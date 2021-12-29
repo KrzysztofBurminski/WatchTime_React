@@ -1,12 +1,65 @@
-export async function getMovieImage(requestData) {
+const FIREBASE_API_KEY = 'AIzaSyB7ekYn9XOb2DbRxh8kpGsvHWDiSuDMy5M';
+
+export async function registerUser(requestData) {
   const response = await fetch(
-    `https://api.tvmaze.com/shows/${requestData}/images`
+    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email: requestData.email,
+        password: requestData.password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
   );
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error.message || 'Could not get products.');
+    throw new Error(data.error.message || 'Authentication failed.');
+  }
+
+  return { data };
+}
+
+export async function loginUser(requestData) {
+  const response = await fetch(
+    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        email: requestData.email,
+        password: requestData.password,
+        returnSecureToken: true,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error.message || 'Authentication failed.');
+  }
+
+  return { data };
+}
+
+export async function getMovieImages(requestData) {
+  const response = await fetch(
+    `https://api.tvmaze.com/shows/${requestData}/images`
+  );
+  // const response = await fetch(`https://api.tvmaze.com/shows/390/images`);
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error.message || 'Could not get images.');
   }
 
   const loadedImages = data.map((show) => {
@@ -15,8 +68,8 @@ export async function getMovieImage(requestData) {
       imgId: show.id,
       type: show.type,
       url: show.resolutions.original.url,
-      height: show.resolutions.original.height,
-      width: show.resolutions.original.width,
+      // height: show.resolutions.original.height,
+      // width: show.resolutions.original.width,
     };
   });
 
@@ -24,18 +77,23 @@ export async function getMovieImage(requestData) {
     return show.type === 'background';
   });
 
-  return backgroundImg[0];
+  if (backgroundImg.length === 0) {
+    throw new Error('No background image.');
+  }
+
+  return { backgroundImg: backgroundImg[0], allImages: loadedImages };
 }
 
 export async function getSingleShow(requestData) {
   const response = await fetch(`https://api.tvmaze.com/shows/${requestData}`);
-  // const response = await fetch(`https://api.tvmaze.com/shows/330`);
+  // const response = await fetch(`https://api.tvmaze.com/shows/390`);
 
   const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data.error.message || 'Could not get products.');
   }
+  // console.log(data);
 
   const loadedShow = {
     id: data.id,
@@ -109,6 +167,9 @@ export async function getSeasons(requestData) {
     };
   });
 
+  // console.log('loadedEpisodes');
+  // console.log(loadedEpisodes);
+
   const seasonsCount = loadedEpisodes[loadedEpisodes.length - 1].season;
   let allSeasons = [];
 
@@ -119,6 +180,51 @@ export async function getSeasons(requestData) {
     allSeasons.push(season);
   }
 
-  // console.log(allSeasons);
   return allSeasons;
+}
+
+export async function getCast(requestData) {
+  const response = await fetch(
+    `https://api.tvmaze.com/shows/${requestData}/cast`
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error.message || 'Could not get products.');
+  }
+
+  // console.log(data);
+
+  const loadedCast = data
+    .map((result) => {
+      return {
+        id: result.person.id,
+        actorName: result.person.name,
+        actorImage: result.person.image.original || '',
+        actorBirthday: result.person.birthday,
+        characterName: result.character.name,
+        characterImage: result.character.image
+          ? result.character.image.original
+          : '',
+      };
+    })
+    .filter((p) => p.actorImage !== '' && p.characterImage !== '');
+
+  let convertedCast = [];
+  loadedCast.forEach((element) => {
+    let repeated = false;
+    convertedCast.forEach((comparison) => {
+      repeated = false;
+      if (comparison.characterName === element.characterName) {
+        repeated = true;
+      }
+    });
+
+    if (!repeated) {
+      convertedCast.push(element);
+    }
+  });
+
+  return convertedCast;
 }

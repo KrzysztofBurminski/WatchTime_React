@@ -1,37 +1,62 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../../store/auth-slice.js';
+
+import * as S from './NavbarElements.jsx';
 import { FaBars } from 'react-icons/fa';
-import * as Styled from './NavbarElements.jsx';
 
 const Navbar = ({ toggle }) => {
+  const dispatch = useDispatch();
+  const isLogged = useSelector((state) => state.auth.isLoggedIn);
+
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
+
+  let authBtn = <S.NavBtnLink to="/auth">Log In</S.NavBtnLink>;
+
+  if (isLogged) {
+    authBtn = (
+      <S.NavBtnLink to="/" onClick={logoutHandler}>
+        Log Out
+      </S.NavBtnLink>
+    );
+  }
+
   return (
-    <Styled.Nav>
-      <Styled.NavbarContainer>
-        <Styled.NavLogo to="/">WatchTime</Styled.NavLogo>
-        <Styled.MobileIcon onClick={toggle}>
+    <S.Nav>
+      <S.NavbarContainer>
+        <S.NavLogo to="/">WatchTime</S.NavLogo>
+        <S.MobileIcon onClick={toggle}>
           <FaBars />
-        </Styled.MobileIcon>
-        <Styled.NavMenu>
-          <Styled.NavItem>
-            <Styled.NavLinks to="/about" activeClassName="current" exact>
+        </S.MobileIcon>
+        <S.NavMenu>
+          {isLogged && (
+            <S.NavItem>
+              <S.NavLinks to="/profile" activeClassName="current" exact>
+                Profile
+              </S.NavLinks>
+            </S.NavItem>
+          )}
+          {!isLogged && (
+            <S.NavItem>
+              <S.NavLinks to="/auth">Profile</S.NavLinks>
+            </S.NavItem>
+          )}
+          <S.NavItem>
+            <S.NavLinks to="/contact" activeClassName="current" exact>
               About
-            </Styled.NavLinks>
-          </Styled.NavItem>
-          <Styled.NavItem>
-            <Styled.NavLinks to="/contact" activeClassName="current" exact>
+            </S.NavLinks>
+          </S.NavItem>
+          <S.NavItem>
+            <S.NavLinks to="/services" activeClassName="current" exact>
               Contact
-            </Styled.NavLinks>
-          </Styled.NavItem>
-          <Styled.NavItem>
-            <Styled.NavLinks to="/services" activeClassName="current" exact>
-              Services
-            </Styled.NavLinks>
-          </Styled.NavItem>
-        </Styled.NavMenu>
-        <Styled.NavBtn>
-          <Styled.NavBtnLink to="/auth">Sign In</Styled.NavBtnLink>
-        </Styled.NavBtn>
-      </Styled.NavbarContainer>
-    </Styled.Nav>
+            </S.NavLinks>
+          </S.NavItem>
+        </S.NavMenu>
+        <S.NavBtn>{authBtn}</S.NavBtn>
+      </S.NavbarContainer>
+    </S.Nav>
   );
 };
 

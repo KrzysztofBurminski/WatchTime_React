@@ -12,16 +12,18 @@ const Home = ({ heroImg, heroDesc, shows }) => {
   let allShows = shows.slice(70, 80);
   let popularShows = shows.filter((show) => show.popularity > 97);
   let bestRatedShows = shows.filter((show) => show.rating > 8.5);
-  let actionShows = shows.filter((show) => show.genres.includes('Action'));
-  let dramaShows = shows.filter((show) => show.genres.includes('Drama'));
+  // let actionShows = shows.filter((show) => show.genres.includes('Action'));
+  // let dramaShows = shows.filter((show) => show.genres.includes('Drama'));
   let comedyShows = shows.filter((show) => show.genres.includes('Comedy'));
+  let familyShows = shows.filter((show) => show.genres.includes('Family'));
+  let mysteryShows = shows.filter((show) => show.genres.includes('Mystery'));
 
   return (
     <>
       <Hero heroImg={heroImg} heroDesc={heroDesc} />
       <S.Container>
-        <MySlider shows={allShows} header="Shows of the day" />
-        <MySlider shows={popularShows} header="Most popular" />
+        <MySlider items={allShows} header="Shows of the day" infinite={true} />
+        <MySlider items={popularShows} header="Most popular" infinite={true} />
       </S.Container>
       <S.HeaderTrailers>TRAILERS</S.HeaderTrailers>
       <S.ContainerTrailers>
@@ -54,8 +56,8 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         </S.TrailerDiv>
       </S.ContainerTrailers>
       <S.Container>
-        <MySlider shows={comedyShows} header="Comedy Shows" />
-        <MySlider shows={bestRatedShows} header="Best rated" />
+        <MySlider items={comedyShows} header="Comedy Shows" infinite={true} />
+        <MySlider items={bestRatedShows} header="Best rated" infinite={true} />
       </S.Container>
       <S.HeaderRecommended>RECOMMENDED</S.HeaderRecommended>
       <S.ContainerRecommended>
@@ -77,8 +79,12 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         </S.RecommendedImg>
       </S.ContainerRecommended>
       <S.Container>
-        <MySlider shows={dramaShows} header="Drama Shows" />
-        <MySlider shows={actionShows} header="Action Shows" />
+        <MySlider
+          items={familyShows}
+          header="Family friendly"
+          infinite={true}
+        />
+        <MySlider items={mysteryShows} header="Mystery Shows" infinite={true} />
       </S.Container>
       <Space height="5rem" />
     </>

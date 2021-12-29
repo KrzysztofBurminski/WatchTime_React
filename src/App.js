@@ -3,13 +3,17 @@ import { Route, Switch } from 'react-router';
 
 import './App.css';
 import GlobalStyles from './GlobalStyles';
-import HomePage from './pages';
-import NotFoundPage from './pages/NotFoundPage';
-import ContactPage from './pages/ContactPage';
+import { ThemeProvider } from 'styled-components';
+
 import Navbar from './components/Layout/Navbar';
 import Sidebar from './components/Layout/SideBar';
-import { ThemeProvider } from 'styled-components';
+import HomePage from './pages';
+import NotFoundPage from './pages/NotFoundPage';
 import ShowDetailsPage from './pages/ShowDetailsPage';
+import ContactPage from './pages/ContactPage';
+import AuthPage from './pages/AuthPage';
+import ProfilePage from './pages/ProfilePage';
+import ChoosingShowsPage from './pages/ChoosingShowsPage';
 
 const theme = {
   colors: {
@@ -18,8 +22,6 @@ const theme = {
     bodyText: '#ccc',
     myPurple: '#6301bf',
     myPurpleDark: '#392A46',
-    // myPurpleHover: '#8D37E7',
-    // #725ac1
     myPurpleHover: '#725ac1',
     onDark: '#ccc',
   },
@@ -45,12 +47,15 @@ function App() {
           <Route path="/shows/:showId">
             <ShowDetailsPage />
           </Route>
-          {/* <Route path="/auth" exact>
+          <Route path="/auth" exact>
             <AuthPage />
           </Route>
           <Route path="/profile" exact>
             <ProfilePage />
-          </Route> */}
+          </Route>
+          <Route path="/choosing" exact>
+            <ChoosingShowsPage />
+          </Route>
           <Route path="/contact" exact>
             <ContactPage />
           </Route>

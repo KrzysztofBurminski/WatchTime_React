@@ -1,33 +1,60 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../../store/auth-slice.js';
 
-import * as Styled from './SidebarElements.jsx';
+import * as S from './SidebarElements.jsx';
 
 const Sidebar = ({ isOpen, toggle }) => {
+  const dispatch = useDispatch();
+  const isLogged = useSelector((state) => state.auth.isLoggedIn);
+
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
+
+  let authBtn = <S.SidebarRoute to="/auth">Log In</S.SidebarRoute>;
+
+  if (isLogged) {
+    authBtn = (
+      <S.SidebarRoute to="/" onClick={logoutHandler}>
+        Log Out
+      </S.SidebarRoute>
+    );
+  }
+
   return (
-    <Styled.SidebarContainer isOpen={isOpen}>
-      <Styled.Icon onClick={toggle}>
-        <Styled.CloseIcon />
-      </Styled.Icon>
-      <Styled.SidebarWrapper>
-        <Styled.SidebarMenu>
-          <Styled.SidebarLink to="/" onClick={toggle}>
+    <S.SidebarContainer isOpen={isOpen}>
+      <S.Icon onClick={toggle}>
+        <S.CloseIcon />
+      </S.Icon>
+      <S.SidebarWrapper>
+        <S.SidebarMenu>
+          <S.SidebarLink to="/" onClick={toggle}>
             Home
-          </Styled.SidebarLink>
-          <Styled.SidebarLink to="/about" onClick={toggle}>
+          </S.SidebarLink>
+          {isLogged && (
+            <S.SidebarLink to="/profile" onClick={toggle}>
+              Profile
+            </S.SidebarLink>
+          )}
+          {!isLogged && (
+            <S.SidebarLink to="/auth" onClick={toggle}>
+              Profile
+            </S.SidebarLink>
+          )}
+          <S.SidebarLink to="/about" onClick={toggle}>
             About
-          </Styled.SidebarLink>
-          <Styled.SidebarLink to="/contact" onClick={toggle}>
+          </S.SidebarLink>
+          <S.SidebarLink to="/contact" onClick={toggle}>
             Contact
-          </Styled.SidebarLink>
-          <Styled.SidebarLink to="/services" onClick={toggle}>
-            Services
-          </Styled.SidebarLink>
-        </Styled.SidebarMenu>
-        <Styled.SideBtnWrap isOpen={isOpen} onClick={toggle}>
-          <Styled.SidebarRoute to="/auth">Sign In</Styled.SidebarRoute>
-        </Styled.SideBtnWrap>
-      </Styled.SidebarWrapper>
-    </Styled.SidebarContainer>
+          </S.SidebarLink>
+        </S.SidebarMenu>
+        <S.SideBtnWrap isOpen={isOpen} onClick={toggle}>
+          {authBtn}
+          {/* <S.SidebarRoute to="/auth/login">Log In</S.SidebarRoute> */}
+        </S.SideBtnWrap>
+      </S.SidebarWrapper>
+    </S.SidebarContainer>
   );
 };
 

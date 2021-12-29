@@ -1,14 +1,39 @@
 import React from 'react';
+import MySlider from '../Slider';
 import Button from '../UI/Button';
 import Space from '../UI/Space';
 // import React, { useState, useEffect } from 'react';
 // import YTSearch from 'youtube-api-search';
 import * as S from './DetailsElements';
-// import * as E from './EpisodesStyled';
 import Episodes from './Episodes';
+import Gallery from './Gallery';
 
-const Details = ({ heroImg, show, seasons }) => {
+const Details = ({ images, show, seasons, cast }) => {
   // console.log(show);
+
+  const actors = cast.map((person) => {
+    return {
+      id: person.id,
+      image: person.actorImage,
+      name: person.actorName,
+      played: person.characterName,
+    };
+  });
+
+  const characters = cast.map((person) => {
+    return {
+      id: person.id,
+      image: person.characterImage,
+      name: person.characterName,
+      // played: person.actorName,
+    };
+  });
+
+  // const characters = charactersList.filter(
+  //   (person) =>
+  //     !charactersList
+  // );
+  // console.log(characters);
 
   let convertedDesc = document
     .createRange()
@@ -17,7 +42,7 @@ const Details = ({ heroImg, show, seasons }) => {
   return (
     <>
       <S.HeroContainer>
-        <S.HeroImg src={heroImg.url}></S.HeroImg>
+        <S.HeroImg src={images.backgroundImg.url}></S.HeroImg>
         <S.HeroShadow>
           <S.TextContainer>
             <S.HeroTitle>{show.title}</S.HeroTitle>
@@ -87,13 +112,35 @@ const Details = ({ heroImg, show, seasons }) => {
           </S.ShowStats>
         </S.MainInfo>
       </S.Container>
+      <S.Container flexDirection="column">
+        <MySlider
+          infinite={false}
+          items={characters}
+          circle={true}
+          header={`Characters from ${show.title}`}
+          clickable="true"
+        />
+      </S.Container>
+      <S.Container flexDirection="column">
+        <MySlider
+          infinite={false}
+          items={actors}
+          header="Cast"
+          clickable="true"
+        />
+      </S.Container>
       <Episodes seasons={seasons} />
       <Space height="10rem" />
+      <Gallery images={images.allImages} />
     </>
   );
 };
 
 export default Details;
+
+//
+//
+//
 // const [trailerUrl, setTrailerUrl] = useState('');
 
 // let showTitle = show.title;

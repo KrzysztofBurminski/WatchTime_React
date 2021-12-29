@@ -11,6 +11,9 @@ const Episodes = ({ seasons }) => {
     setSeasonsOpen(false);
   };
 
+  // console.log('seasons');
+  // console.log(seasons);
+
   return (
     <S.Section>
       <S.ContainerDropdown>
@@ -35,7 +38,7 @@ const Episodes = ({ seasons }) => {
         {seasons[pickedSeason - 1].map((episode) => (
           <S.Episode key={episode.id}>
             <S.EpisodeImg>
-              <S.Image src={episode.images.original} />
+              <S.Image src={episode.images.original || ''} />
             </S.EpisodeImg>
             <S.Row>
               <S.Number>

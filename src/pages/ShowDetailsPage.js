@@ -3,7 +3,12 @@ import { useParams } from 'react-router-dom';
 import Details from '../components/details';
 
 import useFetch from '../hooks/use-fetch';
-import { getSingleShow, getMovieImage, getSeasons } from '../lib/external-api';
+import {
+  getSingleShow,
+  getMovieImages,
+  getSeasons,
+  getCast,
+} from '../lib/external-api';
 
 const ShowDetailsPage = () => {
   const params = useParams();
@@ -18,10 +23,10 @@ const ShowDetailsPage = () => {
 
   const {
     sendRequest: getImageRequest,
-    data: homeImg,
+    data: images,
     error: imgError,
     status: imgStatus,
-  } = useFetch(getMovieImage, showId);
+  } = useFetch(getMovieImages, showId);
 
   const {
     sendRequest: getSeasonsRequest,
@@ -30,11 +35,27 @@ const ShowDetailsPage = () => {
     status: seasonsStatus,
   } = useFetch(getSeasons, showId);
 
+  const {
+    sendRequest: getCastRequest,
+    data: cast,
+    error: castError,
+    status: castStatus,
+  } = useFetch(getCast, showId);
+
   useEffect(() => {
     getImageRequest(showId);
     getSingleShowRequest(showId);
     getSeasonsRequest(showId);
-  }, [getImageRequest, getSingleShowRequest, getSeasonsRequest, showId]);
+    getCastRequest(showId);
+  }, [
+    getImageRequest,
+    getSingleShowRequest,
+    getSeasonsRequest,
+    getCastRequest,
+    showId,
+  ]);
+
+  // console.log(cast);
 
   return (
     <>
@@ -42,15 +63,23 @@ const ShowDetailsPage = () => {
       {imgError && <b>{imgError}</b>}
       {showError && <b>{showError}</b>}
       {seasonsError && <b>{seasonsError}</b>}
+      {castError && <b>{castError}</b>}
 
       {imgStatus === 'completed' &&
         showStatus === 'completed' &&
         seasonsStatus === 'completed' &&
+        castStatus === 'completed' &&
         !imgError &&
         !showError &&
         !seasonsError &&
-        homeImg && (
-          <Details heroImg={homeImg} show={showData} seasons={seasons} />
+        !castError &&
+        images && (
+          <Details
+            images={images}
+            show={showData}
+            seasons={seasons}
+            cast={cast}
+          />
         )}
     </>
   );

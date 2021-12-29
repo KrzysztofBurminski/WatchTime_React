@@ -72,7 +72,7 @@ export const NavItem = styled.li`
   .current {
     margin-bottom: -1px;
     margin-top: 1px;
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid ${(p) => p.theme.colors.myPurpleHover};
     transition: all 0.3s ease-in;
   }
 `;

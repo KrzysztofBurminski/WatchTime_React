@@ -125,10 +125,17 @@ export const Container = styled.div`
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
   display: flex;
-  flex-flow: row, nowrap;
+  /* flex-flow: row, nowrap; */
+  flex-wrap: nowrap;
+  flex-direction: ${(p) => p.flexDirection || 'row'};
   justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+    margin-top: 2rem;
+  }
 `;
 
 export const PosterDiv = styled.aside`
@@ -137,6 +144,10 @@ export const PosterDiv = styled.aside`
   /* height: auto; */
   /* width: auto; */
   max-width: 18rem;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const Poster = styled.img`

@@ -3,10 +3,16 @@ import { useState, useEffect } from 'react';
 import Home from '../components/home';
 import useFetch from '../hooks/use-fetch';
 import useRandom from '../hooks/use-random';
-import { getAllShows, getMovieImage, getSingleShow } from '../lib/external-api';
+import {
+  getAllShows,
+  getMovieImages,
+  getSingleShow,
+} from '../lib/external-api';
 
-const HomePage = (props) => {
-  const [randomId] = useState(useRandom());
+const HomePage = () => {
+  const [randomId, setRandomId] = useState(useRandom());
+  // const [randomId, setRandomId] = useState(390);
+  // const [randomId, setRandomId] = useState(85);
 
   const {
     sendRequest: getAllShowsRequest,
@@ -20,34 +26,54 @@ const HomePage = (props) => {
     data: homeImg,
     error: imgError,
     status: imgStatus,
-  } = useFetch(getMovieImage, randomId);
+  } = useFetch(getMovieImages, true);
 
   const {
     sendRequest: getSingleShowRequest,
     data: showData,
     error: showError,
     status: showStatus,
-  } = useFetch(getSingleShow, randomId);
+  } = useFetch(getSingleShow, true);
 
   useEffect(() => {
+    console.log('useEffect random ' + randomId);
     getAllShowsRequest();
     getImageRequest(randomId);
     getSingleShowRequest(randomId);
-  }, [getAllShowsRequest, getImageRequest, getSingleShowRequest, randomId]);
+    if (showError || imgError) {
+      console.log('error detected!');
+      let random = Math.floor(Math.random() * 400 + 1);
+      setRandomId(random);
+    }
+  }, [
+    getAllShowsRequest,
+    getImageRequest,
+    getSingleShowRequest,
+    randomId,
+    showError,
+    imgError,
+  ]);
 
   return (
     <>
       {(imgStatus === 'pending' || showStatus === 'pending') && <p>Loading</p>}
-      {imgError && <b>{imgError}</b>}
-      {showError && <b>{showError}</b>}
+      {imgError && <b>img error: {imgError}</b>}
+      {showError && <b>show error: {showError}</b>}
+      {showsError && <b>shows error: {showsError}</b>}
+
       {homeImg &&
+        homeImg.backgroundImg &&
         !imgError &&
         !showError &&
         !showsError &&
         imgStatus === 'completed' &&
         showStatus === 'completed' &&
         showsStatus === 'completed' && (
-          <Home heroImg={homeImg} heroDesc={showData} shows={loadedShows} />
+          <Home
+            heroImg={homeImg.backgroundImg}
+            heroDesc={showData}
+            shows={loadedShows}
+          />
         )}
     </>
   );
