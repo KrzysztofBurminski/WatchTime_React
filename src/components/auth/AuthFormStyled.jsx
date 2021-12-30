@@ -37,6 +37,24 @@ export const Header = styled.h2`
   margin-top: 0.7rem;
 `;
 
+export const Alert = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  padding: 0;
+  padding: 10px;
+  /* background-color: #d42a2a; */
+  background-color: #c72828;
+  border: 1px solid #333;
+  border-radius: 4px;
+
+  & > * {
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    font-size: 1.1rem;
+  }
+`;
+
 export const Form = styled.form``;
 export const Control = styled.div`
   display: flex;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../../../store/auth-slice.js';
+import { getAuth, signOut } from 'firebase/auth';
 
 import * as S from './SidebarElements.jsx';
 
@@ -8,8 +9,14 @@ const Sidebar = ({ isOpen, toggle }) => {
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.auth.isLoggedIn);
 
-  const logoutHandler = () => {
-    dispatch(authActions.logout());
+  const logoutHandler = async () => {
+    try {
+      const auth = getAuth();
+      await signOut(auth);
+      dispatch(authActions.removeCurrentUser());
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   let authBtn = <S.SidebarRoute to="/auth">Log In</S.SidebarRoute>;

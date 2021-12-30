@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { showsActions } from '../../store/shows-slice';
-import { pickActions } from '../../store/pick-slice';
+import { showsActions } from '../../store/shows-slice';
+import useFetch from '../../hooks/use-fetch';
+import { addShowToDB, removeShowFromDB } from '../../lib/firebase-api';
 
 import * as S from './ChoosingStyled';
 import { ButtonLink } from '../UI/Button';
@@ -9,18 +10,32 @@ import { BsCheckCircle } from 'react-icons/bs';
 
 const Choosing = ({ shows }) => {
   const dispatch = useDispatch();
-  // let showsList = useSelector((state) => state.shows.showsList);
-  let showsList = useSelector((state) => state.pick.pickedShows);
+  let showsList = useSelector((state) => state.shows.showsList);
+  let showsIdList = useSelector((state) => state.shows.showsIdList);
   console.log(showsList);
 
   let bestRatedShows = shows.filter((show) => show.rating > 8.3);
 
+  const {
+    sendRequest: addShowToDbRequest,
+    // data: loadedShows,
+    // error: addingShowError,
+    // status: addingShowStatus,
+  } = useFetch(addShowToDB, false);
+  const {
+    sendRequest: removeShowFromDbRequest,
+    // data: loadedShows,
+    // error: removingShowError,
+    // status: removingShowStatus,
+  } = useFetch(removeShowFromDB, false);
+
   const pickShowHandler = (show) => {
-    // dispatch(showsActions.addToList(show));
-    if (!showsList.includes(show.id)) {
-      dispatch(pickActions.addToList(show));
+    if (!showsIdList.includes(show.id)) {
+      dispatch(showsActions.addToList(show));
+      addShowToDbRequest(show);
     } else {
-      dispatch(pickActions.removeFromList(show));
+      dispatch(showsActions.removeFromList(show));
+      removeShowFromDbRequest(show);
     }
   };
 
@@ -38,7 +53,7 @@ const Choosing = ({ shows }) => {
         {bestRatedShows.map((show) => (
           <S.Item key={show.id} src={show.image}>
             <S.Image src={show.image} onClick={() => pickShowHandler(show)}>
-              <S.Hoverable picked={showsList.includes(show.id)}>
+              <S.Hoverable picked={showsIdList.includes(show.id)}>
                 <BsCheckCircle />
               </S.Hoverable>
             </S.Image>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BsCheckCircle } from 'react-icons/bs';
+// import { BsCheckCircle } from 'react-icons/bs';
 
 export const Container = styled.div`
   background-color: ${(p) => p.theme.colors.bgColor};

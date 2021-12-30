@@ -1,14 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-
-import useAuth from '../../hooks/use-auth';
+import {
+  getAuth,
+  updateProfile,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+} from 'firebase/auth';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../../store/auth-slice';
 import useInput from '../../hooks/use-input';
-import { registerUser, loginUser } from '../../lib/external-api';
 import * as S from './AuthFormStyled';
 
 const AuthForm = () => {
   const nameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const [isLogging, setIsLogging] = useState(true);
   const [formIsValid, setFormIsValid] = useState(false);
@@ -18,32 +28,22 @@ const AuthForm = () => {
   };
 
   const {
-    sendRequest: loginRequest,
-    // error: loginError,
-    // isLoading: loginIsLoading,
-  } = useAuth(loginUser);
-
-  const {
-    sendRequest: registerRequest,
-    // error: registerError,
-    // isLoading: registerIsLoading,
-  } = useAuth(registerUser);
-  //   } = useAuth(registerUser, updateUser);
-
-  const {
     inputValue: enteredName,
     isTouched: nameIsTouched,
     isValid: nameIsValid,
-    // error: nameError,
+    error: nameError,
     changeValue: nameChangeHandler,
     checkValidity: nameCheckHandler,
-  } = useInput();
+  } = useInput(
+    (value) => /^(?!\s)[A-Za-z_][A-Za-z0-9_():'"#^.?,!\s]+$/.test(value),
+    'Invalid username'
+  );
 
   const {
     inputValue: enteredEmail,
     isTouched: emailIsTouched,
     isValid: emailIsValid,
-    // error: emailError,
+    error: emailError,
     changeValue: emailChangeHandler,
     checkValidity: emailCheckHandler,
   } = useInput((value) => /^\S+@\S+\.\S+$/.test(value), 'Invalid email!');
@@ -52,7 +52,7 @@ const AuthForm = () => {
     inputValue: enteredPassword,
     isTouched: passwordIsTouched,
     isValid: passwordIsValid,
-    // error: passwordError,
+    error: passwordError,
     changeValue: passwordChangeHandler,
     checkValidity: passwordCheckHandler,
   } = useInput();
@@ -88,25 +88,61 @@ const AuthForm = () => {
     event.preventDefault();
 
     if (formIsValid) {
+      const auth = getAuth();
       if (isLogging) {
-        await loginRequest({
-          email: enteredEmail,
-          password: enteredPassword,
-        });
+        try {
+          await setPersistence(auth, browserLocalPersistence);
+          await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
+        } catch (err) {
+          console.log(err);
+        }
       } else {
-        await registerRequest({
-          name: enteredName,
-          email: enteredEmail,
-          password: enteredPassword,
-        });
+        try {
+          await setPersistence(auth, browserLocalPersistence);
+          await createUserWithEmailAndPassword(
+            auth,
+            enteredEmail,
+            enteredPassword
+          );
+          await updateProfile(auth.currentUser, {
+            displayName: enteredName,
+          });
+        } catch (err) {
+          console.log(err);
+        }
       }
+      try {
+        const user = auth.currentUser;
+        if (user !== null) {
+          const displayName = user.displayName;
+          const uid = user.uid;
+          dispatch(authActions.setCurrentUser({ displayName, uid }));
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      history.push('/profile');
     }
   };
+
+  let inputError = null;
+  if (passwordError) {
+    inputError = `Password: ${passwordError}`;
+  } else if (emailError) {
+    inputError = `Email: ${emailError}`;
+  } else if (nameError) {
+    inputError = `Username: ${nameError}`;
+  }
 
   return (
     <S.SectionAuth>
       <S.Background>
         <S.Header>{isLogging ? 'Log In' : 'Sign In'}</S.Header>
+        {inputError && (
+          <S.Alert>
+            <p>{inputError}</p>
+          </S.Alert>
+        )}
         <form onSubmit={submitFormHandler}>
           {!isLogging && (
             <S.Control>
@@ -144,10 +180,18 @@ const AuthForm = () => {
             />
           </S.Control>
           <S.Actions>
-            <S.AuthButton type="submit">Login</S.AuthButton>
+            <S.AuthButton type="submit">
+              {isLogging ? 'Log In' : 'Sign In'}
+            </S.AuthButton>
             <S.Row>
-              <S.Paragraph>Do not have account?</S.Paragraph>
-              <S.Switch onClick={switchAuthModeHandler}>Sign In</S.Switch>
+              <S.Paragraph>
+                {isLogging
+                  ? 'Do not have account?'
+                  : 'Already have an account ?'}
+              </S.Paragraph>
+              <S.Switch onClick={switchAuthModeHandler}>
+                {isLogging ? 'Sign In' : 'Log In'}
+              </S.Switch>
             </S.Row>
           </S.Actions>
         </form>

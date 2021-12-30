@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router';
 
 import './App.css';
@@ -14,6 +14,8 @@ import ContactPage from './pages/ContactPage';
 import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
 import ChoosingShowsPage from './pages/ChoosingShowsPage';
+import { getCurrentUser } from './store/auth-actions';
+import { useDispatch } from 'react-redux';
 
 const theme = {
   colors: {
@@ -29,10 +31,15 @@ const theme = {
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const toggle = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
 
   return (
     <ThemeProvider theme={theme}>

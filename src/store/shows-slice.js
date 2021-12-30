@@ -4,6 +4,7 @@ const showsSlice = createSlice({
   name: 'show',
   initialState: {
     showsList: [],
+    showsIdList: [],
   },
   reducers: {
     addToList(state, action) {
@@ -18,19 +19,27 @@ const showsSlice = createSlice({
           title: newShow.title,
           image: newShow.image,
         });
+        state.showsIdList.push(newShow.id);
       }
     },
     removeFromList(state, action) {
-      const showId = action.payload;
-      const existingShow = state.showsList.find((show) => show.id === showId);
+      const myShow = action.payload;
+      const existingShow = state.showsList.find(
+        (show) => show.id === myShow.id
+      );
 
       if (existingShow) {
-        state.showsList = state.showsList.filter((show) => show.id !== showId);
+        state.showsList = state.showsList.filter(
+          (show) => show.id !== myShow.id
+        );
+        state.showsIdList = state.showsIdList.filter(
+          (showId) => showId !== myShow.id
+        );
       }
     },
     markAsWatched(state, action) {},
     addToFavourites(state, action) {},
-    removeFromFavourites(state) {},
+    removeFromFavourites(state, action) {},
   },
 });
 
