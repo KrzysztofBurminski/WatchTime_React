@@ -36,12 +36,12 @@ const HomePage = () => {
   } = useFetch(getSingleShow, true);
 
   useEffect(() => {
-    console.log('useEffect random ' + randomId);
+    // console.log('useEffect random ' + randomId);
     getAllShowsRequest();
     getImageRequest(randomId);
     getSingleShowRequest(randomId);
     if (showError || imgError) {
-      console.log('error detected!');
+      // console.log('error detected!');
       let random = Math.floor(Math.random() * 400 + 1);
       setRandomId(random);
     }

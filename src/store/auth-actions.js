@@ -8,7 +8,8 @@ export const getCurrentUser = () => {
       if (user) {
         const displayName = user.displayName;
         const uid = user.uid;
-        dispatch(authActions.setCurrentUser({ displayName, uid }));
+        const userImg = user.photoURL;
+        dispatch(authActions.setCurrentUser({ displayName, uid, userImg }));
       }
     });
   };

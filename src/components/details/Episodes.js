@@ -11,8 +11,8 @@ const Episodes = ({ seasons }) => {
     setSeasonsOpen(false);
   };
 
-  // console.log('seasons');
-  // console.log(seasons);
+  console.log('seasons');
+  console.log(seasons);
 
   return (
     <S.Section>
@@ -37,12 +37,20 @@ const Episodes = ({ seasons }) => {
       <S.ContainerEpisodes direction="row">
         {seasons[pickedSeason - 1].map((episode) => (
           <S.Episode key={episode.id}>
-            <S.EpisodeImg>
+            <S.EpisodeImg onClick={() => console.log(episode)}>
               <S.Image src={episode.images.original || ''} />
+              {/* <S.IconDiv> */}
+              {/* <S.CheckIcon /> */}
+              {/* </S.IconDiv> */}
+              {/* <S.Hoverable picked={showsIdList.includes(show.id)}> */}
+              <S.Hoverable picked={true}>
+                {/* <S.Hoverable picked={false}> */}
+                <S.CheckIcon />
+              </S.Hoverable>
             </S.EpisodeImg>
             <S.Row>
               <S.Number>
-                S{pickedSeason} E{episode.episode}
+                s{pickedSeason}e{episode.episode}
               </S.Number>
               <S.Title>{episode.title}</S.Title>
             </S.Row>

@@ -5,6 +5,7 @@ import { getAuth, signOut } from 'firebase/auth';
 
 import * as S from './NavbarElements.jsx';
 import { FaBars } from 'react-icons/fa';
+import { showsActions } from '../../../store/shows-slice.js';
 
 const Navbar = ({ toggle }) => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const Navbar = ({ toggle }) => {
       const auth = getAuth();
       await signOut(auth);
       dispatch(authActions.removeCurrentUser());
+      dispatch(showsActions.resetList());
     } catch (err) {
       console.log(err);
     }

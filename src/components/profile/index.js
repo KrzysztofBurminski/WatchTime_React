@@ -1,22 +1,21 @@
 import React from 'react';
-import { ButtonLink } from '../UI/Button';
+
+import MySlider from '../Slider';
 import * as S from './ProfileStyled';
 
-const Profile = () => {
+const Profile = ({ showsList, heroImg, userImg, userName }) => {
   return (
     <>
-      {/* <S.Hero>
-        <S.HeroImg />
-      </S.Hero> */}
-      <S.Container>
-        <S.CenteredColumn>
-          <S.WelcomeText>Welcome in WatchTime.</S.WelcomeText>
-          <S.WelcomeTextSmall>
-            Since now you can start following your shows.
-          </S.WelcomeTextSmall>
-          <ButtonLink to="/choosing">ADD SHOWS</ButtonLink>
-        </S.CenteredColumn>
-      </S.Container>
+      <S.Hero>
+        <S.HeroImg src={heroImg} />
+        <S.PersonSection>
+          <S.ProfilePicture src={userImg} />
+          <S.ProfileName>{userName}</S.ProfileName>
+        </S.PersonSection>
+      </S.Hero>
+      <S.ShowsSection>
+        <MySlider items={showsList} header="Followed shows" infinite={false} />
+      </S.ShowsSection>
     </>
   );
 };

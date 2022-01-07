@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import { FaChevronDown } from 'react-icons/fa';
+import { BsCheckCircleFill } from 'react-icons/bs';
+import { AiOutlineCheckCircle } from 'react-icons/ai';
 
 export const Section = styled.section`
   margin-top: 2rem;
@@ -103,6 +105,59 @@ export const EpisodeImg = styled.div`
   overflow: hidden;
 `;
 
+// export const CheckIcon = styled(AiOutlineCheckCircle)`
+export const IconDiv = styled.div`
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  padding: 0;
+  margin: 0;
+  width: 35px;
+  height: 35px;
+  z-index: 10;
+  border-radius: 50%;
+  /* border: 1px solid black; */
+
+  /* background-color: #222; */
+  /* background-color: #ccc; */
+`;
+
+export const Hoverable = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: background-color 0.2s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(p) => (p.picked ? 'rgba(0, 0, 0, 0.6)' : 'transparent')};
+  z-index: 10;
+
+  & > * {
+    color: ${(p) => (p.picked ? '#196e08' : 'transparent')};
+    font-size: 3rem;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  &:hover > * {
+    color: #1e9406;
+  }
+`;
+
+export const CheckIcon = styled(BsCheckCircleFill)`
+  /* background-color: #222; */
+  /* background-color: #ccc; */
+  /* height: 90%; */
+  /* width: 90%; */
+  /* color: #ccc; */
+  /* color: #165e07; */
+`;
+
 export const Image = styled.img`
   src: url(${(p) => p.src});
   position: absolute;
@@ -111,6 +166,7 @@ export const Image = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
+  z-index: 5;
 `;
 
 export const Row = styled.div`

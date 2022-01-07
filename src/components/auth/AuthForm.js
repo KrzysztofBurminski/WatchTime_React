@@ -20,11 +20,22 @@ const AuthForm = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const [avatarImage, setAvatarImage] = useState(
+    `https://avatars.dicebear.com/api/micah/funny1.svg`
+  );
   const [isLogging, setIsLogging] = useState(true);
   const [formIsValid, setFormIsValid] = useState(false);
 
   const switchAuthModeHandler = () => {
     setIsLogging(!isLogging);
+  };
+
+  const changeAvatarHandler = () => {
+    setAvatarImage(
+      `https://avatars.dicebear.com/api/micah/${Math.random()
+        .toString(36)
+        .substr(2, 5)}.svg`
+    );
   };
 
   const {
@@ -106,6 +117,7 @@ const AuthForm = () => {
           );
           await updateProfile(auth.currentUser, {
             displayName: enteredName,
+            photoURL: avatarImage,
           });
         } catch (err) {
           console.log(err);
@@ -116,12 +128,14 @@ const AuthForm = () => {
         if (user !== null) {
           const displayName = user.displayName;
           const uid = user.uid;
-          dispatch(authActions.setCurrentUser({ displayName, uid }));
+          const userImg = user.photoURL;
+          dispatch(authActions.setCurrentUser({ displayName, uid, userImg }));
         }
       } catch (err) {
         console.log(err);
       }
-      history.push('/profile');
+      isLogging ? history.push('/profile') : history.push('/choosing');
+      // history.push('/profile');
     }
   };
 
@@ -145,17 +159,21 @@ const AuthForm = () => {
         )}
         <form onSubmit={submitFormHandler}>
           {!isLogging && (
-            <S.Control>
-              <S.Label htmlFor="username">Username</S.Label>
-              <S.Input
-                type="text"
-                name="username"
-                ref={nameInputRef}
-                value={enteredName}
-                onChange={() => nameChangeHandler(nameInputRef.current.value)}
-                onBlur={nameCheckHandler}
-              />
-            </S.Control>
+            <div>
+              <S.ProfilePic src={avatarImage} />
+              <S.ReloadIcon onClick={changeAvatarHandler} />
+              <S.Control>
+                <S.Label htmlFor="username">Username</S.Label>
+                <S.Input
+                  type="text"
+                  name="username"
+                  ref={nameInputRef}
+                  value={enteredName}
+                  onChange={() => nameChangeHandler(nameInputRef.current.value)}
+                  onBlur={nameCheckHandler}
+                />
+              </S.Control>
+            </div>
           )}
           <S.Control>
             <S.Label htmlFor="email">Email</S.Label>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FiRefreshCw } from 'react-icons/fi';
 
 export const SectionAuth = styled.section`
   display: flex;
@@ -55,7 +56,36 @@ export const Alert = styled.div`
   }
 `;
 
-export const Form = styled.form``;
+export const ProfilePic = styled.div`
+  height: 8rem;
+  width: 8rem;
+  margin: 0 auto;
+  /* background-color: #fee9ff; */
+  background-color: #886e9e;
+  background-image: url(${(p) => p.src});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 2px solid black;
+  border-radius: 50%;
+`;
+
+export const ReloadIcon = styled(FiRefreshCw)`
+  margin: 0 auto;
+  padding: 0.3rem;
+  color: #fff;
+  font-size: 1.7rem;
+  margin-top: -1.5rem;
+  background-color: #886e9e;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+
+  &:hover {
+    background-color: #ae99bf;
+  }
+`;
+
 export const Control = styled.div`
   display: flex;
   flex-direction: column;

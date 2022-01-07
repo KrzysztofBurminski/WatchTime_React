@@ -1,4 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addShowToDB, removeShowFromDB } from '../../store/shows-actions';
+import { useSelector } from 'react-redux';
+
 import MySlider from '../Slider';
 import Button from '../UI/Button';
 import Space from '../UI/Space';
@@ -6,10 +10,12 @@ import Space from '../UI/Space';
 // import YTSearch from 'youtube-api-search';
 import * as S from './DetailsElements';
 import Episodes from './Episodes';
-import Gallery from './Gallery';
+// import Gallery from './Gallery';
 
 const Details = ({ images, show, seasons, cast }) => {
-  // console.log(show);
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.auth.userId);
+  const showsIdList = useSelector((state) => state.shows.showsIdList);
 
   const actors = cast.map((person) => {
     return {
@@ -29,15 +35,27 @@ const Details = ({ images, show, seasons, cast }) => {
     };
   });
 
-  // const characters = charactersList.filter(
-  //   (person) =>
-  //     !charactersList
-  // );
-  // console.log(characters);
-
   let convertedDesc = document
     .createRange()
     .createContextualFragment(show.description).firstChild.innerText;
+
+  let followButton = showsIdList.includes(show.id) ? (
+    <Button
+      onClick={() => {
+        dispatch(removeShowFromDB(userId, show));
+      }}
+    >
+      Unfollow
+    </Button>
+  ) : (
+    <Button
+      onClick={() => {
+        dispatch(addShowToDB(userId, show));
+      }}
+    >
+      Add to list
+    </Button>
+  );
 
   return (
     <>
@@ -51,13 +69,7 @@ const Details = ({ images, show, seasons, cast }) => {
               <S.RowText>|</S.RowText>
               <S.RowText>{show.status}</S.RowText>
             </S.Row>
-            <Button
-              onClick={() => {
-                console.log('Added to list');
-              }}
-            >
-              Add to list
-            </Button>
+            {followButton}
           </S.TextContainer>
         </S.HeroShadow>
       </S.HeroContainer>
@@ -131,7 +143,7 @@ const Details = ({ images, show, seasons, cast }) => {
       </S.Container>
       <Episodes seasons={seasons} />
       <Space height="10rem" />
-      <Gallery images={images.allImages} />
+      {/* <Gallery images={images.allImages} /> */}
     </>
   );
 };

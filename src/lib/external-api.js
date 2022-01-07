@@ -1,54 +1,54 @@
-const FIREBASE_API_KEY = 'AIzaSyB7ekYn9XOb2DbRxh8kpGsvHWDiSuDMy5M';
+// const FIREBASE_API_KEY = 'AIzaSyB7ekYn9XOb2DbRxh8kpGsvHWDiSuDMy5M';
 
-export async function registerUser(requestData) {
-  const response = await fetch(
-    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`,
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        email: requestData.email,
-        password: requestData.password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+// export async function registerUser(requestData) {
+//   const response = await fetch(
+//     `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`,
+//     {
+//       method: 'POST',
+//       body: JSON.stringify({
+//         email: requestData.email,
+//         password: requestData.password,
+//         returnSecureToken: true,
+//       }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     }
+//   );
 
-  const data = await response.json();
+//   const data = await response.json();
 
-  if (!response.ok) {
-    throw new Error(data.error.message || 'Authentication failed.');
-  }
+//   if (!response.ok) {
+//     throw new Error(data.error.message || 'Authentication failed.');
+//   }
 
-  return { data };
-}
+//   return { data };
+// }
 
-export async function loginUser(requestData) {
-  const response = await fetch(
-    `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`,
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        email: requestData.email,
-        password: requestData.password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+// export async function loginUser(requestData) {
+//   const response = await fetch(
+//     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`,
+//     {
+//       method: 'POST',
+//       body: JSON.stringify({
+//         email: requestData.email,
+//         password: requestData.password,
+//         returnSecureToken: true,
+//       }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     }
+//   );
 
-  const data = await response.json();
+//   const data = await response.json();
 
-  if (!response.ok) {
-    throw new Error(data.error.message || 'Authentication failed.');
-  }
+//   if (!response.ok) {
+//     throw new Error(data.error.message || 'Authentication failed.');
+//   }
 
-  return { data };
-}
+//   return { data };
+// }
 
 export async function getMovieImages(requestData) {
   const response = await fetch(

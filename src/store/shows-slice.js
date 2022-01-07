@@ -37,6 +37,14 @@ const showsSlice = createSlice({
         );
       }
     },
+    resetList(state) {
+      state.showsList = [];
+      state.showsIdList = [];
+    },
+    updateList(state, action) {
+      state.showsList = action.payload.showList;
+      state.showsIdList = action.payload.idList;
+    },
     markAsWatched(state, action) {},
     addToFavourites(state, action) {},
     removeFromFavourites(state, action) {},
