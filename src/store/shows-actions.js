@@ -29,7 +29,6 @@ export const getShowsList = (userId) => {
       const data = snapshot.val();
       if (data) {
         const convertedData = Object.values(data);
-        console.log(convertedData);
         const idList = [];
         convertedData.forEach((show) => {
           idList.push(show.id);
@@ -49,38 +48,20 @@ export const addEpisodeToDB = (userId, show, episode) => {
     ref(
       db,
       `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
-      // `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
     ),
     {
       id: episode.id,
       episode: episode.episode,
-      // image: episode.image,
     }
   );
-  // };
 };
-
-// export const getWatchedEpisodes = (userId, show, episode) => {
-//   return (dispatch) => {
-//     const db = getDatabase();
-//     const userRef = ref(
-//       db,
-//       `users/${userId}/${show.id}/seasons/${episode.season}/`
-//     );
-//     onValue(userRef, (snapshot) => {
-//       const data = snapshot.val();
-//       if (data) {
-//         const convertedData = Object.values(data);
-//         console.log(convertedData);
-//         const idList = [];
-//         convertedData.forEach((episode) => {
-//           idList.push(episode.id);
-//         });
-
-//         dispatch(
-//           showsActions.updateList({ showList: convertedData, idList: idList })
-//         );
-//       }
-//     });
-//   };
-// };
+export const removeEpisodeFromDB = (userId, show, episode) => {
+  const db = getDatabase();
+  set(
+    ref(
+      db,
+      `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+    ),
+    {}
+  );
+};

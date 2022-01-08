@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { addEpisodeToDB } from '../../store/shows-actions';
+import { addEpisodeToDB, removeEpisodeFromDB } from '../../store/shows-actions';
 import { useSelector } from 'react-redux';
 import * as S from './EpisodesStyled';
 
@@ -33,16 +33,16 @@ const Episodes = ({ seasons, show }) => {
     });
   };
 
-  const setEpisodeHandler = (userId, show, episode) => {
+  const pickEpisodeHandler = (userId, show, episode) => {
     if (!watchedEpisodes.includes(episode.id)) {
-      console.log('add');
       addEpisodeToDB(userId, show, episode);
       let tempWatchedEpisodes = [...watchedEpisodes];
       tempWatchedEpisodes.push(episode.id);
       setWatchedEpisodes(tempWatchedEpisodes);
-      console.log(watchedEpisodes);
+      console.log('Added episode');
     } else {
-      console.log('Not add');
+      removeEpisodeFromDB(userId, show, episode);
+      console.log('Removed episode');
     }
   };
 
@@ -73,7 +73,7 @@ const Episodes = ({ seasons, show }) => {
         {seasons[pickedSeason - 1].map((episode) => (
           <S.Episode key={episode.id}>
             <S.EpisodeImg
-              onClick={() => setEpisodeHandler(userId, show, episode)}
+              onClick={() => pickEpisodeHandler(userId, show, episode)}
             >
               <S.Image src={episode.images.original || ''} />
               <S.Hoverable picked={watchedEpisodes.includes(episode.id)}>
