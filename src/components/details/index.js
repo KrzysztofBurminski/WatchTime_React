@@ -141,7 +141,7 @@ const Details = ({ images, show, seasons, cast }) => {
           clickable="true"
         />
       </S.Container>
-      <Episodes seasons={seasons} />
+      <Episodes seasons={seasons} show={show} />
       <Space height="10rem" />
       {/* <Gallery images={images.allImages} /> */}
     </>

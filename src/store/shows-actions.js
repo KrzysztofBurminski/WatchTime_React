@@ -43,22 +43,43 @@ export const getShowsList = (userId) => {
   };
 };
 
-// export const getShowsList = (userId) => {
+export const addEpisodeToDB = (userId, show, episode) => {
+  const db = getDatabase();
+  set(
+    ref(
+      db,
+      `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+      // `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+    ),
+    {
+      id: episode.id,
+      episode: episode.episode,
+      // image: episode.image,
+    }
+  );
+  // };
+};
+
+// export const getWatchedEpisodes = (userId, show, episode) => {
 //   return (dispatch) => {
 //     const db = getDatabase();
-//     const userRef = ref(db, `users/${userId}`);
+//     const userRef = ref(
+//       db,
+//       `users/${userId}/${show.id}/seasons/${episode.season}/`
+//     );
 //     onValue(userRef, (snapshot) => {
 //       const data = snapshot.val();
 //       if (data) {
-//         // console.log(data);
-
 //         const convertedData = Object.values(data);
-//         // console.log(convertedData);
-
-//         convertedData.forEach((show) => {
-//           dispatch(showsActions.addToList(show));
+//         console.log(convertedData);
+//         const idList = [];
+//         convertedData.forEach((episode) => {
+//           idList.push(episode.id);
 //         });
 
+//         dispatch(
+//           showsActions.updateList({ showList: convertedData, idList: idList })
+//         );
 //       }
 //     });
 //   };

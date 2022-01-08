@@ -1,10 +1,8 @@
 <!-- TV shows api: https://www.episodate.com/api -->
 
-TV series api: https://www.tvmaze.com/api#show-lookup
-
-slick js
+TV series API: https://www.tvmaze.com/api#show-lookup
+Avatars creator API: https://avatars.dicebear.com/
+Sliders API: https://react-slick.neostack.com/
 
 <!-- YT API KEY -->
 <!-- AIzaSyBE3B6foIzG9b-XbIXea1lJOnril6n2dLM -->
-
-<!-- https://avatars.dicebear.com/api/micah/fu4.svg -->
