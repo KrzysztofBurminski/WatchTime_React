@@ -1,11 +1,18 @@
 import styled from 'styled-components';
+import { keyframes } from 'styled-components';
 import { FaChevronDown } from 'react-icons/fa';
 import { BsCheckCircleFill } from 'react-icons/bs';
 
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
 export const Section = styled.section`
-  margin-top: 2rem;
-  padding-top: 2rem;
+  /* margin-top: 2rem; */
+  padding-top: 3rem;
   background-color: #181818;
+  animation: ${fadeIn} 700ms ease-in;
 `;
 
 export const ContainerDropdown = styled.div`

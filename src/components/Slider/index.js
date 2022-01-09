@@ -17,7 +17,7 @@ const MySlider = (props) => {
 
   return (
     <>
-      <S.HeaderSlider>{props.header}</S.HeaderSlider>
+      <S.HeaderSlider clickable={props.infinite}>{props.header}</S.HeaderSlider>{' '}
       <Slider {...settings}>
         {props.clickable
           ? props.items.map((item, index) => (

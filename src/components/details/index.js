@@ -1,43 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addShowToDB, removeShowFromDB } from '../../store/shows-actions';
 import { useSelector } from 'react-redux';
 
-import MySlider from '../Slider';
 import Button from '../UI/Button';
 import Space from '../UI/Space';
-// import React, { useState, useEffect } from 'react';
 // import YTSearch from 'youtube-api-search';
 import * as S from './DetailsElements';
-import Episodes from './Episodes';
+import EpisodesTab from './tabs/EpisodesTab/index';
+import OverviewTab from './tabs/OverviewTab/index';
 // import Gallery from './Gallery';
 
 const Details = ({ images, show, seasons, cast }) => {
   const dispatch = useDispatch();
+
   const userId = useSelector((state) => state.auth.userId);
   const showsIdList = useSelector((state) => state.shows.showsIdList);
 
-  const actors = cast.map((person) => {
-    return {
-      id: person.id,
-      image: person.actorImage,
-      name: person.actorName,
-      played: person.characterName,
-    };
-  });
-
-  const characters = cast.map((person) => {
-    return {
-      id: person.id,
-      image: person.characterImage,
-      name: person.characterName,
-      // played: person.actorName,
-    };
-  });
-
-  let convertedDesc = document
-    .createRange()
-    .createContextualFragment(show.description).firstChild.innerText;
+  // const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('episodes');
 
   let followButton = showsIdList.includes(show.id) ? (
     <Button
@@ -57,6 +38,10 @@ const Details = ({ images, show, seasons, cast }) => {
     </Button>
   );
 
+  const tabClickHandler = (tabName) => {
+    setActiveTab(tabName);
+  };
+
   return (
     <>
       <S.HeroContainer>
@@ -74,75 +59,38 @@ const Details = ({ images, show, seasons, cast }) => {
         </S.HeroShadow>
       </S.HeroContainer>
       {/*  */}
-      {/*  */}
-      {/*  */}
       {/* MAIN CONTENT */}
       {/*  */}
-      {/*  */}
-      {/*  */}
       <Space height="2rem" />
-      <S.Container>
-        <S.PosterDiv>
-          <S.Poster src={show.image} />
-        </S.PosterDiv>
-        <S.MainInfo>
-          <S.TextHeader>Storyline</S.TextHeader>
-          <S.Text>{convertedDesc}</S.Text>
-          <S.ShowStats>
-            <S.StatsItem>
-              <S.StatsLabel>Premiered</S.StatsLabel>
-              <S.Text>{show.premiered}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Seasons</S.StatsLabel>
-              <S.Text>{seasons.length}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Runtime</S.StatsLabel>
-              <S.Text>{show.averageRuntime}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Genres</S.StatsLabel>
-              <S.Text>{show.genres[0]}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Rating</S.StatsLabel>
-              <S.Text>{show.rating}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Status</S.StatsLabel>
-              <S.Text>{show.status}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Language</S.StatsLabel>
-              <S.Text>{show.language}</S.Text>
-            </S.StatsItem>
-            <S.StatsItem>
-              <S.StatsLabel>Popularity</S.StatsLabel>
-              <S.Text>{show.popularity} out of 100</S.Text>
-            </S.StatsItem>
-          </S.ShowStats>
-        </S.MainInfo>
-      </S.Container>
-      <S.Container flexDirection="column">
-        <MySlider
-          infinite={false}
-          items={characters}
-          circle={true}
-          header={`Characters from ${show.title}`}
-          clickable="true"
-        />
-      </S.Container>
-      <S.Container flexDirection="column">
-        <MySlider
-          infinite={false}
-          items={actors}
-          header="Cast"
-          clickable="true"
-        />
-      </S.Container>
-      <Episodes seasons={seasons} show={show} />
-      <Space height="10rem" />
+      <S.TabsDiv>
+        <S.TabList>
+          <S.TabItem
+            active={activeTab === 'overview' ? true : false}
+            onClick={() => tabClickHandler('overview')}
+          >
+            Overview
+          </S.TabItem>
+          <S.TabItem
+            active={activeTab === 'episodes' ? true : false}
+            onClick={() => tabClickHandler('episodes')}
+          >
+            Episodes
+          </S.TabItem>
+          <S.TabItem
+            active={activeTab === 'trailer' ? true : false}
+            onClick={() => tabClickHandler('trailer')}
+          >
+            Trailer
+          </S.TabItem>
+        </S.TabList>
+      </S.TabsDiv>
+      {activeTab === 'overview' && (
+        <OverviewTab cast={cast} seasons={seasons} show={show} />
+      )}
+      {activeTab === 'episodes' && (
+        <EpisodesTab seasons={seasons} show={show} />
+      )}
+      {/* <Space height="5rem" /> */}
       {/* <Gallery images={images.allImages} /> */}
     </>
   );

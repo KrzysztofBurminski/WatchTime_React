@@ -1,4 +1,11 @@
-import { getDatabase, ref, set, remove, onValue } from 'firebase/database';
+import {
+  getDatabase,
+  ref,
+  set,
+  remove,
+  onValue,
+  update,
+} from 'firebase/database';
 import { showsActions } from './shows-slice';
 
 export const addShowToDB = (userId, show) => {
@@ -9,6 +16,7 @@ export const addShowToDB = (userId, show) => {
       id: show.id,
       title: show.title,
       image: show.image,
+      watchedCount: 0,
     });
   };
 };
@@ -42,8 +50,53 @@ export const getShowsList = (userId) => {
   };
 };
 
+const updateWatchedCount = (userId, show, add) => {
+  const db = getDatabase();
+  let watchedCount = 0;
+
+  const watchedCountRef = ref(db, `users/${userId}/${show.id}`);
+  onValue(watchedCountRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      watchedCount = parseInt(data.watchedCount);
+      add ? watchedCount++ : watchedCount--;
+    } else {
+      if (add) {
+        watchedCount = 1;
+      }
+    }
+  });
+
+  update(ref(db, `users/${userId}/${show.id}`), {
+    watchedCount: watchedCount,
+  });
+};
+// const updateWatchedCount = (userId, show, add) => {
+//   const db = getDatabase();
+//   let watchedCount = 0;
+
+//   const watchedCountRef = ref(db, `users/${userId}/${show.id}/watchedCount`);
+//   onValue(watchedCountRef, (snapshot) => {
+//     const data = snapshot.val();
+//     if (data) {
+//       watchedCount = parseInt(data.watchedCount);
+//       add ? watchedCount++ : watchedCount--;
+//       // watchedCount++;
+//     } else {
+//       if (add) {
+//         watchedCount = 1;
+//       }
+//     }
+//   });
+
+//   set(ref(db, `users/${userId}/${show.id}/watchedCount`), {
+//     watchedCount,
+//   });
+// };
+
 export const addEpisodeToDB = (userId, show, episode) => {
   const db = getDatabase();
+
   set(
     ref(
       db,
@@ -54,7 +107,10 @@ export const addEpisodeToDB = (userId, show, episode) => {
       episode: episode.episode,
     }
   );
+
+  updateWatchedCount(userId, show, true);
 };
+
 export const removeEpisodeFromDB = (userId, show, episode) => {
   const db = getDatabase();
   set(
@@ -64,4 +120,6 @@ export const removeEpisodeFromDB = (userId, show, episode) => {
     ),
     {}
   );
+
+  updateWatchedCount(userId, show, false);
 };

@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 export const HeaderSlider = styled.h3`
   font-size: 1.4rem;
   color: #ccc;
+  margin: 0;
   margin-top: 2rem;
+  margin-bottom: ${(p) => (p.clickable ? '1rem' : '0')};
 
   @media screen and (max-width: 576px) {
     font-size: 1.2rem;
@@ -44,13 +46,13 @@ export const MovieImage = styled.img`
 
 export const SliderItem = styled.div`
   height: ${(p) => (p.circle ? '10rem' : '25rem')};
-  padding: 0 0.3rem;
+  padding: 1rem 0.3rem 0;
   display: flex;
   flex-direction: column;
 
-  &:active {
+  /* &:active {
     border: none;
-  }
+  } */
 
   @media screen and (max-width: 768px) {
     height: ${(p) => (p.circle ? '10rem' : '22rem')};
@@ -62,36 +64,37 @@ export const SliderItem = styled.div`
 `;
 
 export const Image = styled.img`
-  height: ${(p) => (p.circle ? '10rem' : '75%')};
+  height: ${(p) => (p.circle ? '12rem' : '85%')};
   width: ${(p) => (p.circle ? '10rem' : '14rem')};
-
+  /* padding-top: 0.5rem; */
   object-fit: cover;
-  background-position: top;
+  background-position: top center;
   transition: transform 0.3s ease-out;
-  border-radius: ${(p) => (p.circle ? '50%' : '0')};
+  border-radius: ${(p) => (p.circle ? '0%' : '0')};
 
   &:hover {
-    transform: scale(0.95);
-    cursor: pointer;
+    transform: scale(0.98);
+    /* cursor: pointer; */
   }
 
   @media screen and (max-width: 1024px) {
-    width: ${(p) => (p.circle ? '10rem' : '13rem')};
+    width: ${(p) => (p.circle ? '10rem' : '14rem')};
   }
 
   @media screen and (max-width: 768px) {
-    height: ${(p) => (p.circle ? '8rem' : '75%')};
-    width: ${(p) => (p.circle ? '8rem' : '11rem')};
+    height: ${(p) => (p.circle ? '10rem' : '85%')};
+    width: ${(p) => (p.circle ? '8rem' : '12rem')};
   }
 
   @media screen and (max-width: 576px) {
-    height: ${(p) => (p.circle ? '8rem' : '75%')};
-    width: ${(p) => (p.circle ? '8rem' : '9rem')};
+    height: ${(p) => (p.circle ? '10rem' : '85%')};
+    width: ${(p) => (p.circle ? '8rem' : '10rem')};
   }
 `;
 
 export const ItemTitle = styled.h5`
   max-width: 10rem;
+  padding: 0;
   margin: 0;
   margin-top: 0.5rem;
   margin-bottom: 0.2rem;

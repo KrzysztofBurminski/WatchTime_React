@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getDatabase, ref, onValue } from 'firebase/database';
-import { addEpisodeToDB, removeEpisodeFromDB } from '../../store/shows-actions';
+import {
+  addEpisodeToDB,
+  removeEpisodeFromDB,
+} from '../../../../store/shows-actions';
 import { useSelector } from 'react-redux';
 import * as S from './EpisodesStyled';
 
@@ -39,10 +42,12 @@ const Episodes = ({ seasons, show }) => {
       let tempWatchedEpisodes = [...watchedEpisodes];
       tempWatchedEpisodes.push(episode.id);
       setWatchedEpisodes(tempWatchedEpisodes);
-      console.log('Added episode');
     } else {
       removeEpisodeFromDB(userId, show, episode);
-      console.log('Removed episode');
+      let tempWatchedEpisodes = watchedEpisodes.filter((id) => {
+        return id !== episode.id;
+      });
+      setWatchedEpisodes(tempWatchedEpisodes);
     }
   };
 

@@ -75,7 +75,6 @@ export const TextContainer = styled.div`
 
   @media screen and (max-width: 1024px) {
     display: block;
-
     width: 90%;
     margin: 4rem auto 0 auto;
   }
@@ -119,84 +118,60 @@ export const RowText = styled.p`
   margin-right: 0.6rem;
 `;
 
-/////////////// MAIN BODY
-
-export const Container = styled.div`
-  width: 90%;
-  max-width: 1400px;
-  margin: 0 auto;
-  margin-top: 2rem;
-  display: flex;
-  /* flex-flow: row, nowrap; */
-  flex-wrap: nowrap;
-  flex-direction: ${(p) => p.flexDirection || 'row'};
-  justify-content: center;
-
-  @media screen and (max-width: 768px) {
-    justify-content: flex-start;
-    margin-top: 2rem;
-  }
-`;
-
-export const PosterDiv = styled.aside`
-  height: 100%;
+export const TabsDiv = styled.div`
   width: 100%;
-  /* height: auto; */
-  /* width: auto; */
-  max-width: 18rem;
-
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-
-export const Poster = styled.img`
-  height: 100%;
-  width: 100%;
-  src: url(${(p) => p.src});
-  object-fit: contain;
-`;
-
-export const MainInfo = styled.section`
-  width: 70%;
-  margin-left: 2rem;
-`;
-
-export const TextHeader = styled.h4`
-  font-size: 1.2rem;
-  margin: 0.5rem 0 0.7rem;
-`;
-
-export const Text = styled.p`
-  color: ${(p) => p.theme.colors.onDark};
-  font-size: 1rem;
+  background-color: #292929;
   margin: 0;
   padding: 0;
+
+  @media screen and (min-width: 1024px) {
+    background-color: #181818;
+  }
 `;
 
-export const ShowStats = styled.ul`
-  display: flex;
-  flex-direction: column;
-  margin-top: 1.5rem;
-  padding: 0;
-`;
-
-export const StatsItem = styled.li`
+export const TabList = styled.ul`
   list-style: none;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
   display: flex;
   flex-direction: row;
-  padding: 0.2rem 0;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (min-width: 1024px) {
+    max-width: 800px;
+    margin-top: -2rem;
+  }
 `;
 
-export const StatsLabel = styled.h5`
-  width: 110px;
-  font-size: 1rem;
-  margin: 0;
-  margin-right: 15px;
-`;
+export const TabItem = styled.li`
+  padding: 2rem 1rem 0.4rem;
+  margin: 0 0.4rem;
+  margin-bottom: ${(p) => (p.active ? '14px' : '15px')};
+  margin-top: ${(p) => (p.active ? '1px' : '0px')};
+  border-bottom: ${(p) => (p.active ? '2px solid #ccc' : 'none')};
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #ccc;
+  text-transform: uppercase;
+  transition: all 0.2s ease-out;
+  cursor: pointer;
 
-export const Trailer = styled.iframe`
-  border: none;
-  width: 100%;
-  height: 100%;
+  &:hover {
+    color: #eee;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 33.3%;
+    padding: 1rem;
+    margin: 0;
+    background-color: ${(p) => (p.active ? '#181818' : 'transparent')};
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: ${(p) => (p.active ? '#ddd' : '#ccc')};
+    border: none;
+    border-right: 1px solid black;
+  }
 `;
