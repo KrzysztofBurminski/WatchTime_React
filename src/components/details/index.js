@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addShowToDB, removeShowFromDB } from '../../store/shows-actions';
 import { useSelector } from 'react-redux';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
 import Button from '../UI/Button';
-import Space from '../UI/Space';
-// import YTSearch from 'youtube-api-search';
 import * as S from './DetailsElements';
 import EpisodesTab from './tabs/EpisodesTab/index';
 import OverviewTab from './tabs/OverviewTab/index';
+// import YTSearch from 'youtube-api-search';
 // import Gallery from './Gallery';
 
-const Details = ({ images, show, seasons, cast }) => {
-  const dispatch = useDispatch();
+const Details = ({ images, show, seasons, cast, episodesCount }) => {
+  const [activeTab, setActiveTab] = useState('overview');
+  const [watchedEpisodesCounter, setWatchedEpisodesCounter] = useState(0);
 
   const userId = useSelector((state) => state.auth.userId);
   const showsIdList = useSelector((state) => state.shows.showsIdList);
 
-  // const [activeTab, setActiveTab] = useState('overview');
-  const [activeTab, setActiveTab] = useState('episodes');
+  const dispatch = useDispatch();
+
+  const getWatchCount = (userId, show) => {
+    const db = getDatabase();
+    let watchedCount = 0;
+
+    const watchedCountRef = ref(db, `users/${userId}/${show.id}`);
+    onValue(watchedCountRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        watchedCount = parseInt(data.watchedCount);
+        setWatchedEpisodesCounter(watchedCount);
+      }
+    });
+  };
+
+  useEffect(() => {
+    getWatchCount(userId, show);
+  }, [userId, show]);
 
   let followButton = showsIdList.includes(show.id) ? (
     <Button
@@ -42,6 +60,11 @@ const Details = ({ images, show, seasons, cast }) => {
     setActiveTab(tabName);
   };
 
+  let percentageWatched = (
+    (watchedEpisodesCounter / episodesCount) *
+    100
+  ).toFixed(2);
+
   return (
     <>
       <S.HeroContainer>
@@ -61,7 +84,14 @@ const Details = ({ images, show, seasons, cast }) => {
       {/*  */}
       {/* MAIN CONTENT */}
       {/*  */}
-      <Space height="2rem" />
+      {userId !== null ? (
+        <S.ProgressDiv>
+          <S.ProgressBar percent={percentageWatched} />
+        </S.ProgressDiv>
+      ) : (
+        <S.BlankSpace />
+      )}
+
       <S.TabsDiv>
         <S.TabList>
           <S.TabItem
@@ -88,7 +118,12 @@ const Details = ({ images, show, seasons, cast }) => {
         <OverviewTab cast={cast} seasons={seasons} show={show} />
       )}
       {activeTab === 'episodes' && (
-        <EpisodesTab seasons={seasons} show={show} />
+        <EpisodesTab
+          seasons={seasons}
+          show={show}
+          watchedEpisodesCounter={watchedEpisodesCounter}
+          episodesCount={episodesCount}
+        />
       )}
       {/* <Space height="5rem" /> */}
       {/* <Gallery images={images.allImages} /> */}

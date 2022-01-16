@@ -25,7 +25,7 @@ const theme = {
     bodyText: '#ccc',
     myPurple: '#6301bf',
     myPurpleDark: '#392A46',
-    myPurpleHover: '#725ac1',
+    myPurpleHover: '#4e0296',
     onDark: '#ccc',
   },
 };

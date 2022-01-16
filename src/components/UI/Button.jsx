@@ -2,31 +2,23 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Button = styled.button`
-  border: 2px solid;
-  background: ${(props) => props.theme.colors.myPurple};
-  border-color: ${(props) =>
-    props.outlined ? 'white' : props.theme.colors.myPurple};
+  /* border-color: {(props) => */
+  /* props.outlined ? 'white' : props.theme.colors.myPurple}; */
   /* color: {(props) => (props.outlined ? props.theme.colors.myPurple : 'white')}; */
-  color: #fff;
-  font-size: 1.2rem;
   margin-top: 2rem;
   padding: 0.5rem 1.2rem;
-  /* border-radius: 30px; */
+  background-color: ${(props) => props.theme.colors.myPurple};
+  border: 2px solid;
   border-radius: 3px;
+  border-color: ${(props) => props.theme.colors.myPurple};
+  color: #fff;
+  font-size: 1.2rem;
   transition: all 0.3s ease-out;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    /* background: {(props) =>
-      props.outlined
-        ? props.theme.colors.myPurpleHover
-        : props.theme.colors.myPurpleHover}; */
-    /* border-color: {(props) =>
-      props.outlined
-        ? 'white'
-        : // ? props.theme.colors.myPurple
-          props.theme.colors.myPurpleHover};
-    color: #fff; */
+    background-color: ${(props) => props.theme.colors.myPurpleHover};
+    border-color: ${(props) => props.theme.colors.myPurpleHover};
     transform: scale(0.95);
   }
 
@@ -42,32 +34,27 @@ export const Button = styled.button`
 `;
 
 export const ButtonLink = styled(Link)`
-  border: 2px solid;
-  background: ${(props) =>
-    props.outlined ? 'transparent' : props.theme.colors.myPurple};
-  border-color: ${(props) =>
-    props.outlined ? 'white' : props.theme.colors.myPurple};
-  color: ${(props) => (props.outlined ? props.theme.colors.myPurple : 'white')};
-  font-size: 1.1rem;
-  text-decoration: none;
+  /* background: {(props) =>
+    props.outlined ? 'transparent' : props.theme.colors.myPurple}; */
+  /* border-color: {(props) => */
+  /* props.outlined ? 'white' : props.theme.colors.myPurple}; */
+  /* color: {(props) =>
+        props.outlined ? props.theme.colors.myPurple : 'white'}; */
   margin-top: 2rem;
   padding: 0.5rem 1.2rem;
+  background-color: ${(props) => props.theme.colors.myPurple};
+  border: 2px solid;
+  border-color: ${(props) => props.theme.colors.myPurple};
   border-radius: 3px;
-  /* border-radius: 30px; */
+  color: #ccc;
+  font-size: 1.1rem;
+  text-decoration: none;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    background: ${(props) =>
-      props.outlined
-        ? props.theme.colors.myPurple
-        : props.theme.colors.myPurpleHover};
-    border-color: ${(props) =>
-      props.outlined
-        ? 'white'
-        : // ? props.theme.colors.myPurple
-          props.theme.colors.myPurpleHover};
-    color: #fff;
+    background-color: ${(props) => props.theme.colors.myPurpleHover};
+    border-color: ${(props) => props.theme.colors.myPurpleHover};
     transform: scale(0.95);
   }
 `;

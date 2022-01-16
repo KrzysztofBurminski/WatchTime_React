@@ -50,6 +50,10 @@ export const getShowsList = (userId) => {
   };
 };
 
+//
+///////////// EPISODES ////////////
+//
+
 const updateWatchedCount = (userId, show, add) => {
   const db = getDatabase();
   let watchedCount = 0;
@@ -71,28 +75,6 @@ const updateWatchedCount = (userId, show, add) => {
     watchedCount: watchedCount,
   });
 };
-// const updateWatchedCount = (userId, show, add) => {
-//   const db = getDatabase();
-//   let watchedCount = 0;
-
-//   const watchedCountRef = ref(db, `users/${userId}/${show.id}/watchedCount`);
-//   onValue(watchedCountRef, (snapshot) => {
-//     const data = snapshot.val();
-//     if (data) {
-//       watchedCount = parseInt(data.watchedCount);
-//       add ? watchedCount++ : watchedCount--;
-//       // watchedCount++;
-//     } else {
-//       if (add) {
-//         watchedCount = 1;
-//       }
-//     }
-//   });
-
-//   set(ref(db, `users/${userId}/${show.id}/watchedCount`), {
-//     watchedCount,
-//   });
-// };
 
 export const addEpisodeToDB = (userId, show, episode) => {
   const db = getDatabase();
@@ -107,7 +89,6 @@ export const addEpisodeToDB = (userId, show, episode) => {
       episode: episode.episode,
     }
   );
-
   updateWatchedCount(userId, show, true);
 };
 
@@ -120,6 +101,23 @@ export const removeEpisodeFromDB = (userId, show, episode) => {
     ),
     {}
   );
-
   updateWatchedCount(userId, show, false);
+};
+
+export const addSeasonToDB = (userId, show, season) => {
+  const db = getDatabase();
+
+  season.forEach((episode) => {
+    set(
+      ref(
+        db,
+        `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+      ),
+      {
+        id: episode.id,
+        episode: episode.episode,
+      }
+    );
+    updateWatchedCount(userId, show, true);
+  });
 };

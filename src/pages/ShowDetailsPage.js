@@ -55,7 +55,16 @@ const ShowDetailsPage = () => {
     showId,
   ]);
 
-  // console.log(cast);
+  let episodesCount = 0;
+  if (seasons) {
+    seasons.forEach((season) => {
+      // episodesCount++;
+      season.forEach((episode) => {
+        episodesCount++;
+      });
+    });
+    // console.log(episodesCount);
+  }
 
   return (
     <>
@@ -79,6 +88,7 @@ const ShowDetailsPage = () => {
             show={showData}
             seasons={seasons}
             cast={cast}
+            episodesCount={episodesCount}
           />
         )}
     </>

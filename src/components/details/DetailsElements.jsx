@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { keyframes } from 'styled-components';
 
 export const HeroContainer = styled.div`
   height: 35rem;
@@ -116,6 +117,39 @@ export const RowText = styled.p`
   padding: 0;
   margin: 0;
   margin-right: 0.6rem;
+`;
+
+export const ProgressDiv = styled.div`
+  margin: 0;
+  width: 100%;
+  height: 14px;
+  background-color: #aaa;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 1024px) {
+    margin: 0;
+    margin-top: 2rem;
+  }
+`;
+
+const slide = keyframes`
+  from { width: 0%; }
+  to { width: ${(p) => (p.percent ? `${p.percent}%` : '0%')}; }
+  `;
+
+export const ProgressBar = styled.div`
+  width: ${(p) => (p.percent ? `${p.percent}%` : '0%')};
+  height: 100%;
+  background-color: #1e9406;
+  border-radius: 2px;
+  animation: ${slide} 1000ms ease-in-out;
+`;
+
+export const BlankSpace = styled.div`
+  margin: 0;
+  padding: 0;
+  height: 2rem;
 `;
 
 export const TabsDiv = styled.div`
