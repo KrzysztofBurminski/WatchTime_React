@@ -8,11 +8,12 @@ import Button from '../UI/Button';
 import * as S from './DetailsElements';
 import EpisodesTab from './tabs/EpisodesTab/index';
 import OverviewTab from './tabs/OverviewTab/index';
+import GalleryTab from './tabs/GalleryTab';
 // import YTSearch from 'youtube-api-search';
 // import Gallery from './Gallery';
 
 const Details = ({ images, show, seasons, cast, episodesCount }) => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('gallery');
   const [watchedEpisodesCounter, setWatchedEpisodesCounter] = useState(0);
 
   const userId = useSelector((state) => state.auth.userId);
@@ -84,7 +85,7 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
       {/*  */}
       {/* MAIN CONTENT */}
       {/*  */}
-      {userId !== null ? (
+      {userId !== null && showsIdList.includes(show.id) ? (
         <S.ProgressDiv>
           <S.ProgressBar percent={percentageWatched} />
         </S.ProgressDiv>
@@ -107,10 +108,10 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
             Episodes
           </S.TabItem>
           <S.TabItem
-            active={activeTab === 'trailer' ? true : false}
-            onClick={() => tabClickHandler('trailer')}
+            active={activeTab === 'gallery' ? true : false}
+            onClick={() => tabClickHandler('gallery')}
           >
-            Trailer
+            Gallery
           </S.TabItem>
         </S.TabList>
       </S.TabsDiv>
@@ -125,8 +126,7 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
           episodesCount={episodesCount}
         />
       )}
-      {/* <Space height="5rem" /> */}
-      {/* <Gallery images={images.allImages} /> */}
+      {activeTab === 'gallery' && <GalleryTab images={images.allImages} />}
     </>
   );
 };
