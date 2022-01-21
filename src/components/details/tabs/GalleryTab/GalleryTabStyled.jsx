@@ -46,7 +46,7 @@ export const BackgroundImagesGrid = styled.div`
   align-content: center;
   grid-template-columns: repeat(6, 1fr);
   grid-gap: 10px;
-  margin-bottom: 5rem;
+  padding-bottom: 5rem;
 
   @media screen and (max-width: 1300px) {
     grid-template-columns: repeat(3, 1fr);

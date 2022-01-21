@@ -53,8 +53,8 @@ export const ProfileName = styled.h5`
 
 export const ShowsSection = styled.section`
   width: 100%;
-  padding: 2rem;
-  margin: 5rem auto 10rem auto;
+  padding-top: 2rem;
+  margin: 5rem auto 10rem;
   /* margin-top: 5rem; */
   /* background-color: #141314; */
   background-color: ${(p) => p.theme.colors.bodyBg};

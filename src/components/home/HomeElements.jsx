@@ -1,10 +1,11 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 90%;
+  width: 100%;
   margin: auto;
 
-  @media screen and (max-width: 992px) {
+  /* @media screen and (max-width: 992px) {
     width: 90%;
   }
 
@@ -14,13 +15,13 @@ export const Container = styled.div`
 
   @media screen and (max-width: 576px) {
     width: 85%;
-  }
+  } */
 `;
 
 // Trailers
 export const HeaderTrailers = styled.h3`
   width: 100%;
-  background-color: #aaa;
+  background-color: #999;
   margin: 0;
   margin-top: 5rem;
   padding-top: 2rem;
@@ -33,7 +34,7 @@ export const ContainerTrailers = styled.div`
   width: 100%;
   margin: 0 auto 4rem;
   padding: 2rem 2rem 4rem;
-  background-color: #aaa;
+  background-color: #999;
   display: flex;
   flex-flow: row, nowrap;
   justify-content: space-between;
@@ -84,7 +85,7 @@ export const Trailer = styled.iframe`
   height: 100%;
 `;
 
-// Double
+// Recommended
 export const HeaderRecommended = styled.h2`
   width: 100%;
   padding-top: 2rem;
@@ -123,7 +124,7 @@ export const ContainerRecommended = styled.div`
   }
 `;
 
-export const RecommendedImg = styled.div`
+export const RecommendedImg = styled(Link)`
   height: 16rem;
   width: 45%;
   max-width: 35rem;
@@ -138,10 +139,10 @@ export const RecommendedImg = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  transition: transform 0.2s ease-out;
+  transition: transform 0.3s ease-in-out;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(0.99);
   }
 
   @media screen and (max-width: 992px) {
@@ -154,6 +155,37 @@ export const RecommendedImg = styled.div`
     margin: 1rem auto;
   }
 `;
+// export const RecommendedImg = styled.div`
+//   height: 16rem;
+//   width: 45%;
+//   max-width: 35rem;
+//   background: linear-gradient(
+//       to ${({ side }) => side},
+//       transparent 30%,
+//       rgba(0, 0, 0, 0.5) 45% 55%,
+//       #000 65%
+//     ),
+//     url(${({ src }) => src});
+//   background-position: top;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   position: relative;
+//   transition: transform 0.2s ease-out;
+
+//   &:hover {
+//     transform: scale(1.05);
+//   }
+
+//   @media screen and (max-width: 992px) {
+//     width: 48%;
+//   }
+
+//   @media screen and (max-width: 768px) {
+//     height: 13rem;
+//     width: 80%;
+//     margin: 1rem auto;
+//   }
+// `;
 
 export const RecommendedTextContainer = styled.div`
   position: absolute;

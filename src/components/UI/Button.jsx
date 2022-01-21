@@ -2,9 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Button = styled.button`
-  /* border-color: {(props) => */
-  /* props.outlined ? 'white' : props.theme.colors.myPurple}; */
-  /* color: {(props) => (props.outlined ? props.theme.colors.myPurple : 'white')}; */
   margin-top: 2rem;
   padding: 0.5rem 1.2rem;
   background-color: ${(props) => props.theme.colors.myPurple};
@@ -34,12 +31,6 @@ export const Button = styled.button`
 `;
 
 export const ButtonLink = styled(Link)`
-  /* background: {(props) =>
-    props.outlined ? 'transparent' : props.theme.colors.myPurple}; */
-  /* border-color: {(props) => */
-  /* props.outlined ? 'white' : props.theme.colors.myPurple}; */
-  /* color: {(props) =>
-        props.outlined ? props.theme.colors.myPurple : 'white'}; */
   margin-top: 2rem;
   padding: 0.5rem 1.2rem;
   background-color: ${(props) => props.theme.colors.myPurple};

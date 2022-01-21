@@ -87,6 +87,17 @@ export const StatsLabel = styled.h5`
   margin-right: 15px;
 `;
 
+export const ContainerSlider = styled.div`
+  animation: ${fadeIn} 700ms ease-in;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+`;
+
 export const Trailer = styled.iframe`
   border: none;
   width: 100%;

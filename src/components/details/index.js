@@ -13,7 +13,7 @@ import GalleryTab from './tabs/GalleryTab';
 // import Gallery from './Gallery';
 
 const Details = ({ images, show, seasons, cast, episodesCount }) => {
-  const [activeTab, setActiveTab] = useState('gallery');
+  const [activeTab, setActiveTab] = useState('overview');
   const [watchedEpisodesCounter, setWatchedEpisodesCounter] = useState(0);
 
   const userId = useSelector((state) => state.auth.userId);

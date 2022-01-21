@@ -70,7 +70,7 @@ const OverviewTab = ({ show, seasons, cast }) => {
           </S.ShowStats>
         </S.MainInfo>
       </S.Container>
-      <S.Container flexDirection="column">
+      <S.ContainerSlider>
         <Space height="2rem" />
         <MySlider
           infinite={false}
@@ -79,16 +79,16 @@ const OverviewTab = ({ show, seasons, cast }) => {
           header={`Characters from ${show.title}`}
           clickable="true"
         />
-      </S.Container>
-      <S.Container flexDirection="column">
-        <Space height="2rem" />
+      </S.ContainerSlider>
+      <S.ContainerSlider>
+        <Space height="1rem" />
         <MySlider
           infinite={false}
           items={actors}
           header="Cast"
           clickable="true"
         />
-      </S.Container>
+      </S.ContainerSlider>
     </S.Section>
   );
 };

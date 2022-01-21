@@ -6,13 +6,12 @@ import MySlider from '../Slider';
 import Space from '../UI/Space';
 
 const Home = ({ heroImg, heroDesc, shows }) => {
-  // console.log(heroDesc);
-
   // console.log(shows);
   let allShows = shows.slice(70, 80);
   let popularShows = shows.filter((show) => show.popularity > 97);
   let bestRatedShows = shows.filter((show) => show.rating > 8.5);
   // let actionShows = shows.filter((show) => show.genres.includes('Action'));
+  // console.log(actionShows);
   // let dramaShows = shows.filter((show) => show.genres.includes('Drama'));
   let comedyShows = shows.filter((show) => show.genres.includes('Comedy'));
   let familyShows = shows.filter((show) => show.genres.includes('Family'));
@@ -64,6 +63,7 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         <S.RecommendedImg
           side="left"
           src="https://static.tvmaze.com/uploads/images/original_untouched/72/180098.jpg"
+          to={`/shows/13`}
         >
           <S.RecommendedTextContainer side="left">
             <S.RecommendedText>The Flash</S.RecommendedText>
@@ -72,6 +72,7 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         <S.RecommendedImg
           side="right"
           src="https://static.tvmaze.com/uploads/images/original_untouched/219/547788.jpg"
+          to={`/shows/335`}
         >
           <S.RecommendedTextContainer side="right">
             <S.RecommendedText>Sherlock</S.RecommendedText>
