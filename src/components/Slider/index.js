@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import Slider from 'react-slick';
-import { GrNext } from 'react-icons/gr';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 
 import * as S from './SliderElements';

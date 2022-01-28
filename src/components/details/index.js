@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addShowToDB, removeShowFromDB } from '../../store/shows-actions';
+import {
+  addShowToDB,
+  addToFavourite,
+  removeShowFromDB,
+  removeShowFromFav,
+} from '../../store/shows-actions';
 import { useSelector } from 'react-redux';
 import { getDatabase, ref, onValue } from 'firebase/database';
 
@@ -10,7 +15,6 @@ import EpisodesTab from './tabs/EpisodesTab/index';
 import OverviewTab from './tabs/OverviewTab/index';
 import GalleryTab from './tabs/GalleryTab';
 // import YTSearch from 'youtube-api-search';
-// import Gallery from './Gallery';
 
 const Details = ({ images, show, seasons, cast, episodesCount }) => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -18,6 +22,7 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
 
   const userId = useSelector((state) => state.auth.userId);
   const showsIdList = useSelector((state) => state.shows.showsIdList);
+  const favShowsIdList = useSelector((state) => state.shows.favShowsIdList);
 
   const dispatch = useDispatch();
 
@@ -25,7 +30,7 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
     const db = getDatabase();
     let watchedCount = 0;
 
-    const watchedCountRef = ref(db, `users/${userId}/${show.id}`);
+    const watchedCountRef = ref(db, `users/${userId}/followed/${show.id}`);
     onValue(watchedCountRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -57,6 +62,14 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
     </Button>
   );
 
+  const favouriteClickHandler = () => {
+    if (!favShowsIdList.includes(show.id)) {
+      dispatch(addToFavourite(userId, show));
+    } else {
+      dispatch(removeShowFromFav(userId, show));
+    }
+  };
+
   const tabClickHandler = (tabName) => {
     setActiveTab(tabName);
   };
@@ -82,6 +95,10 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
           </S.TextContainer>
         </S.HeroShadow>
       </S.HeroContainer>
+      <S.FavIcon
+        onClick={favouriteClickHandler}
+        fav={favShowsIdList.includes(show.id) ? 'true' : 'false'}
+      />
       {/*  */}
       {/* MAIN CONTENT */}
       {/*  */}

@@ -48,7 +48,10 @@ const EpisodesTab = ({ seasons, show }) => {
 
   const getWatchedEpisodes = (userId, show, season) => {
     const db = getDatabase();
-    const seasonRef = ref(db, `users/${userId}/${show.id}/seasons/${season}/`);
+    const seasonRef = ref(
+      db,
+      `users/${userId}/followed/${show.id}/seasons/${season}/`
+    );
     onValue(seasonRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {

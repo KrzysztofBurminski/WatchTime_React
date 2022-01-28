@@ -45,10 +45,10 @@ const OverviewTab = ({ show, seasons, cast }) => {
             </S.StatsItem>
             <S.StatsItem>
               <S.StatsLabel>Runtime</S.StatsLabel>
-              <S.Text>{show.averageRuntime}</S.Text>
+              <S.Text>{show.averageRuntime}min</S.Text>
             </S.StatsItem>
             <S.StatsItem>
-              <S.StatsLabel>Genres</S.StatsLabel>
+              <S.StatsLabel>Genre</S.StatsLabel>
               <S.Text>{show.genres[0]}</S.Text>
             </S.StatsItem>
             <S.StatsItem>

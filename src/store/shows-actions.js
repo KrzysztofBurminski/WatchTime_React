@@ -12,11 +12,12 @@ export const addShowToDB = (userId, show) => {
   return (dispatch) => {
     dispatch(showsActions.addToList(show));
     const db = getDatabase();
-    set(ref(db, `users/${userId}/${show.id}`), {
+    set(ref(db, `users/${userId}/followed/${show.id}`), {
       id: show.id,
       title: show.title,
       image: show.image,
       watchedCount: 0,
+      runtime: show.averageRuntime,
     });
   };
 };
@@ -25,14 +26,14 @@ export const removeShowFromDB = (userId, show) => {
   return (dispatch) => {
     dispatch(showsActions.removeFromList(show));
     const db = getDatabase();
-    remove(ref(db, `users/${userId}/${show.id}`));
+    remove(ref(db, `users/${userId}/followed/${show.id}`));
   };
 };
 
 export const getShowsList = (userId) => {
   return (dispatch) => {
     const db = getDatabase();
-    const userRef = ref(db, `users/${userId}`);
+    const userRef = ref(db, `users/${userId}/followed`);
     onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
@@ -58,7 +59,7 @@ const updateWatchedCount = (userId, show, add) => {
   const db = getDatabase();
   let watchedCount = 0;
 
-  const watchedCountRef = ref(db, `users/${userId}/${show.id}`);
+  const watchedCountRef = ref(db, `users/${userId}/followed/${show.id}`);
   onValue(watchedCountRef, (snapshot) => {
     const data = snapshot.val();
     if (data) {
@@ -71,7 +72,7 @@ const updateWatchedCount = (userId, show, add) => {
     }
   });
 
-  update(ref(db, `users/${userId}/${show.id}`), {
+  update(ref(db, `users/${userId}/followed/${show.id}`), {
     watchedCount: watchedCount,
   });
 };
@@ -82,7 +83,7 @@ export const addEpisodeToDB = (userId, show, episode) => {
   set(
     ref(
       db,
-      `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+      `users/${userId}/followed/${show.id}/seasons/${episode.season}/${episode.id}`
     ),
     {
       id: episode.id,
@@ -97,7 +98,7 @@ export const removeEpisodeFromDB = (userId, show, episode) => {
   set(
     ref(
       db,
-      `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+      `users/${userId}/followed/${show.id}/seasons/${episode.season}/${episode.id}`
     ),
     {}
   );
@@ -111,7 +112,7 @@ export const addSeasonToDB = (userId, show, season) => {
     set(
       ref(
         db,
-        `users/${userId}/${show.id}/seasons/${episode.season}/${episode.id}`
+        `users/${userId}/followed/${show.id}/seasons/${episode.season}/${episode.id}`
       ),
       {
         id: episode.id,
@@ -120,4 +121,49 @@ export const addSeasonToDB = (userId, show, season) => {
     );
     updateWatchedCount(userId, show, true);
   });
+};
+
+// FAVOURITES
+export const addToFavourite = (userId, show) => {
+  return (dispatch) => {
+    dispatch(showsActions.addToFav(show));
+    const db = getDatabase();
+    set(ref(db, `users/${userId}/favourite/${show.id}`), {
+      id: show.id,
+      title: show.title,
+      image: show.image,
+    });
+  };
+};
+
+export const removeShowFromFav = (userId, show) => {
+  return (dispatch) => {
+    dispatch(showsActions.removeFromFavList(show));
+    const db = getDatabase();
+    remove(ref(db, `users/${userId}/favourite/${show.id}`));
+  };
+};
+
+export const getFavShowsList = (userId) => {
+  return (dispatch) => {
+    const db = getDatabase();
+    const userRef = ref(db, `users/${userId}/favourite`);
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const convertedData = Object.values(data);
+        const idList = [];
+        convertedData.forEach((show) => {
+          idList.push(show.id);
+        });
+
+        dispatch(
+          showsActions.updateFavList({
+            showList: convertedData,
+            idList: idList,
+          })
+        );
+      }
+    });
+  };
 };

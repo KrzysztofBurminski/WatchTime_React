@@ -3,7 +3,19 @@ import React from 'react';
 import MySlider from '../Slider';
 import * as S from './ProfileStyled';
 
-const Profile = ({ showsList, heroImg, userImg, userName }) => {
+const Profile = ({
+  showsList,
+  favShowsList,
+  heroImg,
+  userImg,
+  userName,
+  statistics,
+}) => {
+  let spentTime = '0min';
+  let hours = Math.floor(statistics.timeSpent / 60);
+  let minutes = statistics.timeSpent % 60;
+  spentTime = `${hours}h ${minutes}min`;
+
   return (
     <>
       <S.Hero>
@@ -13,8 +25,40 @@ const Profile = ({ showsList, heroImg, userImg, userName }) => {
           <S.ProfileName>{userName}</S.ProfileName>
         </S.PersonSection>
       </S.Hero>
+      <S.Statistics>
+        <S.StatisticsCard>
+          <S.StatisticsHeader>Watched episodes</S.StatisticsHeader>
+          <S.StatisticsContent>{statistics.episodes}</S.StatisticsContent>
+        </S.StatisticsCard>
+        <S.StatisticsCard>
+          <S.StatisticsHeader>Time spent on watching:</S.StatisticsHeader>
+          <S.StatisticsContent>{spentTime}</S.StatisticsContent>
+        </S.StatisticsCard>
+      </S.Statistics>
+      <S.FavouriteSection withSlider={favShowsList.length > 3}>
+        <S.FavHeader withSlider={favShowsList.length > 3}>
+          My Favourite Shows
+        </S.FavHeader>
+        {favShowsList.length <= 3 &&
+          favShowsList.map((show) => (
+            <S.FavShow key={show.id} to={`/shows/${show.id}`}>
+              <S.FavShowImg src={show.image} />
+            </S.FavShow>
+          ))}
+        {favShowsList.length > 3 && (
+          // <MySlider items={favShowsList} header="Favourite" infinite={false} />
+          <MySlider items={favShowsList} infinite={false} />
+        )}
+      </S.FavouriteSection>
       <S.ShowsSection>
-        <MySlider items={showsList} header="Followed shows" infinite={false} />
+        <S.ShowsHeader>Followed shows</S.ShowsHeader>
+        <S.ShowsGrid>
+          {showsList.map((show) => (
+            <S.ShowItem key={show.id} to={`/shows/${show.id}`}>
+              <S.ShowImage src={show.image} />
+            </S.ShowItem>
+          ))}
+        </S.ShowsGrid>
       </S.ShowsSection>
     </>
   );

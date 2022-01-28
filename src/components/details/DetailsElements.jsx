@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
+import { AiFillHeart } from 'react-icons/ai';
 
 export const HeroContainer = styled.div`
   height: 35rem;
@@ -65,6 +66,19 @@ export const HeroShadow = styled.div`
       rgba(0, 0, 0, 0.1) 70%
     );
     align-items: flex-end;
+  }
+`;
+
+export const FavIcon = styled(AiFillHeart)`
+  position: absolute;
+  top: 100px;
+  right: 40px;
+  font-size: 3rem;
+  color: ${(p) => (p.fav === 'true' ? '#ba1414' : '#ccc')};
+  cursor: pointer;
+
+  &:hover {
+    color: #ba1414;
   }
 `;
 

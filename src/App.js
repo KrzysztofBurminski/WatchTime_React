@@ -16,7 +16,7 @@ import ProfilePage from './pages/ProfilePage';
 import ChoosingShowsPage from './pages/ChoosingShowsPage';
 import { getCurrentUser } from './store/auth-actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { getShowsList } from './store/shows-actions';
+import { getFavShowsList, getShowsList } from './store/shows-actions';
 
 const theme = {
   colors: {
@@ -24,7 +24,7 @@ const theme = {
     bodyBg: '#0a0a0a',
     bodyText: '#ccc',
     myPurple: '#6301bf',
-    myPurpleDark: '#392A46',
+    myPurpleDark: '#352047',
     myPurpleHover: '#4e0296',
     onDark: '#ccc',
   },
@@ -38,12 +38,10 @@ function App() {
     setIsOpen(!isOpen);
   };
 
-  // const showsList = useSelector((state) => state.shows.showsList);
-  // dispatch(getCurrentUser());
   const userId = useSelector((state) => state.auth.userId);
-  // console.log(userId);
   if (userId !== null) {
     dispatch(getShowsList(userId));
+    dispatch(getFavShowsList(userId));
   }
 
   useEffect(() => {
@@ -67,8 +65,7 @@ function App() {
             <AuthPage />
           </Route>
           <Route path="/profile" exact>
-            <ProfilePage />
-            {/* <ProfilePage showsList={showsList} /> */}
+            <ProfilePage userId={userId} />
           </Route>
           <Route path="/choosing" exact>
             <ChoosingShowsPage />
