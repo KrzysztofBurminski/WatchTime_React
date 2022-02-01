@@ -2,20 +2,22 @@ import styled from 'styled-components';
 
 export const GallerySection = styled.section`
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
   background-color: #181818;
 `;
 
 export const ContainerGallery = styled.div`
   width: 90%;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 0;
 `;
 
 export const HeaderImages = styled.h5`
-  margin: 0;
+  margin: 0 auto;
+  text-align: center;
   padding: 4rem 0 1rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 `;
 
 export const PosterImagesGrid = styled.div`

@@ -7,11 +7,10 @@ import Space from '../UI/Space';
 
 const Home = ({ heroImg, heroDesc, shows }) => {
   // console.log(shows);
-  let allShows = shows.slice(70, 80);
+  let allShows = shows.slice(70, 90);
   let popularShows = shows.filter((show) => show.popularity > 97);
   let bestRatedShows = shows.filter((show) => show.rating > 8.5);
   // let actionShows = shows.filter((show) => show.genres.includes('Action'));
-  // console.log(actionShows);
   // let dramaShows = shows.filter((show) => show.genres.includes('Drama'));
   let comedyShows = shows.filter((show) => show.genres.includes('Comedy'));
   let familyShows = shows.filter((show) => show.genres.includes('Family'));
@@ -21,8 +20,20 @@ const Home = ({ heroImg, heroDesc, shows }) => {
     <>
       <Hero heroImg={heroImg} heroDesc={heroDesc} />
       <S.Container>
-        <MySlider items={allShows} header="Shows of the day" infinite={true} />
-        <MySlider items={popularShows} header="Most popular" infinite={true} />
+        <MySlider
+          items={allShows}
+          header="Shows of the day"
+          infinite={true}
+          standard={true}
+          clickable={true}
+        />
+        <MySlider
+          items={popularShows}
+          header="Most popular"
+          infinite={true}
+          standard={true}
+          clickable={true}
+        />
       </S.Container>
       <S.HeaderTrailers>TRAILERS</S.HeaderTrailers>
       <S.ContainerTrailers>
@@ -55,8 +66,20 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         </S.TrailerDiv>
       </S.ContainerTrailers>
       <S.Container>
-        <MySlider items={comedyShows} header="Comedy Shows" infinite={true} />
-        <MySlider items={bestRatedShows} header="Best rated" infinite={true} />
+        <MySlider
+          items={comedyShows}
+          header="Comedy Shows"
+          infinite={true}
+          standard={true}
+          clickable={true}
+        />
+        <MySlider
+          items={bestRatedShows}
+          header="Best rated"
+          infinite={true}
+          standard={true}
+          clickable={true}
+        />
       </S.Container>
       <S.HeaderRecommended>RECOMMENDED</S.HeaderRecommended>
       <S.ContainerRecommended>
@@ -84,8 +107,16 @@ const Home = ({ heroImg, heroDesc, shows }) => {
           items={familyShows}
           header="Family friendly"
           infinite={true}
+          standard={true}
+          clickable={true}
         />
-        <MySlider items={mysteryShows} header="Mystery Shows" infinite={true} />
+        <MySlider
+          items={mysteryShows}
+          header="Mystery Shows"
+          infinite={true}
+          standard={true}
+          clickable={true}
+        />
       </S.Container>
       <Space height="5rem" />
     </>

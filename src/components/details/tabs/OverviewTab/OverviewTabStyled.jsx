@@ -3,7 +3,7 @@ import { keyframes } from 'styled-components';
 
 export const Section = styled.section`
   /* margin-top: 2rem; */
-  padding: 2rem 0 4rem;
+  padding: 2rem 0 20rem;
   background-color: #181818;
 `;
 
@@ -98,8 +98,20 @@ export const ContainerSlider = styled.div`
   justify-content: center;
 `;
 
-export const Trailer = styled.iframe`
-  border: none;
-  width: 100%;
-  height: 100%;
-`;
+// export const ContainerSlider = styled.div`
+//   animation: ${fadeIn} 700ms ease-in;
+//   width: 100%;
+//   max-width: 1400px;
+//   margin: 0;
+//   /* display: flex;
+//   flex-wrap: nowrap;
+//   flex-direction: column;
+//   justify-content: left;
+//   align-items: flex-start; */
+// `;
+
+// export const Trailer = styled.iframe`
+//   border: none;
+//   width: 100%;
+//   height: 100%;
+// `;

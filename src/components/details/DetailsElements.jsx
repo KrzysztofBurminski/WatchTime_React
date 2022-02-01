@@ -100,6 +100,8 @@ export const HeroTitle = styled.h2`
   font-weight: 600;
   color: #fff;
   margin: 0;
+  padding: 0 0.6rem;
+  text-align: center;
 
   @media screen and (max-width: 1200px) {
     font-size: 1.7rem;

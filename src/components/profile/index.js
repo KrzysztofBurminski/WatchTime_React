@@ -46,8 +46,14 @@ const Profile = ({
             </S.FavShow>
           ))}
         {favShowsList.length > 3 && (
-          // <MySlider items={favShowsList} header="Favourite" infinite={false} />
-          <MySlider items={favShowsList} infinite={false} />
+          <MySlider
+            items={favShowsList}
+            infinite={false}
+            standard={true}
+            clickable={true}
+            small={false}
+            profile={true}
+          />
         )}
       </S.FavouriteSection>
       <S.ShowsSection>

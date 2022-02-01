@@ -126,16 +126,24 @@ export const StatisticsContent = styled.p`
 
 export const FavouriteSection = styled.section`
   width: 100%;
-  /* margin: 5rem 0 0; */
+  height: 100%;
   margin: 0;
   background-color: #7d7484;
-  background-color: #706a75;
-  padding: 2rem 1rem;
-  /* background-color: #b1a8b9; */
+  padding: ${(p) => (p.withSlider === true ? '2rem 2rem' : '2rem 1rem')};
   display: ${(p) => (p.withSlider === true ? 'block' : 'flex')};
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    padding: ${(p) => (p.withSlider === true ? '2rem 3rem' : '2rem 1rem')};
+  }
+  @media screen and (max-width: 576px) {
+    padding: ${(p) => (p.withSlider === true ? '2rem 4rem' : '2rem 1rem')};
+  }
+  @media screen and (max-width: 430px) {
+    padding: ${(p) => (p.withSlider === true ? '2rem 1rem' : '2rem 1rem')};
+  }
 `;
 
 export const FavHeader = styled.h3`
@@ -144,13 +152,11 @@ export const FavHeader = styled.h3`
   text-align: center;
   margin-bottom: ${(p) => (p.withSlider === true ? '0' : '2rem')};
   font-size: 2rem;
-  color: #201925;
   color: #000;
 `;
 
 export const FavShow = styled(Link)`
   height: 19.5rem;
-  /* margin: 0 auto; */
   padding: 0.5rem 0.8rem;
   overflow: hidden;
 
@@ -161,7 +167,6 @@ export const FavShow = styled(Link)`
 
   @media screen and (max-width: 576px) {
     height: 13rem;
-    /* flex-direction: column; */
   }
 `;
 
@@ -181,13 +186,10 @@ export const FavShowImg = styled.img`
 //
 
 export const ShowsSection = styled.section`
-  /* width: 90%; */
-  /* padding-top: 5rem; */
-  /* margin: 0 auto 5rem; */
   width: 100%;
-  margin: 0;
+  max-width: 1600px;
+  margin: 0 auto;
   padding: 5rem 3rem 3rem;
-  /* background-color: #181818; */
 `;
 
 export const ShowsHeader = styled.h3`

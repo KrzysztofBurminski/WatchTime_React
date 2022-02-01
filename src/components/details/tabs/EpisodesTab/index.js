@@ -102,7 +102,11 @@ const EpisodesTab = ({ seasons, show }) => {
           </S.MarkSeason>
         )}
       </S.SeasonActionsRow>
-      {userId && <S.WatchedStats>{watchedStats}</S.WatchedStats>}
+      {userId && (
+        <S.ContainerStats>
+          <S.WatchedStats>{watchedStats}</S.WatchedStats>
+        </S.ContainerStats>
+      )}
       {/*  */}
       {/* EPISODES */}
       {/*  */}

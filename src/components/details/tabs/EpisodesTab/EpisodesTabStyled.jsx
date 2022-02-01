@@ -11,7 +11,7 @@ const fadeIn = keyframes`
 
 export const Section = styled.section`
   padding-top: 2rem;
-  max-width: 1500px;
+  width: 100%;
   margin: 0 auto;
   background-color: #181818;
   animation: ${fadeIn} 700ms ease-in;
@@ -22,6 +22,9 @@ export const Section = styled.section`
 `;
 
 export const SeasonActionsRow = styled.div`
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -145,6 +148,12 @@ export const EyeIcon = styled(BsEyeFill)`
   font-size: 1.3rem;
 `;
 
+export const ContainerStats = styled.div`
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+`;
+
 export const WatchedStats = styled.h5`
   margin: 0;
   margin-left: calc(2.5% + 0.8rem);
@@ -158,12 +167,10 @@ export const WatchedStats = styled.h5`
 //
 
 export const ContainerEpisodes = styled.div`
-  /* width: 95%;
-  max-width: 1500px; */
   width: 95%;
+  max-width: 1500px;
   margin: 0 auto 3rem;
   border-radius: 3px;
-  /* background-color: #181818; */
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
