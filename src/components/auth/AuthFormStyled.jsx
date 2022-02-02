@@ -9,9 +9,9 @@ export const SectionAuth = styled.section`
 `;
 
 export const Background = styled.div`
-  width: 60%;
-  max-width: 50rem;
-  margin: 7rem auto;
+  width: 50%;
+  max-width: 600px;
+  margin: 2rem auto;
   margin-bottom: 4rem;
   padding: 1rem;
   text-align: center;
@@ -36,24 +36,6 @@ export const Header = styled.h2`
   margin: 0;
   margin-bottom: 1.5rem;
   margin-top: 0.7rem;
-`;
-
-export const Alert = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  padding: 0;
-  padding: 10px;
-  /* background-color: #d42a2a; */
-  background-color: #c72828;
-  border: 1px solid #333;
-  border-radius: 4px;
-
-  & > * {
-    padding: 0;
-    margin: 0;
-    color: #fff;
-    font-size: 1.1rem;
-  }
 `;
 
 export const ProfilePic = styled.div`
@@ -113,19 +95,34 @@ export const Actions = styled.div`
   text-align: center;
   align-items: center;
   margin-top: 2rem;
+  margin: 0;
+`;
+
+export const Alert = styled.div`
+  padding: 0.6rem 1.8rem;
+  margin: 1rem auto 0rem;
+  background-color: rgba(255, 255, 255, 0.75);
+  border: 1px solid #333;
+  border-radius: 4px;
+
+  & > * {
+    padding: 0;
+    margin: 0;
+    color: #9d0000;
+    font-size: 1.3rem;
+    font-weight: 400;
+  }
 `;
 
 export const AuthButton = styled.button`
-  cursor: pointer;
-  font: inherit;
+  margin-top: 1.5rem;
+  padding: 0.4rem 2.2rem;
   font-size: 1.2rem;
   font-weight: bold;
-  background-color: #8525df;
   color: #fff;
-  /* border: none; */
+  background-color: #8525df;
   border: 2px solid #d0a7f7;
   border-radius: 4px;
-  padding: 0.4rem 2.2rem;
   cursor: pointer;
   transition: background-color 0.3s ease-out;
 

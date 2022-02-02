@@ -35,27 +35,29 @@ const Profile = ({
           <S.StatisticsContent>{spentTime}</S.StatisticsContent>
         </S.StatisticsCard>
       </S.Statistics>
-      <S.FavouriteSection withSlider={favShowsList.length > 3}>
-        <S.FavHeader withSlider={favShowsList.length > 3}>
-          My Favourite Shows
-        </S.FavHeader>
-        {favShowsList.length <= 3 &&
-          favShowsList.map((show) => (
-            <S.FavShow key={show.id} to={`/shows/${show.id}`}>
-              <S.FavShowImg src={show.image} />
-            </S.FavShow>
-          ))}
-        {favShowsList.length > 3 && (
-          <MySlider
-            items={favShowsList}
-            infinite={false}
-            standard={true}
-            clickable={true}
-            small={false}
-            profile={true}
-          />
-        )}
-      </S.FavouriteSection>
+      {favShowsList.length !== 0 && (
+        <S.FavouriteSection withSlider={favShowsList.length > 3}>
+          <S.FavHeader withSlider={favShowsList.length > 3}>
+            My Favourite Shows
+          </S.FavHeader>
+          {favShowsList.length <= 3 &&
+            favShowsList.map((show) => (
+              <S.FavShow key={show.id} to={`/shows/${show.id}`}>
+                <S.FavShowImg src={show.image} />
+              </S.FavShow>
+            ))}
+          {favShowsList.length > 3 && (
+            <MySlider
+              items={favShowsList}
+              infinite={false}
+              standard={true}
+              clickable={true}
+              small={false}
+              profile={true}
+            />
+          )}
+        </S.FavouriteSection>
+      )}
       <S.ShowsSection>
         <S.ShowsHeader>Followed shows</S.ShowsHeader>
         <S.ShowsGrid>

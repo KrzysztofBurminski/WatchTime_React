@@ -6,7 +6,7 @@ export const HeaderContainer = styled.div`
   width: 99%;
   max-width: 1600px;
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-bottom: ${(p) => (p.clickable ? '1rem' : '0')};
 `;
 

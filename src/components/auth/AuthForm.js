@@ -21,9 +21,10 @@ const AuthForm = () => {
   const dispatch = useDispatch();
 
   const [avatarImage, setAvatarImage] = useState(
-    `https://avatars.dicebear.com/api/micah/funny1.svg`
+    `https://avatars.dicebear.com/api/avataaars/smil4e12ya2.svg`
   );
-  const [isLogging, setIsLogging] = useState(true);
+  // const [isLogging, setIsLogging] = useState(true);
+  const [isLogging, setIsLogging] = useState(false);
   const [formIsValid, setFormIsValid] = useState(false);
 
   const switchAuthModeHandler = () => {
@@ -32,7 +33,7 @@ const AuthForm = () => {
 
   const changeAvatarHandler = () => {
     setAvatarImage(
-      `https://avatars.dicebear.com/api/micah/${Math.random()
+      `https://avatars.dicebear.com/api/avataaars/${Math.random()
         .toString(36)
         .substr(2, 5)}.svg`
     );
@@ -73,6 +74,17 @@ const AuthForm = () => {
 
     if (mounted) {
       if (
+        isLogging &&
+        emailIsTouched &&
+        emailIsValid &&
+        passwordIsTouched &&
+        passwordIsValid
+      ) {
+        setFormIsValid(true);
+      } else if (
+        !isLogging &&
+        nameIsTouched &&
+        nameIsValid &&
         emailIsTouched &&
         emailIsValid &&
         passwordIsTouched &&
@@ -135,7 +147,6 @@ const AuthForm = () => {
         console.log(err);
       }
       isLogging ? history.push('/profile') : history.push('/choosing');
-      // history.push('/profile');
     }
   };
 
@@ -152,11 +163,11 @@ const AuthForm = () => {
     <S.SectionAuth>
       <S.Background>
         <S.Header>{isLogging ? 'Log In' : 'Sign In'}</S.Header>
-        {inputError && (
+        {/* {inputError && (
           <S.Alert>
             <p>{inputError}</p>
           </S.Alert>
-        )}
+        )} */}
         <form onSubmit={submitFormHandler}>
           {!isLogging && (
             <div>
@@ -198,6 +209,11 @@ const AuthForm = () => {
             />
           </S.Control>
           <S.Actions>
+            {inputError && (
+              <S.Alert>
+                <p>{inputError}</p>
+              </S.Alert>
+            )}
             <S.AuthButton type="submit">
               {isLogging ? 'Log In' : 'Sign In'}
             </S.AuthButton>

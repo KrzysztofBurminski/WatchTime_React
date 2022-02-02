@@ -69,16 +69,29 @@ export const HeroShadow = styled.div`
   }
 `;
 
-export const FavIcon = styled(AiFillHeart)`
+export const Circle = styled.div`
   position: absolute;
-  top: 100px;
-  right: 40px;
-  font-size: 3rem;
-  color: ${(p) => (p.fav === 'true' ? '#ba1414' : '#ccc')};
+  top: calc(4.6rem + 15px);
+  right: 13px;
+  border-radius: 50%;
+  background-color: #8d37e7;
+`;
+
+export const FavIcon = styled(AiFillHeart)`
+  font-size: 4rem;
+  color: ${(p) => (p.fav === 'true' ? '#da0000' : '#ccc')};
+  vertical-align: middle;
+  padding: 0.7rem;
   cursor: pointer;
+  transition: color 200ms ease-in-out;
+  transition: padding 100ms ease-in-out;
 
   &:hover {
-    color: #ba1414;
+    color: #e82323;
+  }
+
+  &:active {
+    padding: 0rem;
   }
 `;
 

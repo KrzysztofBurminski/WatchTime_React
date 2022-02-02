@@ -78,6 +78,7 @@ export async function getAllShows() {
       rating: show.rating.average,
       popularity: show.weight,
       genres: show.genres,
+      averageRuntime: show.averageRuntime,
     };
   });
 

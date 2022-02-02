@@ -39,10 +39,6 @@ export const PosterImagesGrid = styled.div`
   }
 `;
 
-// export const ItemImg = styled.img`
-//   object-fit: cover;
-// `;
-
 export const BackgroundImagesGrid = styled.div`
   display: grid;
   align-content: center;

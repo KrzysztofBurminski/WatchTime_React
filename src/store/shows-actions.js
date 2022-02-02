@@ -8,6 +8,57 @@ import {
 } from 'firebase/database';
 import { showsActions } from './shows-slice';
 
+//
+// FAVOURITE SHOW
+//
+export const addToFavourite = (userId, show) => {
+  return (dispatch) => {
+    dispatch(showsActions.addToFav(show));
+    const db = getDatabase();
+    set(ref(db, `users/${userId}/favourite/${show.id}`), {
+      id: show.id,
+      title: show.title,
+      image: show.image,
+    });
+  };
+};
+
+export const removeShowFromFav = (userId, show) => {
+  return (dispatch) => {
+    dispatch(showsActions.removeFromFavList(show));
+    const db = getDatabase();
+    remove(ref(db, `users/${userId}/favourite/${show.id}`));
+  };
+};
+
+export const getFavShowsList = (userId) => {
+  return (dispatch) => {
+    const db = getDatabase();
+    const userRef = ref(db, `users/${userId}/favourite`);
+    onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const convertedData = Object.values(data);
+        const idList = [];
+        convertedData.forEach((show) => {
+          idList.push(show.id);
+        });
+
+        dispatch(
+          showsActions.updateFavList({
+            showList: convertedData,
+            idList: idList,
+          })
+        );
+      }
+    });
+  };
+};
+
+//
+// FOLLOWED SHOWS
+//
+
 export const addShowToDB = (userId, show) => {
   return (dispatch) => {
     dispatch(showsActions.addToList(show));
@@ -27,6 +78,7 @@ export const removeShowFromDB = (userId, show) => {
     dispatch(showsActions.removeFromList(show));
     const db = getDatabase();
     remove(ref(db, `users/${userId}/followed/${show.id}`));
+    dispatch(removeShowFromFav(userId, show));
   };
 };
 
@@ -121,49 +173,4 @@ export const addSeasonToDB = (userId, show, season) => {
     );
     updateWatchedCount(userId, show, true);
   });
-};
-
-// FAVOURITES
-export const addToFavourite = (userId, show) => {
-  return (dispatch) => {
-    dispatch(showsActions.addToFav(show));
-    const db = getDatabase();
-    set(ref(db, `users/${userId}/favourite/${show.id}`), {
-      id: show.id,
-      title: show.title,
-      image: show.image,
-    });
-  };
-};
-
-export const removeShowFromFav = (userId, show) => {
-  return (dispatch) => {
-    dispatch(showsActions.removeFromFavList(show));
-    const db = getDatabase();
-    remove(ref(db, `users/${userId}/favourite/${show.id}`));
-  };
-};
-
-export const getFavShowsList = (userId) => {
-  return (dispatch) => {
-    const db = getDatabase();
-    const userRef = ref(db, `users/${userId}/favourite`);
-    onValue(userRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        const convertedData = Object.values(data);
-        const idList = [];
-        convertedData.forEach((show) => {
-          idList.push(show.id);
-        });
-
-        dispatch(
-          showsActions.updateFavList({
-            showList: convertedData,
-            idList: idList,
-          })
-        );
-      }
-    });
-  };
 };

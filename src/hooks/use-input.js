@@ -7,7 +7,8 @@ const isMinLength = (value) => value.trim().length > 5;
 
 const useInput = (
   enteredValidation = hasValidSymbols,
-  enteredValidationError = 'Use only valid symbols!'
+  enteredValidationError = 'Use letters and numbers!'
+  // enteredValidationError = 'Use only valid symbols!'
 ) => {
   const [inputValue, setInputValue] = useState('');
   const [isTouched, setIsTouched] = useState(false);

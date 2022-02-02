@@ -8,6 +8,7 @@ import {
 } from '../../store/shows-actions';
 import { useSelector } from 'react-redux';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import { useHistory } from 'react-router-dom';
 
 import Button from '../UI/Button';
 import * as S from './DetailsElements';
@@ -17,14 +18,17 @@ import GalleryTab from './tabs/GalleryTab';
 // import YTSearch from 'youtube-api-search';
 
 const Details = ({ images, show, seasons, cast, episodesCount }) => {
+  // console.log(show);
   const [activeTab, setActiveTab] = useState('overview');
   const [watchedEpisodesCounter, setWatchedEpisodesCounter] = useState(0);
 
+  const isLogged = useSelector((state) => state.auth.isLoggedIn);
   const userId = useSelector((state) => state.auth.userId);
   const showsIdList = useSelector((state) => state.shows.showsIdList);
   const favShowsIdList = useSelector((state) => state.shows.favShowsIdList);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const getWatchCount = (userId, show) => {
     const db = getDatabase();
@@ -41,10 +45,20 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
   };
 
   useEffect(() => {
-    getWatchCount(userId, show);
-  }, [userId, show]);
+    if (isLogged) {
+      getWatchCount(userId, show);
+    }
+  }, [userId, show, isLogged]);
 
-  let followButton = showsIdList.includes(show.id) ? (
+  let followButton = !isLogged ? (
+    <Button
+      onClick={() => {
+        history.push('/auth');
+      }}
+    >
+      Add to list
+    </Button>
+  ) : showsIdList.includes(show.id) ? (
     <Button
       onClick={() => {
         dispatch(removeShowFromDB(userId, show));
@@ -95,10 +109,14 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
           </S.TextContainer>
         </S.HeroShadow>
       </S.HeroContainer>
-      <S.FavIcon
-        onClick={favouriteClickHandler}
-        fav={favShowsIdList.includes(show.id) ? 'true' : 'false'}
-      />
+      {isLogged && showsIdList.includes(show.id) && (
+        <S.Circle>
+          <S.FavIcon
+            onClick={favouriteClickHandler}
+            fav={favShowsIdList.includes(show.id) ? 'true' : 'false'}
+          />
+        </S.Circle>
+      )}
       {/*  */}
       {/* MAIN CONTENT */}
       {/*  */}

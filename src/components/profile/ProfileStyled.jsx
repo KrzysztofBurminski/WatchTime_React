@@ -45,13 +45,13 @@ export const PersonSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -3rem;
+  margin-top: -5rem;
   z-index: 10;
 `;
 
 export const ProfilePicture = styled.div`
-  height: 6rem;
-  width: 6rem;
+  height: 10rem;
+  width: 10rem;
   /* background-color: #fee9ff; */
   background-color: #886e9e;
   background-image: url(${(p) => p.src});
@@ -63,17 +63,18 @@ export const ProfilePicture = styled.div`
 `;
 
 export const ProfileName = styled.h5`
-  font-size: 1rem;
+  font-size: 1.5rem;
   margin: 0;
-  padding-top: 0.4em;
+  padding-top: 0.2em;
   font-weight: 500;
+  /* margin-bottom: 10rem; */
 `;
 
 export const Statistics = styled.div`
   width: 100%;
   /* margin: 7rem auto 0 auto; */
   margin: 0 auto;
-  padding: 7rem 0 4rem;
+  padding: 9rem 0 4rem;
   /* padding: 7rem auto 0 auto; */
   /* padding-top: 7rem; */
   display: flex;
@@ -189,14 +190,14 @@ export const ShowsSection = styled.section`
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 5rem 3rem 3rem;
+  padding: 3rem;
 `;
 
 export const ShowsHeader = styled.h3`
   font-size: 2rem;
   text-align: center;
   margin: 0;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 `;
 
 export const ShowsGrid = styled.div`

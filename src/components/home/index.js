@@ -7,7 +7,7 @@ import Space from '../UI/Space';
 
 const Home = ({ heroImg, heroDesc, shows }) => {
   // console.log(shows);
-  let allShows = shows.slice(70, 90);
+  let allShows = shows.slice(100, 120);
   let popularShows = shows.filter((show) => show.popularity > 97);
   let bestRatedShows = shows.filter((show) => show.rating > 8.5);
   // let actionShows = shows.filter((show) => show.genres.includes('Action'));
