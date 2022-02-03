@@ -19,22 +19,23 @@ const Profile = ({
   return (
     <>
       <S.Hero>
-        <S.HeroImg src={heroImg} />
-        <S.PersonSection>
-          <S.ProfilePicture src={userImg} />
-          <S.ProfileName>{userName}</S.ProfileName>
-        </S.PersonSection>
+        <S.HeroImg src={heroImg}>
+          <S.PersonSection>
+            <S.ProfilePicture src={userImg} />
+            <S.ProfileName>{userName}</S.ProfileName>
+          </S.PersonSection>
+          <S.Statistics>
+            <S.StatisticsCard>
+              <S.StatisticsHeader>Watched episodes</S.StatisticsHeader>
+              <S.StatisticsContent>{statistics.episodes}</S.StatisticsContent>
+            </S.StatisticsCard>
+            <S.StatisticsCard>
+              <S.StatisticsHeader>Time spent on watching:</S.StatisticsHeader>
+              <S.StatisticsContent>{spentTime}</S.StatisticsContent>
+            </S.StatisticsCard>
+          </S.Statistics>
+        </S.HeroImg>
       </S.Hero>
-      <S.Statistics>
-        <S.StatisticsCard>
-          <S.StatisticsHeader>Watched episodes</S.StatisticsHeader>
-          <S.StatisticsContent>{statistics.episodes}</S.StatisticsContent>
-        </S.StatisticsCard>
-        <S.StatisticsCard>
-          <S.StatisticsHeader>Time spent on watching:</S.StatisticsHeader>
-          <S.StatisticsContent>{spentTime}</S.StatisticsContent>
-        </S.StatisticsCard>
-      </S.Statistics>
       {favShowsList.length !== 0 && (
         <S.FavouriteSection withSlider={favShowsList.length > 3}>
           <S.FavHeader withSlider={favShowsList.length > 3}>

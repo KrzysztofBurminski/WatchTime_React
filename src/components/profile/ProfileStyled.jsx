@@ -3,56 +3,67 @@ import styled from 'styled-components';
 import heroImg from '../../assets/heroProfile.jpg';
 
 export const Hero = styled.div`
-  height: 24rem;
+  height: 25rem;
   width: 100%;
   z-index: 0;
   position: relative;
 
   @media screen and (max-width: 1200px) {
-    height: 22rem;
+    height: 24rem;
   }
 
   @media screen and (max-width: 960px) {
-    height: 20rem;
+    height: 22rem;
   }
 
   @media screen and (max-width: 768px) {
-    height: 18rem;
+    height: 22rem;
   }
 
   @media screen and (max-width: 576px) {
-    height: 14rem;
+    height: 30rem;
   }
 `;
 
 export const HeroImg = styled.div`
   height: 100%;
   width: 100%;
-  /* background: url(${(p) => p.src}); */
   background-image: url(${heroImg});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
-  /* background-position: 50% 5%; */
-`;
+  position: relative;
 
-export const Container = styled.div`
-  background-color: #141314;
-  padding-bottom: 35rem;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 0;
+  }
 `;
 
 export const PersonSection = styled.section`
+  position: absolute;
+  top: 30px;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -5rem;
   z-index: 10;
+
+  @media screen and (max-width: 960px) {
+    top: 20px;
+  }
 `;
 
 export const ProfilePicture = styled.div`
   height: 10rem;
   width: 10rem;
-  /* background-color: #fee9ff; */
   background-color: #886e9e;
   background-image: url(${(p) => p.src});
   background-position: center;
@@ -60,6 +71,11 @@ export const ProfilePicture = styled.div`
   background-size: cover;
   border: 2px solid black;
   border-radius: 50%;
+
+  @media screen and (max-width: 960px) {
+    height: 9rem;
+    width: 9rem;
+  }
 `;
 
 export const ProfileName = styled.h5`
@@ -67,21 +83,29 @@ export const ProfileName = styled.h5`
   margin: 0;
   padding-top: 0.2em;
   font-weight: 500;
-  /* margin-bottom: 10rem; */
+
+  @media screen and (max-width: 960px) {
+    font-size: 1.4rem;
+  }
 `;
 
+//
+// STATS
+//
+
 export const Statistics = styled.div`
+  position: absolute;
+  top: calc(30px + 10rem + 0.2rem + 1.5rem + 2.5rem);
+  left: 0;
   width: 100%;
-  /* margin: 7rem auto 0 auto; */
   margin: 0 auto;
-  padding: 9rem 0 4rem;
-  /* padding: 7rem auto 0 auto; */
-  /* padding-top: 7rem; */
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #7d7484; */
-  background-color: #181818;
+
+  @media screen and (max-width: 960px) {
+    top: calc(20px + 9rem + 0.2rem + 1.4rem + 2rem);
+  }
 
   @media screen and (max-width: 576px) {
     flex-direction: column;
@@ -120,6 +144,58 @@ export const StatisticsContent = styled.p`
   color: #b65eff;
   color: #9a40e6;
 `;
+
+// export const Statistics = styled.div`
+//   position: absolute;
+//   top: calc(30px + 10rem + 0.2rem + 1.5rem + 2.5rem);
+//   left: 0;
+//   width: 100%;
+//   margin: 0 auto;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   @media screen and (max-width: 960px) {
+//     top: calc(20px + 9rem + 0.2rem + 1.4rem + 2rem);
+//   }
+
+//   @media screen and (max-width: 576px) {
+//     flex-direction: column;
+//   }
+// `;
+
+// export const StatisticsCard = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 15rem;
+//   margin: 0 0.5rem;
+//   padding: 0.8rem 0;
+//   background-color: #2a292b;
+//   border-radius: 10px;
+//   border: none;
+//   color: #ddd;
+
+//   @media screen and (max-width: 576px) {
+//     margin: 0.5rem 0;
+//   }
+// `;
+
+// export const StatisticsHeader = styled.h5`
+//   margin: 0;
+//   font-size: 1rem;
+//   font-weight: 500;
+// `;
+
+// export const StatisticsContent = styled.p`
+//   margin: 0;
+//   padding-top: 0.2em;
+//   font-size: 2.3rem;
+//   font-weight: 900;
+//   color: #b65eff;
+//   color: #9a40e6;
+// `;
 
 //
 // FAVOURITE
