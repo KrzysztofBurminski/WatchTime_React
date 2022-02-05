@@ -99,7 +99,7 @@ export const Actions = styled.div`
 `;
 
 export const Alert = styled.div`
-  padding: 0.6rem 1.8rem;
+  padding: 0.3rem 1.2rem;
   margin: 1rem auto 0rem;
   background-color: rgba(255, 255, 255, 0.75);
   border: 1px solid #333;
@@ -109,7 +109,7 @@ export const Alert = styled.div`
     padding: 0;
     margin: 0;
     color: #9d0000;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 400;
   }
 `;

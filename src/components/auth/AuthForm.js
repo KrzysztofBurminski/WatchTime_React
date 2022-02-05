@@ -23,9 +23,9 @@ const AuthForm = () => {
   const [avatarImage, setAvatarImage] = useState(
     `https://avatars.dicebear.com/api/avataaars/smil4e12ya2.svg`
   );
-  // const [isLogging, setIsLogging] = useState(true);
-  const [isLogging, setIsLogging] = useState(false);
+  const [isLogging, setIsLogging] = useState(true);
   const [formIsValid, setFormIsValid] = useState(false);
+  const [authError, setAuthError] = useState(null);
 
   const switchAuthModeHandler = () => {
     setIsLogging(!isLogging);
@@ -109,6 +109,7 @@ const AuthForm = () => {
 
   const submitFormHandler = async (event) => {
     event.preventDefault();
+    setAuthError(null);
 
     if (formIsValid) {
       const auth = getAuth();
@@ -117,7 +118,11 @@ const AuthForm = () => {
           await setPersistence(auth, browserLocalPersistence);
           await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
         } catch (err) {
-          console.log(err);
+          if (err.code === 'auth/user-not-found') {
+            setAuthError('USER NOT FOUND!!!');
+          } else if (err.code === 'auth/wrong-password') {
+            setAuthError('WRONG PASSWORD!!!');
+          }
         }
       } else {
         try {
@@ -132,7 +137,9 @@ const AuthForm = () => {
             photoURL: avatarImage,
           });
         } catch (err) {
-          console.log(err);
+          if (err.code === 'auth/email-already-in-use') {
+            setAuthError('EMAIL ALREADY EXISTS!!!');
+          }
         }
       }
       try {
@@ -142,11 +149,11 @@ const AuthForm = () => {
           const uid = user.uid;
           const userImg = user.photoURL;
           dispatch(authActions.setCurrentUser({ displayName, uid, userImg }));
+          isLogging ? history.push('/profile') : history.push('/choosing');
         }
       } catch (err) {
-        console.log(err);
+        setAuthError('FAILED TO GET LOGIN');
       }
-      isLogging ? history.push('/profile') : history.push('/choosing');
     }
   };
 
@@ -163,11 +170,6 @@ const AuthForm = () => {
     <S.SectionAuth>
       <S.Background>
         <S.Header>{isLogging ? 'Log In' : 'Sign In'}</S.Header>
-        {/* {inputError && (
-          <S.Alert>
-            <p>{inputError}</p>
-          </S.Alert>
-        )} */}
         <form onSubmit={submitFormHandler}>
           {!isLogging && (
             <div>
@@ -212,6 +214,11 @@ const AuthForm = () => {
             {inputError && (
               <S.Alert>
                 <p>{inputError}</p>
+              </S.Alert>
+            )}
+            {authError && (
+              <S.Alert>
+                <p>{authError}</p>
               </S.Alert>
             )}
             <S.AuthButton type="submit">
