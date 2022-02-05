@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { authActions } from '../../../store/auth-slice.js';
 import { getAuth, signOut } from 'firebase/auth';
+import { authActions } from '../../../store/auth-slice.js';
+import { showsActions } from '../../../store/shows-slice.js';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import * as S from './NavbarElements.jsx';
 import { FaBars } from 'react-icons/fa';
-import { showsActions } from '../../../store/shows-slice.js';
+import { searchActions } from '../../../store/search-slice.js';
 
 const Navbar = ({ toggle }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const location = useLocation();
+  const queryNameRef = useRef();
   const isLogged = useSelector((state) => state.auth.isLoggedIn);
+  const searchActive = useSelector((state) => state.search.active);
 
   const logoutHandler = async () => {
     try {
@@ -32,40 +38,79 @@ const Navbar = ({ toggle }) => {
     );
   }
 
+  const searchHandler = (query) => {
+    if (location.pathname === '/search') {
+      history.replace({
+        pathname: '/search',
+        search: `?q=${query}`,
+      });
+    } else {
+      history.push({
+        pathname: '/search',
+        search: `?q=${query}`,
+      });
+    }
+  };
+
   return (
-    <S.Nav>
-      <S.NavbarContainer>
-        <S.NavLogo to="/">WatchTime</S.NavLogo>
-        <S.MobileIcon onClick={toggle}>
-          <FaBars />
-        </S.MobileIcon>
-        <S.NavMenu>
-          {isLogged && (
+    <>
+      <S.Nav>
+        <S.NavbarContainer>
+          <S.NavLogo to="/">WatchTime</S.NavLogo>
+          <S.MobileIcon onClick={toggle}>
+            <FaBars />
+          </S.MobileIcon>
+          <S.NavMenu>
+            {isLogged && (
+              <S.NavItem>
+                <S.NavLinks to="/profile" activeClassName="current" exact>
+                  Profile
+                </S.NavLinks>
+              </S.NavItem>
+            )}
+            {!isLogged && (
+              <S.NavItem>
+                <S.NavLinks to="/auth">Profile</S.NavLinks>
+              </S.NavItem>
+            )}
             <S.NavItem>
-              <S.NavLinks to="/profile" activeClassName="current" exact>
-                Profile
+              <S.NavLinks to="/about" activeClassName="current" exact>
+                About
               </S.NavLinks>
             </S.NavItem>
-          )}
-          {!isLogged && (
             <S.NavItem>
-              <S.NavLinks to="/auth">Profile</S.NavLinks>
+              <S.NavSearchLink
+                onClick={() => {
+                  dispatch(searchActions.toggleSearch());
+                }}
+              >
+                Search
+              </S.NavSearchLink>
             </S.NavItem>
-          )}
-          <S.NavItem>
-            <S.NavLinks to="/contact" activeClassName="current" exact>
-              About
-            </S.NavLinks>
-          </S.NavItem>
-          <S.NavItem>
-            <S.NavLinks to="/services" activeClassName="current" exact>
-              Contact
-            </S.NavLinks>
-          </S.NavItem>
-        </S.NavMenu>
-        <S.NavBtn>{authBtn}</S.NavBtn>
-      </S.NavbarContainer>
-    </S.Nav>
+          </S.NavMenu>
+          <S.NavBtn>{authBtn}</S.NavBtn>
+        </S.NavbarContainer>
+      </S.Nav>
+      {searchActive && (
+        <S.NavSearchContainer>
+          <S.SearchInput
+            type="search"
+            name="search"
+            placeholder="Search for a TV show..."
+            autoFocus
+            ref={queryNameRef}
+            onChange={() => {
+              searchHandler(queryNameRef.current.value);
+            }}
+            onBlur={() => {
+              if (queryNameRef.current.value.length === 0) {
+                dispatch(searchActions.hide());
+              }
+            }}
+          />
+        </S.NavSearchContainer>
+      )}
+    </>
   );
 };
 

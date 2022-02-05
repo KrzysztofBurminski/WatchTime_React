@@ -16,8 +16,6 @@ export async function getMovieImages(requestData) {
       imgId: show.id,
       type: show.type,
       url: show.resolutions.original.url,
-      // height: show.resolutions.original.height,
-      // width: show.resolutions.original.width,
     };
   });
 
@@ -41,7 +39,6 @@ export async function getSingleShow(requestData) {
   if (!response.ok) {
     throw new Error(data.error.message || 'Could not get products.');
   }
-  // console.log(data);
 
   const loadedShow = {
     id: data.id,
@@ -103,7 +100,6 @@ export async function getSeasons(requestData) {
       episode: show.number,
       title: show.name,
       runtime: show.runtime,
-      // desc: show.summary,
       desc: show.summary
         ? document
             .createRange()
@@ -115,9 +111,6 @@ export async function getSeasons(requestData) {
       rating: show.rating.average,
     };
   });
-
-  // console.log('loadedEpisodes');
-  // console.log(loadedEpisodes);
 
   const seasonsCount = loadedEpisodes[loadedEpisodes.length - 1].season;
   let allSeasons = [];
@@ -142,8 +135,6 @@ export async function getCast(requestData) {
   if (!response.ok) {
     throw new Error(data.error.message || 'Could not get products.');
   }
-
-  // console.log(data);
 
   const loadedCast = data
     .map((result) => {
@@ -176,4 +167,32 @@ export async function getCast(requestData) {
   });
 
   return convertedCast;
+}
+
+export async function getSearchResult(requestData) {
+  const response = await fetch(
+    `https://api.tvmaze.com/search/shows${requestData}`
+  );
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error.message || 'Could not get products.');
+  }
+
+  // console.log(data);
+
+  const loadedShows = data.map((result) => {
+    return {
+      id: result.show.id,
+      title: result.show.name,
+      image: result.show.image.medium,
+      // rating: result.show.rating.average,
+      // popularity: result.show.weight,
+      // genres: result.show.genres,
+      // averageRuntime: result.show.averageRuntime,
+    };
+  });
+
+  return loadedShows;
 }

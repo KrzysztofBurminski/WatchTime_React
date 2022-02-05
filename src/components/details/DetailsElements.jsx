@@ -122,7 +122,9 @@ export const HeroTitle = styled.h2`
 
   @media screen and (max-width: 1024px) {
     margin-top: 1rem;
+    padding: 0;
     padding-top: 1rem;
+    text-align: left;
   }
 `;
 

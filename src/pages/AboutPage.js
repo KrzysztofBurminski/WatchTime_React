@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-const ContactPage = () => {
+const AboutPage = () => {
   return (
     <Fragment>
       <h1
@@ -8,11 +8,11 @@ const ContactPage = () => {
           textAlign: 'center',
         }}
       >
-        Contact
+        About
       </h1>
       ;
     </Fragment>
   );
 };
 
-export default ContactPage;
+export default AboutPage;

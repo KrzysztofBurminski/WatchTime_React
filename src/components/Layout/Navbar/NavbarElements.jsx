@@ -85,6 +85,23 @@ export const NavLinks = styled(NavLink)`
   margin: 0 0.5rem;
   padding: 0 0.5rem;
   height: 100%;
+  font-size: 1.1rem;
+  font-weight: 400;
+  cursor: pointer;
+`;
+
+export const NavSearchLink = styled.button`
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 1px 0.5rem 0;
+  padding: 0 0.5rem;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.1rem;
+  font-weight: 400;
   cursor: pointer;
 `;
 
@@ -114,5 +131,40 @@ export const NavBtnLink = styled(Link)`
     transition: all 0.2s ease-in-out;
     background: #fff;
     color: #010606;
+  }
+`;
+
+//
+// SEARCH FORM
+//
+
+export const NavSearchContainer = styled.div`
+  position: fixed;
+  top: 80px;
+  height: 60px;
+  width: 100%;
+  background-color: #1f1f21;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  z-index: 1000;
+`;
+
+export const SearchInput = styled.input`
+  background-color: transparent;
+  border-color: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 1.2rem;
+  width: 95%;
+  max-width: 1500px;
+  margin: 0 auto;
+  letter-spacing: 0.7px;
+
+  &:focus,
+  &:active {
+    border: none;
+    outline: none;
   }
 `;

@@ -145,58 +145,6 @@ export const StatisticsContent = styled.p`
   color: #9a40e6;
 `;
 
-// export const Statistics = styled.div`
-//   position: absolute;
-//   top: calc(30px + 10rem + 0.2rem + 1.5rem + 2.5rem);
-//   left: 0;
-//   width: 100%;
-//   margin: 0 auto;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-
-//   @media screen and (max-width: 960px) {
-//     top: calc(20px + 9rem + 0.2rem + 1.4rem + 2rem);
-//   }
-
-//   @media screen and (max-width: 576px) {
-//     flex-direction: column;
-//   }
-// `;
-
-// export const StatisticsCard = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 15rem;
-//   margin: 0 0.5rem;
-//   padding: 0.8rem 0;
-//   background-color: #2a292b;
-//   border-radius: 10px;
-//   border: none;
-//   color: #ddd;
-
-//   @media screen and (max-width: 576px) {
-//     margin: 0.5rem 0;
-//   }
-// `;
-
-// export const StatisticsHeader = styled.h5`
-//   margin: 0;
-//   font-size: 1rem;
-//   font-weight: 500;
-// `;
-
-// export const StatisticsContent = styled.p`
-//   margin: 0;
-//   padding-top: 0.2em;
-//   font-size: 2.3rem;
-//   font-weight: 900;
-//   color: #b65eff;
-//   color: #9a40e6;
-// `;
-
 //
 // FAVOURITE
 //

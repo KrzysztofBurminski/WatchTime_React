@@ -4,6 +4,7 @@ import { authActions } from '../../../store/auth-slice.js';
 import { getAuth, signOut } from 'firebase/auth';
 
 import * as S from './SidebarElements.jsx';
+import { searchActions } from '../../../store/search-slice.js';
 
 const Sidebar = ({ isOpen, toggle }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,11 @@ const Sidebar = ({ isOpen, toggle }) => {
     );
   }
 
+  const searchBtnHandler = () => {
+    toggle();
+    dispatch(searchActions.toggleSearch());
+  };
+
   return (
     <S.SidebarContainer isOpen={isOpen}>
       <S.Icon onClick={toggle}>
@@ -52,13 +58,10 @@ const Sidebar = ({ isOpen, toggle }) => {
           <S.SidebarLink to="/about" onClick={toggle}>
             About
           </S.SidebarLink>
-          <S.SidebarLink to="/contact" onClick={toggle}>
-            Contact
-          </S.SidebarLink>
+          <S.NavSearchLink onClick={searchBtnHandler}>Search</S.NavSearchLink>
         </S.SidebarMenu>
         <S.SideBtnWrap isOpen={isOpen} onClick={toggle}>
           {authBtn}
-          {/* <S.SidebarRoute to="/auth/login">Log In</S.SidebarRoute> */}
         </S.SideBtnWrap>
       </S.SidebarWrapper>
     </S.SidebarContainer>

@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { Route, Switch } from 'react-router';
-
-import './App.css';
-import GlobalStyles from './GlobalStyles';
-import { ThemeProvider } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getFavShowsList, getShowsList } from './store/shows-actions';
+import { getCurrentUser } from './store/auth-actions';
 
 import Navbar from './components/Layout/Navbar';
 import Sidebar from './components/Layout/SideBar';
 import HomePage from './pages';
 import NotFoundPage from './pages/NotFoundPage';
 import ShowDetailsPage from './pages/ShowDetailsPage';
-import ContactPage from './pages/ContactPage';
+import AboutPage from './pages/AboutPage';
 import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
 import ChoosingShowsPage from './pages/ChoosingShowsPage';
-import { getCurrentUser } from './store/auth-actions';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFavShowsList, getShowsList } from './store/shows-actions';
+import SearchPage from './pages/SearchPage';
+
+import GlobalStyles from './GlobalStyles';
+import { ThemeProvider } from 'styled-components';
+import './App.css';
 
 const theme = {
   colors: {
@@ -70,8 +71,11 @@ function App() {
           <Route path="/choosing" exact>
             <ChoosingShowsPage />
           </Route>
-          <Route path="/contact" exact>
-            <ContactPage />
+          <Route path="/about" exact>
+            <AboutPage />
+          </Route>
+          <Route path="/search" exact>
+            <SearchPage />
           </Route>
           <Route path="*">
             <NotFoundPage />

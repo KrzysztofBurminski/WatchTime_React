@@ -75,7 +75,33 @@ export const SidebarLink = styled(Link)`
     color: #fff;
     cursor: pointer;
 
-    &:hover {
+    &:hover,
+    &:focus {
+      color: ${({ theme }) => theme.colors.myPurple};
+      transition: 0.2s ease-in-out;
+    }
+  }
+`;
+
+export const NavSearchLink = styled.button`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    list-style: none;
+    transition: 0.2s ease-in-out;
+    text-decoration: none;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
       color: ${({ theme }) => theme.colors.myPurple};
       transition: 0.2s ease-in-out;
     }
@@ -88,7 +114,6 @@ export const SideBtnWrap = styled.div`
   @media screen and (max-width: 768px) {
     display: ${({ isOpen }) => (isOpen ? 'flex' : 'none')};
     justify-content: center;
-    /* opacity: ${({ isOpen }) => (isOpen ? '100%' : '0')}; */
   }
 `;
 
