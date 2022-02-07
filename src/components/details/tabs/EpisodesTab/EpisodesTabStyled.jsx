@@ -276,11 +276,6 @@ export const Premiered = styled.p`
   color: #666;
 `;
 
-// export const Section = styled.section`
-//   background-color: #181818;
-//   /* background-color: #292929; */
-// `;
-
 export const WatchedInfo = styled.p`
   padding: 0;
   padding-bottom: 0.5rem;

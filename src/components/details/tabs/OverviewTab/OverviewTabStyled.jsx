@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { keyframes } from 'styled-components';
 
 export const Section = styled.section`
-  padding: 2rem 0 20rem;
+  padding: 2rem 0 5rem;
   background-color: #181818;
 `;
 

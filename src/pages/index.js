@@ -12,7 +12,6 @@ import Spinner from '../components/UI/Spinner';
 
 const HomePage = () => {
   const [randomId, setRandomId] = useState(useRandom());
-  // const [randomId, setRandomId] = useState(85);
 
   const {
     sendRequest: getAllShowsRequest,

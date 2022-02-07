@@ -1,3 +1,5 @@
+import imageNotFound from '../assets/imgageNotFound.png';
+
 export async function getMovieImages(requestData) {
   const response = await fetch(
     `https://api.tvmaze.com/shows/${requestData}/images`
@@ -24,9 +26,7 @@ export async function getMovieImages(requestData) {
 
   return {
     backgroundImg:
-      backgroundImg.length === 0
-        ? { url: '../assets/heroProfile.jpg' }
-        : backgroundImg[0],
+      backgroundImg.length === 0 ? { url: imageNotFound } : backgroundImg[0],
     allImages: loadedImages,
   };
 }
@@ -44,7 +44,7 @@ export async function getSingleShow(requestData) {
     id: data.id,
     title: data.name,
     description: data.summary,
-    image: data.image.medium,
+    image: data.image?.medium ?? imageNotFound,
     language: data.language,
     status: data.status,
     averageRuntime: data.averageRuntime,
@@ -71,7 +71,7 @@ export async function getAllShows() {
     return {
       id: show.id,
       title: show.name,
-      image: show.image.medium,
+      image: show.image?.medium ?? imageNotFound,
       rating: show.rating.average,
       popularity: show.weight,
       genres: show.genres,
@@ -107,7 +107,7 @@ export async function getSeasons(requestData) {
             .firstChild.innerText.slice(0, 250)
         : '',
       premiered: show.airdate,
-      images: show.image,
+      images: show.image ?? { original: imageNotFound },
       rating: show.rating.average,
     };
   });
@@ -141,12 +141,10 @@ export async function getCast(requestData) {
       return {
         id: result.person.id,
         actorName: result.person.name,
-        actorImage: result.person.image.original || '',
+        actorImage: result.person.image?.original ?? imageNotFound,
         actorBirthday: result.person.birthday,
         characterName: result.character.name,
-        characterImage: result.character.image
-          ? result.character.image.original
-          : '',
+        characterImage: result.character.image?.original ?? imageNotFound,
       };
     })
     .filter((p) => p.actorImage !== '' && p.characterImage !== '');
@@ -184,7 +182,7 @@ export async function getSearchResult(requestData) {
     return {
       id: result.show.id,
       title: result.show.name,
-      image: result.show.image.medium,
+      image: result.show.image?.medium ?? imageNotFound,
     };
   });
 

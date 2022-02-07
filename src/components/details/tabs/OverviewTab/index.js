@@ -18,7 +18,6 @@ const OverviewTab = ({ show, seasons, cast }) => {
       id: person.id,
       image: person.characterImage,
       name: person.characterName,
-      // played: person.actorName,
     };
   });
 
@@ -73,9 +72,6 @@ const OverviewTab = ({ show, seasons, cast }) => {
       {characters.length > 0 && (
         <S.ContainerSlider>
           <Space height="2rem" />
-          {/* {characters.length < 5 ? ( */}
-          {/* <p>ff</p> */}
-          {/* ) : ( */}
           <MySlider
             infinite={false}
             standard={false}
@@ -84,7 +80,6 @@ const OverviewTab = ({ show, seasons, cast }) => {
             clickable={false}
             header={`Characters from ${show.title}`}
           />
-          {/* )} */}
         </S.ContainerSlider>
       )}
       {actors.length > 0 && (

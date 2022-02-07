@@ -17,7 +17,11 @@ const GalleryTab = ({ images }) => {
         <S.HeaderImages>Backgrounds</S.HeaderImages>
         <S.BackgroundImagesGrid>
           {backgrounds.map((image) => (
-            <S.ItemImg src={image.url} key={image.imgId}></S.ItemImg>
+            <S.ItemImg
+              src={image.url}
+              key={image.imgId}
+              loading="lazy"
+            ></S.ItemImg>
           ))}
         </S.BackgroundImagesGrid>
       </S.ContainerGallery>

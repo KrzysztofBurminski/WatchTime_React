@@ -7,7 +7,6 @@ import Spinner from '../components/UI/Spinner';
 
 const SearchPage = () => {
   const location = useLocation();
-  // console.log(location.search);
   let searchQuery = location.search;
 
   const {
@@ -21,7 +20,6 @@ const SearchPage = () => {
     searchRequest(searchQuery);
   }, [searchRequest, searchQuery]);
 
-  // console.log(searchData);
   return (
     <>
       {searchError && <h5>{searchError}</h5>}

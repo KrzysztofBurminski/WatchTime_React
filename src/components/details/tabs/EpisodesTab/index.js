@@ -124,7 +124,7 @@ const EpisodesTab = ({ seasons, show, followed }) => {
                 onClick={() => pickEpisodeHandler(userId, show, episode)}
                 clickable={true}
               >
-                <S.Image src={episode.images.original || ''} />
+                <S.Image src={episode.images.original} />
                 <S.Hoverable picked={watchedEpisodes.includes(episode.id)}>
                   <S.CheckIcon />
                 </S.Hoverable>

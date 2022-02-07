@@ -88,6 +88,11 @@ export const NavLinks = styled(NavLink)`
   font-size: 1.1rem;
   font-weight: 400;
   cursor: pointer;
+  transition: color 200ms ease-in-out;
+
+  &:hover {
+    color: #ccc;
+  }
 `;
 
 export const NavSearchLink = styled.button`
@@ -103,6 +108,11 @@ export const NavSearchLink = styled.button`
   font-size: 1.1rem;
   font-weight: 400;
   cursor: pointer;
+  transition: color 200ms ease-in-out;
+
+  &:hover {
+    color: #ccc;
+  }
 `;
 
 export const NavBtn = styled.nav`
@@ -154,7 +164,6 @@ export const NavSearchContainer = styled.div`
   font-size: 1rem;
   z-index: 1000;
   animation: ${slideDown} 200ms ease-out;
-  /* animation: ${slideDown} 200ms linear; */
 `;
 
 export const SearchInput = styled.input`

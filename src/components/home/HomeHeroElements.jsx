@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const HeroImg = styled.div`
   height: 35rem;
-  /* background-image: url({({ src }) => src}); */
   background: linear-gradient(
       to bottom,
       rgba(10, 10, 10, 0.5) 15%,
@@ -15,16 +14,15 @@ export const HeroImg = styled.div`
   position: relative;
 
   @media screen and (max-width: 960px) {
-    /* height: calc(80vh - 80px); */
     height: 30rem;
   }
 
   @media screen and (max-width: 768px) {
-    height: calc(95vh - 80px);
+    height: calc(70vh - 80px);
   }
 
   @media screen and (max-width: 576px) {
-    height: calc(100vh - 80px);
+    height: calc(60vh - 80px);
   }
 `;
 
@@ -35,7 +33,6 @@ export const HeroShadow = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  /* background-color: rgba(0, 0, 0, 0.7); */
 `;
 
 export const HeroText = styled.div`
@@ -112,7 +109,7 @@ export const HeroDesc = styled.div`
   color: #ccc;
   margin: 0;
   padding: 0;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 0.9rem;
   margin-bottom: 2rem;
 `;

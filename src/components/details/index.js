@@ -18,7 +18,6 @@ import GalleryTab from './tabs/GalleryTab';
 // import YTSearch from 'youtube-api-search';
 
 const Details = ({ images, show, seasons, cast, episodesCount }) => {
-  // console.log(show);
   const [activeTab, setActiveTab] = useState('overview');
   const [watchedEpisodesCounter, setWatchedEpisodesCounter] = useState(0);
 

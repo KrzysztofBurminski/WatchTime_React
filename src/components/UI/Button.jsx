@@ -48,6 +48,16 @@ export const ButtonLink = styled(Link)`
     border-color: ${(props) => props.theme.colors.myPurpleHover};
     transform: scale(0.95);
   }
+
+  @media screen and (max-width: 1024px) {
+    font-size: 1.1rem;
+    padding: 0.5rem 1.1rem;
+  }
+
+  @media screen and (max-width: 576px) {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 export default Button;
