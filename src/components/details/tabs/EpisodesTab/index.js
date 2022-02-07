@@ -3,12 +3,15 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import {
   addEpisodeToDB,
   addSeasonToDB,
+  addShowToDB,
   removeEpisodeFromDB,
 } from '../../../../store/shows-actions';
 import { useSelector } from 'react-redux';
 import * as S from './EpisodesTabStyled';
+import { useDispatch } from 'react-redux';
 
-const EpisodesTab = ({ seasons, show }) => {
+const EpisodesTab = ({ seasons, show, followed }) => {
+  const dispatch = useDispatch();
   const [pickedSeason, setPickedSeason] = useState(1);
   const [seasonsOpen, setSeasonsOpen] = useState(false);
   const [watchedEpisodes, setWatchedEpisodes] = useState([]);
@@ -25,6 +28,9 @@ const EpisodesTab = ({ seasons, show }) => {
   };
 
   const pickEpisodeHandler = (userId, show, episode) => {
+    if (!followed) {
+      dispatch(addShowToDB(userId, show));
+    }
     if (!watchedEpisodes.includes(episode.id)) {
       addEpisodeToDB(userId, show, episode);
       let tempWatchedEpisodes = [...watchedEpisodes];

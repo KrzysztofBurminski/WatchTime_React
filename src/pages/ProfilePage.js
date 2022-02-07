@@ -7,6 +7,7 @@ import { getDatabase, ref, onValue } from 'firebase/database';
 import Profile from '../components/profile';
 import { ButtonLink } from '../components/UI/Button';
 import { Center, Container } from '../components/globalComponents';
+import Spinner from '../components/UI/Spinner';
 
 const ProfilePage = ({ userId }) => {
   const showsList = useSelector((state) => state.shows.showsList);
@@ -74,12 +75,11 @@ const ProfilePage = ({ userId }) => {
   return (
     <>
       {imgStatus === null && noShowsContent}
-      {imgStatus === 'pending' && !imgError && <p>Loading...</p>}
+      {imgStatus === 'pending' && !imgError && <Spinner />}
       {heroImg && !imgError && imgStatus === 'completed' && (
         <Profile
           showsList={showsList}
           favShowsList={favShowsList}
-          heroImg={heroImg.backgroundImg.url}
           userImg={userImg}
           userName={userName}
           statistics={{

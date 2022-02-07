@@ -14,7 +14,6 @@ export const Section = styled.section`
   width: 100%;
   margin: 0 auto;
   background-color: #181818;
-  animation: ${fadeIn} 700ms ease-in;
 
   @media screen and (max-width: 1024px) {
     padding-top: 3rem;
@@ -29,6 +28,7 @@ export const SeasonActionsRow = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  animation: ${fadeIn} 700ms ease-in;
 `;
 
 export const ContainerDropdown = styled.div`
@@ -94,7 +94,6 @@ export const MarkSeason = styled.button`
   display: inline-block;
   padding: 0.5rem 0.9rem 0.3rem;
   margin-left: calc(2.5% + 1rem);
-  /* margin-left: 4rem; */
   margin-bottom: 2rem;
   background-color: ${(p) => p.theme.colors.myPurple};
   border: 1px solid ${(p) => p.theme.colors.myPurple};
@@ -152,6 +151,7 @@ export const ContainerStats = styled.div`
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
+  animation: ${fadeIn} 700ms ease-in;
 `;
 
 export const WatchedStats = styled.h5`
@@ -174,6 +174,7 @@ export const ContainerEpisodes = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
+  animation: ${fadeIn} 700ms ease-in;
 `;
 
 export const Episode = styled.div`

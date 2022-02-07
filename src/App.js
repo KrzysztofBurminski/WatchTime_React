@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFavShowsList, getShowsList } from './store/shows-actions';
 import { getCurrentUser } from './store/auth-actions';
@@ -45,6 +45,10 @@ function App() {
     dispatch(getFavShowsList(userId));
   }
 
+  const PrivateRoute = ({ children }) => {
+    return userId !== null ? children : <Redirect to="/auth" />;
+  };
+
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
@@ -65,17 +69,21 @@ function App() {
           <Route path="/auth" exact>
             <AuthPage />
           </Route>
-          <Route path="/profile" exact>
-            <ProfilePage userId={userId} />
-          </Route>
-          <Route path="/choosing" exact>
-            <ChoosingShowsPage />
-          </Route>
           <Route path="/about" exact>
             <AboutPage />
           </Route>
           <Route path="/search" exact>
             <SearchPage />
+          </Route>
+          <Route path="/choosing" exact>
+            <PrivateRoute>
+              <ChoosingShowsPage />
+            </PrivateRoute>
+          </Route>
+          <Route path="/profile" exact>
+            <PrivateRoute>
+              <ProfilePage userId={userId} />
+            </PrivateRoute>
           </Route>
           <Route path="*">
             <NotFoundPage />

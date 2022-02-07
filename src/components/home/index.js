@@ -6,15 +6,12 @@ import MySlider from '../Slider';
 import Space from '../UI/Space';
 
 const Home = ({ heroImg, heroDesc, shows }) => {
-  // console.log(shows);
   let allShows = shows.slice(100, 120);
   let popularShows = shows.filter((show) => show.popularity > 97);
   let bestRatedShows = shows.filter((show) => show.rating > 8.5);
-  // let actionShows = shows.filter((show) => show.genres.includes('Action'));
-  // let dramaShows = shows.filter((show) => show.genres.includes('Drama'));
+  let actionShows = shows.filter((show) => show.genres.includes('Action'));
   let comedyShows = shows.filter((show) => show.genres.includes('Comedy'));
   let familyShows = shows.filter((show) => show.genres.includes('Family'));
-  let mysteryShows = shows.filter((show) => show.genres.includes('Mystery'));
 
   return (
     <>
@@ -111,8 +108,8 @@ const Home = ({ heroImg, heroDesc, shows }) => {
           clickable={true}
         />
         <MySlider
-          items={mysteryShows}
-          header="Mystery Shows"
+          items={actionShows}
+          header="Action Shows"
           infinite={true}
           standard={true}
           clickable={true}
@@ -124,17 +121,3 @@ const Home = ({ heroImg, heroDesc, shows }) => {
 };
 
 export default Home;
-
-// 216
-// https://static.tvmaze.com/uploads/images/original_untouched/90/225679.jpg
-
-// 13
-// https://static.tvmaze.com/uploads/images/original_untouched/113/284155.jpg
-
-// 305
-// https://static.tvmaze.com/uploads/images/original_untouched/202/505185.jpg
-
-// 335
-// https://static.tvmaze.com/uploads/images/original_untouched/219/547788.jpg
-
-// https://static.tvmaze.com/uploads/images/original_untouched/315/787548.jpg

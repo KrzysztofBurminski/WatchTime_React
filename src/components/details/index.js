@@ -157,8 +157,7 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
         <EpisodesTab
           seasons={seasons}
           show={show}
-          watchedEpisodesCounter={watchedEpisodesCounter}
-          episodesCount={episodesCount}
+          followed={showsIdList.includes(show.id)}
         />
       )}
       {activeTab === 'gallery' && <GalleryTab images={images.allImages} />}

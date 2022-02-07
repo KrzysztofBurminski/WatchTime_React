@@ -6,7 +6,6 @@ import * as S from './ProfileStyled';
 const Profile = ({
   showsList,
   favShowsList,
-  heroImg,
   userImg,
   userName,
   statistics,
@@ -19,7 +18,7 @@ const Profile = ({
   return (
     <>
       <S.Hero>
-        <S.HeroImg src={heroImg}>
+        <S.HeroImg>
           <S.PersonSection>
             <S.ProfilePicture src={userImg} />
             <S.ProfileName>{userName}</S.ProfileName>

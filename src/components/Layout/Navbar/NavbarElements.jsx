@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 
 export const Nav = styled.nav`
@@ -137,6 +137,10 @@ export const NavBtnLink = styled(Link)`
 //
 // SEARCH FORM
 //
+const slideDown = keyframes`
+  0% {top: 20px; opacity: 0}
+  100% {top: 80px, opacity: 1}
+`;
 
 export const NavSearchContainer = styled.div`
   position: fixed;
@@ -149,6 +153,8 @@ export const NavSearchContainer = styled.div`
   align-items: center;
   font-size: 1rem;
   z-index: 1000;
+  animation: ${slideDown} 200ms ease-out;
+  /* animation: ${slideDown} 200ms linear; */
 `;
 
 export const SearchInput = styled.input`

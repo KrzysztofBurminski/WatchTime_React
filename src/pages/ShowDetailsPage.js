@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Details from '../components/details';
+import Spinner from '../components/UI/Spinner';
 
 import useFetch from '../hooks/use-fetch';
 import {
@@ -58,17 +59,15 @@ const ShowDetailsPage = () => {
   let episodesCount = 0;
   if (seasons) {
     seasons.forEach((season) => {
-      // episodesCount++;
       season.forEach((episode) => {
         episodesCount++;
       });
     });
-    // console.log(episodesCount);
   }
 
   return (
     <>
-      {(imgStatus === 'pending' || showStatus === 'pending') && <p>Loading</p>}
+      {(imgStatus === 'pending' || showStatus === 'pending') && <Spinner />}
       {imgError && <b>{imgError}</b>}
       {showError && <b>{showError}</b>}
       {seasonsError && <b>{seasonsError}</b>}

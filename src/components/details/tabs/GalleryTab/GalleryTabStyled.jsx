@@ -1,4 +1,10 @@
 import styled from 'styled-components';
+import { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
 
 export const GallerySection = styled.section`
   width: 100%;
@@ -11,6 +17,7 @@ export const ContainerGallery = styled.div`
   max-width: 1600px;
   margin: 0 auto;
   padding: 0;
+  animation: ${fadeIn} 700ms ease-in;
 `;
 
 export const HeaderImages = styled.h5`

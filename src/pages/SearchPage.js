@@ -3,6 +3,7 @@ import { getSearchResult } from '../lib/external-api';
 import useFetch from '../hooks/use-fetch';
 import { useLocation } from 'react-router-dom';
 import Search from '../components/search';
+import Spinner from '../components/UI/Spinner';
 
 const SearchPage = () => {
   const location = useLocation();
@@ -24,7 +25,7 @@ const SearchPage = () => {
   return (
     <>
       {searchError && <h5>{searchError}</h5>}
-      {searchStatus === 'pending' && <h5>Loading...</h5>}
+      {searchStatus === 'pending' && <Spinner />}
       {searchStatus === 'completed' && !searchData && !searchError && (
         <h5>No results matched</h5>
       )}

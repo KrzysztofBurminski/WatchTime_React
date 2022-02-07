@@ -3,6 +3,7 @@ import { getAllShows } from '../lib/external-api';
 import useFetch from '../hooks/use-fetch';
 
 import Choosing from '../components/choosing';
+import Spinner from '../components/UI/Spinner';
 
 const ChoosingShowsPage = () => {
   const {
@@ -18,7 +19,7 @@ const ChoosingShowsPage = () => {
 
   return (
     <>
-      {showsStatus === 'pending' && <b>Loading...</b>}
+      {showsStatus === 'pending' && <Spinner />}
       {showsError && <b>shows error: {showsError}</b>}
       {!showsError && showsStatus === 'completed' && (
         <Choosing shows={loadedShows} />

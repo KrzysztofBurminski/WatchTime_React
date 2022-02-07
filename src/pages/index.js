@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-
-import Home from '../components/home';
 import useFetch from '../hooks/use-fetch';
 import useRandom from '../hooks/use-random';
 import {
@@ -9,9 +7,11 @@ import {
   getSingleShow,
 } from '../lib/external-api';
 
+import Home from '../components/home';
+import Spinner from '../components/UI/Spinner';
+
 const HomePage = () => {
   const [randomId, setRandomId] = useState(useRandom());
-  // const [randomId, setRandomId] = useState(390);
   // const [randomId, setRandomId] = useState(85);
 
   const {
@@ -36,12 +36,10 @@ const HomePage = () => {
   } = useFetch(getSingleShow, true);
 
   useEffect(() => {
-    // console.log('useEffect random ' + randomId);
     getAllShowsRequest();
     getImageRequest(randomId);
     getSingleShowRequest(randomId);
     if (showError || imgError) {
-      // console.log('error detected!');
       let random = Math.floor(Math.random() * 400 + 1);
       setRandomId(random);
     }
@@ -56,7 +54,7 @@ const HomePage = () => {
 
   return (
     <>
-      {(imgStatus === 'pending' || showStatus === 'pending') && <p>Loading</p>}
+      {(imgStatus === 'pending' || showStatus === 'pending') && <Spinner />}
       {imgError && <b>img error: {imgError}</b>}
       {showError && <b>show error: {showError}</b>}
       {showsError && <b>shows error: {showsError}</b>}

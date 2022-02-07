@@ -2,7 +2,6 @@ export async function getMovieImages(requestData) {
   const response = await fetch(
     `https://api.tvmaze.com/shows/${requestData}/images`
   );
-  // const response = await fetch(`https://api.tvmaze.com/shows/390/images`);
 
   const data = await response.json();
 
@@ -23,16 +22,17 @@ export async function getMovieImages(requestData) {
     return show.type === 'background';
   });
 
-  if (backgroundImg.length === 0) {
-    throw new Error('No background image.');
-  }
-
-  return { backgroundImg: backgroundImg[0], allImages: loadedImages };
+  return {
+    backgroundImg:
+      backgroundImg.length === 0
+        ? { url: '../assets/heroProfile.jpg' }
+        : backgroundImg[0],
+    allImages: loadedImages,
+  };
 }
 
 export async function getSingleShow(requestData) {
   const response = await fetch(`https://api.tvmaze.com/shows/${requestData}`);
-  // const response = await fetch(`https://api.tvmaze.com/shows/390`);
 
   const data = await response.json();
 
@@ -180,17 +180,11 @@ export async function getSearchResult(requestData) {
     throw new Error(data.error.message || 'Could not get products.');
   }
 
-  // console.log(data);
-
   const loadedShows = data.map((result) => {
     return {
       id: result.show.id,
       title: result.show.name,
       image: result.show.image.medium,
-      // rating: result.show.rating.average,
-      // popularity: result.show.weight,
-      // genres: result.show.genres,
-      // averageRuntime: result.show.averageRuntime,
     };
   });
 

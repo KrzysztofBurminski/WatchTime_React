@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { keyframes } from 'styled-components';
 
 export const Section = styled.section`
-  /* margin-top: 2rem; */
   padding: 2rem 0 20rem;
   background-color: #181818;
 `;
@@ -17,8 +16,6 @@ export const Container = styled.div`
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
-  /* margin-top: 2rem; */
-  /* background-color: #181818; */
   display: flex;
   flex-wrap: nowrap;
   flex-direction: ${(p) => p.flexDirection || 'row'};
@@ -33,8 +30,6 @@ export const Container = styled.div`
 export const PosterDiv = styled.aside`
   height: 100%;
   width: 100%;
-  /* height: auto; */
-  /* width: auto; */
   max-width: 18rem;
 
   @media screen and (max-width: 768px) {
@@ -97,21 +92,3 @@ export const ContainerSlider = styled.div`
   flex-direction: column;
   justify-content: center;
 `;
-
-// export const ContainerSlider = styled.div`
-//   animation: ${fadeIn} 700ms ease-in;
-//   width: 100%;
-//   max-width: 1400px;
-//   margin: 0;
-//   /* display: flex;
-//   flex-wrap: nowrap;
-//   flex-direction: column;
-//   justify-content: left;
-//   align-items: flex-start; */
-// `;
-
-// export const Trailer = styled.iframe`
-//   border: none;
-//   width: 100%;
-//   height: 100%;
-// `;
