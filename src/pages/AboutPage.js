@@ -1,17 +1,11 @@
-import { Fragment } from 'react';
+import React from 'react';
+import About from '../components/about';
 
 const AboutPage = () => {
   return (
-    <Fragment>
-      <h1
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        About
-      </h1>
-      ;
-    </Fragment>
+    <>
+      <About />
+    </>
   );
 };
 

@@ -18,6 +18,7 @@ import SearchPage from './pages/SearchPage';
 import GlobalStyles from './GlobalStyles';
 import { ThemeProvider } from 'styled-components';
 import './App.css';
+import Footer from './components/Layout/Footer';
 
 const theme = {
   colors: {
@@ -90,6 +91,7 @@ function App() {
           </Route>
         </Switch>
       </main>
+      <Footer />
     </ThemeProvider>
   );
 }
