@@ -14,12 +14,14 @@ const authSlice = createSlice({
       state.userName = action.payload.displayName;
       state.userId = action.payload.uid;
       state.userImg = action.payload.userImg;
+      localStorage.setItem('isLogged', 'true');
     },
     removeCurrentUser(state) {
       state.isLoggedIn = false;
       state.userName = null;
       state.userId = null;
       state.userImg = null;
+      localStorage.removeItem('isLogged');
     },
   },
 });

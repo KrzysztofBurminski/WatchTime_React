@@ -47,7 +47,10 @@ function App() {
   }
 
   const PrivateRoute = ({ children }) => {
-    return userId !== null ? children : <Redirect to="/auth" />;
+    let isAuthenticated =
+      localStorage.getItem('isLogged') == null ? false : true;
+
+    return isAuthenticated ? children : <Redirect to="/auth" />;
   };
 
   useEffect(() => {
@@ -68,7 +71,7 @@ function App() {
             <ShowDetailsPage />
           </Route>
           <Route path="/auth" exact>
-            <AuthPage userId={userId} />
+            <AuthPage />
           </Route>
           <Route path="/about" exact>
             <AboutPage />

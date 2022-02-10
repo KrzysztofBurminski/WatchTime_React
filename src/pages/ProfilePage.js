@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import useFetch from '../hooks/use-fetch';
-import { getMovieImages } from '../lib/external-api';
 import { getDatabase, ref, onValue } from 'firebase/database';
 
 import Profile from '../components/Profile';
@@ -10,37 +8,11 @@ import { Center, Container } from '../components/globalComponents';
 import Spinner from '../components/UI/Spinner';
 
 const ProfilePage = ({ userId }) => {
+  const [showing, setShowing] = useState(false);
   const showsList = useSelector((state) => state.shows.showsList);
   const favShowsList = useSelector((state) => state.shows.favShowsList);
   const userImg = useSelector((state) => state.auth.userImg);
   const userName = useSelector((state) => state.auth.userName);
-
-  const {
-    sendRequest: getImageRequest,
-    data: heroImg,
-    error: imgError,
-    status: imgStatus,
-  } = useFetch(getMovieImages, false);
-
-  useEffect(() => {
-    if (showsList.length > 0) {
-      const randomId = Math.floor(Math.random() * showsList.length);
-      getImageRequest(showsList[randomId].id);
-      if (imgError) {
-        console.log('Image error! No background image found!');
-      }
-    }
-  }, [getImageRequest, showsList, imgError]);
-
-  let noShowsContent = (
-    <Container>
-      <Center>
-        <h3>It looks like you are not following any shows.</h3>
-        <h4>Add some shows to your list.</h4>
-        <ButtonLink to={'/choosing'}>ADD SHOWS</ButtonLink>
-      </Center>
-    </Container>
-  );
 
   const getWatchCount = (userId, show) => {
     const db = getDatabase();
@@ -72,11 +44,27 @@ const ProfilePage = ({ userId }) => {
     });
   }
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowing(true);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [showing]);
+
   return (
     <>
-      {imgStatus === null && noShowsContent}
-      {imgStatus === 'pending' && !imgError && <Spinner />}
-      {heroImg && !imgError && imgStatus === 'completed' && (
+      {!showing && <Spinner />}
+      {showsList.length === 0 && showing && (
+        <Container>
+          <Center>
+            <h3>It looks like you are not following any shows.</h3>
+            <h4>Add some shows to your list.</h4>
+            <ButtonLink to={'/choosing'}>ADD SHOWS</ButtonLink>
+          </Center>
+        </Container>
+      )}
+      {showsList.length > 0 && showing && (
         <Profile
           showsList={showsList}
           favShowsList={favShowsList}
