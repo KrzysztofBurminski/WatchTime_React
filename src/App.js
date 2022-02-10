@@ -68,7 +68,7 @@ function App() {
             <ShowDetailsPage />
           </Route>
           <Route path="/auth" exact>
-            <AuthPage />
+            <AuthPage userId={userId} />
           </Route>
           <Route path="/about" exact>
             <AboutPage />

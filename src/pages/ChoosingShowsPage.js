@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { getAllShows } from '../lib/external-api';
 import useFetch from '../hooks/use-fetch';
 
-import Choosing from '../components/choosing';
+import Choosing from '../components/Choosing';
 import Spinner from '../components/UI/Spinner';
 
 const ChoosingShowsPage = () => {

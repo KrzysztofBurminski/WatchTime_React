@@ -7,7 +7,7 @@ import {
   getSingleShow,
 } from '../lib/external-api';
 
-import Home from '../components/home';
+import Home from '../components/Home';
 import Spinner from '../components/UI/Spinner';
 
 const HomePage = () => {

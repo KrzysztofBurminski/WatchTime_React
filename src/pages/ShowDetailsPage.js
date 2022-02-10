@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Details from '../components/details';
-import Spinner from '../components/UI/Spinner';
-
 import useFetch from '../hooks/use-fetch';
 import {
   getSingleShow,
@@ -10,6 +7,9 @@ import {
   getSeasons,
   getCast,
 } from '../lib/external-api';
+
+import Details from '../components/details';
+import Spinner from '../components/UI/Spinner';
 
 const ShowDetailsPage = () => {
   const params = useParams();

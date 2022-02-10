@@ -94,12 +94,13 @@ export const Content = styled.div`
   height: 30rem;
   margin: 0;
   padding-right: ${(p) => (p.right ? '3rem' : 'auto')};
-  padding-left: ${(p) => (p.right ? 'auto' : '3rem')};
+  padding-left: ${(p) => (p.right ? 'auto' : '0')};
   margin-left: ${(p) => (p.right ? 'auto' : '3rem')};
   margin-right: ${(p) => (p.right ? '3rem' : 'auto')};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   z-index: 10;
 
   @media screen and (max-width: 1024px) {

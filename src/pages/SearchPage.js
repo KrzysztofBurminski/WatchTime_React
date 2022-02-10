@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { getSearchResult } from '../lib/external-api';
 import useFetch from '../hooks/use-fetch';
 import { useLocation } from 'react-router-dom';
-import Search from '../components/search';
+
+import Search from '../components/Search';
 import Spinner from '../components/UI/Spinner';
 
 const SearchPage = () => {

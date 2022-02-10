@@ -4,7 +4,7 @@ import useFetch from '../hooks/use-fetch';
 import { getMovieImages } from '../lib/external-api';
 import { getDatabase, ref, onValue } from 'firebase/database';
 
-import Profile from '../components/profile';
+import Profile from '../components/Profile';
 import { ButtonLink } from '../components/UI/Button';
 import { Center, Container } from '../components/globalComponents';
 import Spinner from '../components/UI/Spinner';

@@ -160,11 +160,8 @@ export const FavouriteSection = styled.section`
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width: 768px) {
-    padding: ${(p) => (p.withSlider === true ? '2rem 3rem' : '2rem 1rem')};
-  }
   @media screen and (max-width: 576px) {
-    padding: ${(p) => (p.withSlider === true ? '2rem 4rem' : '2rem 1rem')};
+    padding: ${(p) => (p.withSlider === true ? '2rem 1rem' : '2rem 1rem')};
   }
   @media screen and (max-width: 430px) {
     padding: ${(p) => (p.withSlider === true ? '2rem 1rem' : '2rem 1rem')};
@@ -173,9 +170,8 @@ export const FavouriteSection = styled.section`
 
 export const FavHeader = styled.h3`
   width: 100%;
-  margin: 0 auto;
+  margin: 1rem auto 2rem auto;
   text-align: center;
-  margin-bottom: ${(p) => (p.withSlider === true ? '0' : '2rem')};
   font-size: 2rem;
   color: #000;
 `;
@@ -215,13 +211,18 @@ export const ShowsSection = styled.section`
   max-width: 1600px;
   margin: 0 auto;
   padding: 3rem;
+
+  @media screen and (max-width: 576px) {
+    padding: 1rem;
+  }
 `;
 
 export const ShowsHeader = styled.h3`
   font-size: 2rem;
   text-align: center;
   margin: 0;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export const ShowsGrid = styled.div`
