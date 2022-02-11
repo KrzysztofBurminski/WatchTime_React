@@ -6,7 +6,9 @@ export const Container = styled.div`
   margin: auto;
 `;
 
+//
 // Trailers
+//
 export const HeaderTrailers = styled.h3`
   width: 100%;
   background-color: #999;
@@ -35,42 +37,29 @@ export const ContainerTrailers = styled.div`
 `;
 
 export const TrailerDiv = styled.div`
-  height: 13rem;
   width: 33%;
   border: none;
   margin: 0 1rem;
 
-  @media screen and (max-width: 1200px) {
-    height: 10rem;
-  }
-
   @media screen and (max-width: 992px) {
-    height: 12rem;
-    width: 50%;
+    width: 48%;
+    margin: 0;
     :last-child {
       display: none;
     }
   }
 
-  @media screen and (max-width: 768px) {
-    height: 9rem;
-  }
-
   @media screen and (max-width: 576px) {
     margin: 1rem auto;
-    height: 10rem;
-    width: 80%;
-
-    :last-child {
-      display: block;
-    }
+    height: auto;
+    width: 90%;
   }
 `;
 
 export const Trailer = styled.iframe`
   border: none;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16/9;
 `;
 
 // Recommended

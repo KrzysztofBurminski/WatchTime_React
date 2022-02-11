@@ -75,7 +75,7 @@ export const ArrowButton = styled.button`
     background-color: rgba(0, 0, 0, 0.9);
   }
 
-  @media screen and (max-width: 1250px) {
+  @media screen and (max-width: 1500px) {
     display: ${(p) =>
       p.isSmall
         ? p.length > 8

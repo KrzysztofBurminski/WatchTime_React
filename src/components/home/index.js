@@ -36,7 +36,7 @@ const Home = ({ heroImg, heroDesc, shows }) => {
       <S.ContainerTrailers>
         <S.TrailerDiv>
           <S.Trailer
-            src="https://www.youtube.com/embed/ZYzbalQ6Lg8"
+            src="https://www.youtube.com/embed/ndl1W4ltcmg"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -54,7 +54,7 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         </S.TrailerDiv>
         <S.TrailerDiv>
           <S.Trailer
-            src="https://www.youtube.com/embed/mqqft2x_Aa4"
+            src="https://www.youtube.com/embed/9BqKiZhEFFw"
             title="YouTube video player"
             frameborder="0"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

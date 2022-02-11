@@ -1,4 +1,5 @@
 import React from 'react';
+
 import * as S from './OverviewTabStyled';
 import MySlider from '../../../Slider';
 import Space from '../../../UI/Space';
@@ -24,6 +25,7 @@ const OverviewTab = ({ show, seasons, cast }) => {
   let convertedDesc = document
     .createRange()
     .createContextualFragment(show.description).firstChild.innerText;
+
   return (
     <S.Section>
       <S.Container>

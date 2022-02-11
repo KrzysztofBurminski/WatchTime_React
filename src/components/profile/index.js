@@ -39,7 +39,7 @@ const Profile = ({
       {favShowsList.length !== 0 && (
         <S.FavouriteSection withSlider={favShowsList.length > 3}>
           <S.FavHeader withSlider={favShowsList.length > 3}>
-            My Favourite Shows
+            My Favorite Shows
           </S.FavHeader>
           {favShowsList.length <= 3 &&
             favShowsList.map((show) => (

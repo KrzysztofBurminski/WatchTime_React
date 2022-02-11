@@ -71,3 +71,16 @@ export const ItemImg = styled.img`
   width: 100%;
   height: 100%;
 `;
+
+export const WrapperTrailer = styled.section`
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 5rem;
+`;
+
+export const Trailer = styled.iframe`
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+`;

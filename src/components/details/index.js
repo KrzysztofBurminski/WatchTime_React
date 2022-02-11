@@ -159,7 +159,9 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
           followed={showsIdList.includes(show.id)}
         />
       )}
-      {activeTab === 'gallery' && <GalleryTab images={images.allImages} />}
+      {activeTab === 'gallery' && (
+        <GalleryTab show={show} images={images.allImages} />
+      )}
     </>
   );
 };

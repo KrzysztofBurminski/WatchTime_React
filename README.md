@@ -1,10 +1,30 @@
-<!-- TV shows api: https://www.episodate.com/api -->
+# WatchTime React App
 
-TV series API: https://www.tvmaze.com/api#show-lookup
-Avatars creator API: https://avatars.dicebear.com/
-Sliders API: https://react-slick.neostack.com/
+### React App inspired by https://www.tvtime.com/
 
-<!-- YT API KEY -->
-<!-- AIzaSyBE3B6foIzG9b-XbIXea1lJOnril6n2dLM -->
+### See it live!
 
-<!-- Red band society id=55. Problems with images -->
+#### Functionality:
+
+- following tv shows
+- marking watched episodes
+- tracking your watching progress
+- searching for shows
+- adding shows to favorite
+- authorization using Firebase
+- creating user with unique avatar
+
+---
+
+#### Libraries and API's used in project:
+
+- Redux
+- React Router
+- Styled Components
+- Firebase
+- TV series API: https://www.tvmaze.com/api#show-lookup
+- Avatars creator API: https://avatars.dicebear.com/
+- Sliders: https://react-slick.neostack.com/
+- Youtube API
+
+#### To log in you can use one of the existing accounts (login: test@test.com, password: test123) or create fake one
