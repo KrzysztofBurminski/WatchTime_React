@@ -17,10 +17,10 @@ const About = () => {
         </p>
         <p>
           It is a place where you can discover a lot of new positions to watch.
-          We offer you a wide range of television series. In addition you can
+          We offer you a wide range of television series. Moreover, you can
           follow shows you are watching or you would like to watch in the
-          future. We give you possibility to check as watched an episode or
-          whole season.
+          future. We give you the opportunity to check as watched the episode
+          watched or all season.
         </p>
       </S.WrapperGeneral>
 
@@ -32,8 +32,8 @@ const About = () => {
           <S.Column>
             <S.ItemTitle>GREAT VARIETY OF TV SHOWS</S.ItemTitle>
             <p>
-              Wide range of television series. You have access to our large
-              database of over 10.000 tv series. Lots of actions show full of
+              A wide variety of television series. You have access to our large
+              database of over 10,000 TV series. Lots of action programs full of
               fighting, comedy shows full of humor and mystery shows with hidden
               secrets.
             </p>
@@ -48,10 +48,10 @@ const About = () => {
           <S.Column>
             <S.ItemTitle>CHECK WHAT YOU'VE SEEN</S.ItemTitle>
             <p>
-              Since now you have the possibility to check not even episodes, but
-              the whole seasons that you have watched. It is quick and simple.
-              All you have to do is to click on episode or on an eye icon
-              visible in the episodes section.
+              Since now you have the option to choose not only episodes, but
+              whole seasons that you have watched. It is quick and simple. All
+              you have to do is to click on episode or on an eye icon visible in
+              the episodes section.
             </p>
           </S.Column>
           <S.Icon big>
@@ -67,10 +67,10 @@ const About = () => {
           <S.Column>
             <S.ItemTitle>SEE YOUR STATISTICS</S.ItemTitle>
             <p>
-              We know it very well that some people like to see the what they
-              have achieved. We met these expectations and started to collect
-              your data. Now you are able to see your personal statistics in
-              watching tv shows.
+              We know it very well that some people like to see what they have
+              achieved. We met these expectations and started collecting your
+              data. Now you are able to see your personal statistics in watching
+              tv shows.
             </p>
           </S.Column>
         </S.Content>

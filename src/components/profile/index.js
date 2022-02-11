@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import MySlider from '../Slider';
 import ProfileSlider from '../Slider/ProfileSlider';
 import * as S from './ProfileStyled';
 
@@ -47,17 +46,7 @@ const Profile = ({
                 <S.FavShowImg src={show.image} />
               </S.FavShow>
             ))}
-          {favShowsList.length > 3 && (
-            <ProfileSlider items={favShowsList} />
-            // <MySlider
-            //   items={favShowsList}
-            //   infinite={false}
-            //   standard={true}
-            //   clickable={true}
-            //   small={false}
-            //   profile={true}
-            // />
-          )}
+          {favShowsList.length > 3 && <ProfileSlider items={favShowsList} />}
         </S.FavouriteSection>
       )}
       <S.ShowsSection>
