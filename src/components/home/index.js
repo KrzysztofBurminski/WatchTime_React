@@ -78,27 +78,31 @@ const Home = ({ heroImg, heroDesc, shows }) => {
           clickable={true}
         />
       </S.Container>
-      <S.HeaderRecommended>RECOMMENDED</S.HeaderRecommended>
-      <S.ContainerRecommended>
-        <S.RecommendedImg
-          side="left"
-          src="https://static.tvmaze.com/uploads/images/original_untouched/72/180098.jpg"
-          to={`/shows/13`}
-        >
-          <S.RecommendedTextContainer side="left">
-            <S.RecommendedText>The Flash</S.RecommendedText>
-          </S.RecommendedTextContainer>
-        </S.RecommendedImg>
-        <S.RecommendedImg
-          side="right"
-          src="https://static.tvmaze.com/uploads/images/original_untouched/219/547788.jpg"
-          to={`/shows/335`}
-        >
-          <S.RecommendedTextContainer side="right">
-            <S.RecommendedText>Sherlock</S.RecommendedText>
-          </S.RecommendedTextContainer>
-        </S.RecommendedImg>
-      </S.ContainerRecommended>
+      <S.RecommendedSection>
+        <S.HeaderRecommended>RECOMMENDED</S.HeaderRecommended>
+        <S.ContainerRecommendedItems>
+          <S.RecommendedImg
+            side="left"
+            first
+            src="https://static.tvmaze.com/uploads/images/original_untouched/72/180098.jpg"
+            to={`/shows/13`}
+          >
+            <S.RecommendedTextContainer side="left">
+              <S.RecommendedText>The Flash</S.RecommendedText>
+            </S.RecommendedTextContainer>
+          </S.RecommendedImg>
+          <S.RecommendedImg
+            second
+            side="right"
+            src="https://static.tvmaze.com/uploads/images/original_untouched/219/547788.jpg"
+            to={`/shows/335`}
+          >
+            <S.RecommendedTextContainer side="right">
+              <S.RecommendedText>Sherlock</S.RecommendedText>
+            </S.RecommendedTextContainer>
+          </S.RecommendedImg>
+        </S.ContainerRecommendedItems>
+      </S.RecommendedSection>
       <S.Container>
         <MySlider
           items={familyShows}

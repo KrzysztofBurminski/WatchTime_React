@@ -16,7 +16,7 @@ export const HeaderTrailers = styled.h3`
   margin-top: 5rem;
   padding-top: 2rem;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: #0a0a0a;
 `;
 
@@ -62,51 +62,47 @@ export const Trailer = styled.iframe`
   aspect-ratio: 16/9;
 `;
 
+//
 // Recommended
-export const HeaderRecommended = styled.h2`
+//
+export const RecommendedSection = styled.section`
   width: 100%;
-  padding-top: 2rem;
-  padding-bottom: 4rem;
-  margin: 0;
   margin-top: 5rem;
-  text-align: center;
-  font-size: 1.6rem;
-  /* color: #0a0a0a; */
-  color: ${(props) => props.theme.colors.onDark};
-  /* background-color: #999; */
+  padding: 4rem 5% 2rem;
   background-color: ${(props) => props.theme.colors.myPurpleDark};
-
-  @media screen and (max-width: 768px) {
-    padding-bottom: 2rem;
-  }
 `;
 
-export const ContainerRecommended = styled.div`
+export const HeaderRecommended = styled.h2`
   width: 100%;
-  margin: 0 auto 3rem;
-  padding: 0 5% 4rem;
-  background-color: ${(props) => props.theme.colors.myPurpleDark};
-  /* background-color: #999; */
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: ${(props) => props.theme.colors.onDark};
+  font-size: 2rem;
+  letter-spacing: 1px;
+`;
+
+export const ContainerRecommendedItems = styled.div`
+  width: 100%;
+  margin: 0;
+  margin-bottom: 4rem;
   display: flex;
-  flex-flow: row, nowrap;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
   @media screen and (max-width: 992px) {
-    padding: 0 1rem 4rem;
-  }
-
-  @media screen and (max-width: 768px) {
     flex-direction: column;
-    padding: 0 5% 3rem;
   }
 `;
 
 export const RecommendedImg = styled(Link)`
-  height: 16rem;
-  width: 45%;
+  width: 48%;
+  aspect-ratio: 16/9;
   max-width: 35rem;
+  margin: 1rem 1%;
   background: linear-gradient(
-      to ${({ side }) => side},
+      to ${(p) => p.side},
       transparent 30%,
       rgba(0, 0, 0, 0.5) 45% 55%,
       #000 65%
@@ -123,46 +119,17 @@ export const RecommendedImg = styled(Link)`
   }
 
   @media screen and (max-width: 992px) {
-    width: 48%;
+    width: 70%;
   }
 
   @media screen and (max-width: 768px) {
-    height: 13rem;
     width: 80%;
     margin: 1rem auto;
   }
+  @media screen and (max-width: 576px) {
+    width: 90%;
+  }
 `;
-// export const RecommendedImg = styled.div`
-//   height: 16rem;
-//   width: 45%;
-//   max-width: 35rem;
-//   background: linear-gradient(
-//       to ${({ side }) => side},
-//       transparent 30%,
-//       rgba(0, 0, 0, 0.5) 45% 55%,
-//       #000 65%
-//     ),
-//     url(${({ src }) => src});
-//   background-position: top;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   position: relative;
-//   transition: transform 0.2s ease-out;
-
-//   &:hover {
-//     transform: scale(1.05);
-//   }
-
-//   @media screen and (max-width: 992px) {
-//     width: 48%;
-//   }
-
-//   @media screen and (max-width: 768px) {
-//     height: 13rem;
-//     width: 80%;
-//     margin: 1rem auto;
-//   }
-// `;
 
 export const RecommendedTextContainer = styled.div`
   position: absolute;
@@ -176,13 +143,24 @@ export const RecommendedTextContainer = styled.div`
 `;
 
 export const RecommendedText = styled.h3`
-  font-size: 1.2rem;
   color: ${(props) => props.theme.colors.onDark};
   padding: 0;
   margin: 0 auto;
   text-align: center;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: 600;
 
   @media screen and (max-width: 992px) {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.8px;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+  @media screen and (max-width: 576px) {
+    font-size: 1.1rem;
+    letter-spacing: 0.6px;
   }
 `;

@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFavShowsList, getShowsList } from './store/shows-actions';
 import { getCurrentUser } from './store/auth-actions';
 
+import { ThemeProvider } from 'styled-components';
+import GlobalStyles from './GlobalStyles';
 import Navbar from './components/Layout/Navbar';
 import Sidebar from './components/Layout/SideBar';
+import Footer from './components/Layout/Footer';
 import HomePage from './pages';
 import NotFoundPage from './pages/NotFoundPage';
 import ShowDetailsPage from './pages/ShowDetailsPage';
@@ -14,11 +17,7 @@ import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
 import ChoosingShowsPage from './pages/ChoosingShowsPage';
 import SearchPage from './pages/SearchPage';
-
-import GlobalStyles from './GlobalStyles';
-import { ThemeProvider } from 'styled-components';
 import './App.css';
-import Footer from './components/Layout/Footer';
 
 const theme = {
   colors: {

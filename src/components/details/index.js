@@ -15,7 +15,6 @@ import * as S from './DetailsElements';
 import EpisodesTab from './tabs/EpisodesTab/index';
 import OverviewTab from './tabs/OverviewTab/index';
 import GalleryTab from './tabs/GalleryTab';
-// import YTSearch from 'youtube-api-search';
 
 const Details = ({ images, show, seasons, cast, episodesCount }) => {
   const [activeTab, setActiveTab] = useState('overview');
@@ -167,37 +166,3 @@ const Details = ({ images, show, seasons, cast, episodesCount }) => {
 };
 
 export default Details;
-
-//
-//
-//
-// const [trailerUrl, setTrailerUrl] = useState('');
-
-// let showTitle = show.title;
-
-// const videoSearch = (term) => {
-//   YTSearch(
-//     {
-//       key: 'AIzaSyBE3B6foIzG9b-XbIXea1lJOnril6n2dLM',
-//       term: `${term} trailer`,
-//     },
-//     (videos) => {
-//       // console.log(videos[0].id.videoId);
-//       setTrailerUrl(`https://www.youtube.com/embed/${videos[0].id.videoId}`);
-//     }
-//   );
-// };
-
-// useEffect(() => {
-//   if (showTitle) {
-//     videoSearch(showTitle);
-//   }
-// }, [showTitle]);
-
-/* <S.Trailer
-          src={trailerUrl}
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        /> */
