@@ -1,8 +1,8 @@
 # WatchTime React App
 
-### React App inspired by https://www.tvtime.com/
+## See it live! https://komellar.github.io/WatchTime_React/
 
-### See it live!
+### To log in you can use one of the existing accounts (login: test@test.com, password: test123) or create fake one
 
 #### Functionality:
 
@@ -27,4 +27,4 @@
 - Sliders: https://react-slick.neostack.com/
 - Youtube API
 
-#### To log in you can use one of the existing accounts (login: test@test.com, password: test123) or create fake one
+#### Inspired by https://www.tvtime.com/
