@@ -159,6 +159,7 @@ export const RecommendedText = styled.h3`
   @media screen and (max-width: 768px) {
     font-size: 1.3rem;
   }
+
   @media screen and (max-width: 576px) {
     font-size: 1.1rem;
     letter-spacing: 0.6px;

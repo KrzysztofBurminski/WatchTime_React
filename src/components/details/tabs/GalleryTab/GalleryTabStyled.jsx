@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -49,7 +49,7 @@ export const PosterImagesGrid = styled.div`
 export const BackgroundImagesGrid = styled.div`
   display: grid;
   align-content: center;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
   padding-bottom: 5rem;
 
@@ -66,7 +66,7 @@ export const BackgroundImagesGrid = styled.div`
   }
 `;
 
-export const ItemImg = styled.img`
+export const ItemImg = styled(motion.img)`
   object-fit: cover;
   width: 100%;
   height: 100%;

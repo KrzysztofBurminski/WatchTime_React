@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 import ProfileSlider from '../Slider/ProfileSlider';
 import * as S from './ProfileStyled';
@@ -14,6 +16,20 @@ const Profile = ({
   let hours = Math.floor(statistics.timeSpent / 60);
   let minutes = statistics.timeSpent % 60;
   spentTime = `${hours}h ${minutes}min`;
+
+  const animation = useAnimation();
+  const { ref, inView } = useInView({ threshold: 0.2 });
+
+  const initial = { opacity: 0, y: 30 };
+
+  useEffect(() => {
+    if (inView) {
+      animation.start({
+        y: 0,
+        opacity: 1,
+      });
+    }
+  }, [inView, animation]);
 
   return (
     <>
@@ -51,10 +67,15 @@ const Profile = ({
       )}
       <S.ShowsSection>
         <S.ShowsHeader>Followed shows</S.ShowsHeader>
-        <S.ShowsGrid>
-          {showsList.map((show) => (
+        <S.ShowsGrid ref={ref}>
+          {showsList.map((show, index) => (
             <S.ShowItem key={show.id} to={`/shows/${show.id}`}>
-              <S.ShowImage src={show.image} />
+              <S.ShowImage
+                src={show.image}
+                initial={initial}
+                animate={animation}
+                transition={{ duration: 0.3, delay: index / 10 }}
+              />
             </S.ShowItem>
           ))}
         </S.ShowsGrid>

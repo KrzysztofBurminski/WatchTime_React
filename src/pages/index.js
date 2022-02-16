@@ -58,8 +58,7 @@ const HomePage = () => {
       {showError && <b>show error: {showError}</b>}
       {showsError && <b>shows error: {showsError}</b>}
 
-      {homeImg &&
-        homeImg.backgroundImg &&
+      {homeImg?.backgroundImg &&
         !imgError &&
         !showError &&
         !showsError &&

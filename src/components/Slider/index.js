@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import Slider from 'react-slick';
 import './slider.css';
 
@@ -78,12 +80,27 @@ const MySlider = (props) => {
     ],
   };
 
+  const animation = useAnimation();
+  const { ref, inView } = useInView({ threshold: 0.1 });
+
+  const initial = { opacity: 0, x: 20 };
+
+  useEffect(() => {
+    if (inView) {
+      animation.start({
+        opacity: 1,
+        x: 0,
+      });
+    }
+  }, [inView, animation]);
+
   return (
     <>
-      <S.HeaderContainer clickable={props.clickable}>
+      <S.HeaderContainer clickable={props.clickable} ref={ref}>
         <S.HeaderSlider>{props.header}</S.HeaderSlider>
       </S.HeaderContainer>
       <S.SliderContainer
+        ref={ref}
         standard={props.standard}
         small={props.small}
         length={props.items.length}
@@ -114,13 +131,32 @@ const MySlider = (props) => {
           }
         >
           {props.clickable
-            ? props.items.map((show) => (
+            ? props.items.map((show, index) => (
                 <S.MovieItem key={show.id} to={`/shows/${show.id}`}>
-                  <S.MovieImage src={show.image} />
+                  <S.MovieImage
+                    src={show.image}
+                    initial={initial}
+                    animate={animation}
+                    transition={{
+                      duration: 0.4,
+                      delay: index / 5,
+                      ease: 'easeOut',
+                    }}
+                  />
                 </S.MovieItem>
               ))
             : props.items.map((item, index) => (
-                <S.SliderItem key={item.id} small={props.small || false}>
+                <S.SliderItem
+                  key={item.id}
+                  small={props.small || false}
+                  initial={initial}
+                  animate={animation}
+                  transition={{
+                    duration: 0.4,
+                    delay: index / 5,
+                    ease: 'easeOut',
+                  }}
+                >
                   <S.Image
                     src={item[Object.keys(item)[1]]}
                     small={props.small || false}

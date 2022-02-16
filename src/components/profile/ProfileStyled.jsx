@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import heroImg from '../../assets/heroProfile.jpg';
 
 export const Hero = styled.div`
@@ -262,7 +263,7 @@ export const ShowItem = styled(Link)`
   }
 `;
 
-export const ShowImage = styled.img`
+export const ShowImage = styled(motion.img)`
   object-fit: cover;
   width: 100%;
   height: 100%;

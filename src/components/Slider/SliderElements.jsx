@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { motion } from 'framer-motion';
 
 export const HeaderContainer = styled.div`
   width: 99%;
@@ -43,6 +44,18 @@ export const SliderContainer = styled.div`
     width: 97%;
     height: ${(p) =>
       p.standard ? '10rem' : p.small ? '10rem' : 'calc(18rem * 85/100)'};
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 97%;
+    height: ${(p) =>
+      p.standard ? '10rem' : p.small ? '8rem' : 'calc(15rem * 85/100)'};
+  }
+
+  @media screen and (max-width: 375px) {
+    width: 97%;
+    height: ${(p) =>
+      p.standard ? '10rem' : p.small ? '7rem' : 'calc(14rem * 85/100)'};
   }
 `;
 
@@ -202,7 +215,7 @@ export const MovieItem = styled(Link)`
   }
 `;
 
-export const MovieImage = styled.img`
+export const MovieImage = styled(motion.img)`
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease-out;
@@ -217,7 +230,7 @@ export const MovieImage = styled.img`
 // PEOPLE SLIDER
 //
 
-export const SliderItem = styled.div`
+export const SliderItem = styled(motion.div)`
   height: ${(p) => (p.small ? '10rem' : '25rem')};
   padding: 0 0.3rem 0;
   display: flex;
@@ -229,6 +242,14 @@ export const SliderItem = styled.div`
 
   @media screen and (max-width: 576px) {
     height: ${(p) => (p.small ? '10rem' : '18rem')};
+  }
+
+  @media screen and (max-width: 425px) {
+    height: ${(p) => (p.small ? '8rem' : '15rem')};
+  }
+
+  @media screen and (max-width: 375px) {
+    height: ${(p) => (p.small ? '7rem' : '14rem')};
   }
 `;
 
@@ -256,6 +277,16 @@ export const Image = styled.img`
   @media screen and (max-width: 576px) {
     height: ${(p) => (p.small ? '10rem' : '85%')};
     width: ${(p) => (p.small ? '8rem' : '10rem')};
+  }
+
+  @media screen and (max-width: 425px) {
+    height: ${(p) => (p.small ? '8rem' : '85%')};
+    width: ${(p) => (p.small ? '6rem' : '8rem')};
+  }
+
+  @media screen and (max-width: 375px) {
+    height: ${(p) => (p.small ? '7rem' : '85%')};
+    width: ${(p) => (p.small ? '5rem' : '7rem')};
   }
 `;
 

@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import { infoData } from './AboutData.js';
+
 import * as S from './AboutStyled.jsx';
+import InfoSection from './InfoSection.js';
 import heroImg from '../../assets/tvMan.jpg';
-import { IoTvSharp, IoStatsChartSharp, IoEyeSharp } from 'react-icons/io5';
 import { FaLinkedinIn, FaFacebookSquare, FaInstagram } from 'react-icons/fa';
 
 const About = () => {
+  const animation = useAnimation();
+  const { ref, inView } = useInView({ threshold: 0.2 });
+
+  const initial = {
+    opacity: 0,
+    x: 50,
+  };
+
+  useEffect(() => {
+    if (inView) {
+      animation.start({
+        x: 0,
+        opacity: 1,
+      });
+    }
+  }, [inView, animation]);
+
   return (
     <>
       <S.AboutHeroImg src={heroImg}>
@@ -24,68 +45,40 @@ const About = () => {
         </p>
       </S.WrapperGeneral>
 
-      <S.WrapperAboutItem right>
-        <S.Content right>
-          <S.Icon>
-            <IoTvSharp />
-          </S.Icon>
-          <S.Column>
-            <S.ItemTitle>GREAT VARIETY OF TV SHOWS</S.ItemTitle>
-            <p>
-              A wide variety of television series. You have access to our large
-              database of over 10,000 TV series. Lots of action programs full of
-              fighting, comedy shows full of humor and mystery shows with hidden
-              secrets.
-            </p>
-          </S.Column>
-        </S.Content>
-      </S.WrapperAboutItem>
-      <S.WrapperAboutItem>
-        <S.Content>
-          <S.IconSmall>
-            <IoEyeSharp />
-          </S.IconSmall>
-          <S.Column>
-            <S.ItemTitle>CHECK WHAT YOU'VE SEEN</S.ItemTitle>
-            <p>
-              Since now you have the option to choose not only episodes, but
-              whole seasons that you have watched. It is quick and simple. All
-              you have to do is to click on episode or on an eye icon visible in
-              the episodes section.
-            </p>
-          </S.Column>
-          <S.Icon big>
-            <IoEyeSharp />
-          </S.Icon>
-        </S.Content>
-      </S.WrapperAboutItem>
-      <S.WrapperAboutItem right>
-        <S.Content right>
-          <S.Icon>
-            <IoStatsChartSharp />
-          </S.Icon>
-          <S.Column>
-            <S.ItemTitle>SEE YOUR STATISTICS</S.ItemTitle>
-            <p>
-              We know it very well that some people like to see what they have
-              achieved. We met these expectations and started collecting your
-              data. Now you are able to see your personal statistics in watching
-              tv shows.
-            </p>
-          </S.Column>
-        </S.Content>
-      </S.WrapperAboutItem>
+      <section>
+        {infoData.map((item, index) => (
+          <InfoSection {...item} key={index} />
+        ))}
+      </section>
 
-      <S.MediaWrapper>
+      <S.MediaWrapper ref={ref}>
         <S.FollowText>FOLLOW US!</S.FollowText>
         <S.RowMedia>
-          <S.IconMedia href="https://linkedin.com/" target="_blank">
+          <S.IconMedia
+            href="https://linkedin.com/"
+            target="_blank"
+            initial={initial}
+            animate={animation}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
             <FaLinkedinIn />
           </S.IconMedia>
-          <S.IconMedia href="https://www.facebook.com/" target="_blank">
+          <S.IconMedia
+            href="https://www.facebook.com/"
+            target="_blank"
+            initial={initial}
+            animate={animation}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
             <FaFacebookSquare />
           </S.IconMedia>
-          <S.IconMedia href="https://www.instagram.com/" target="_blank">
+          <S.IconMedia
+            href="https://www.instagram.com/"
+            target="_blank"
+            initial={initial}
+            animate={animation}
+            transition={{ delay: 0.7, duration: 0.6 }}
+          >
             <FaInstagram />
           </S.IconMedia>
         </S.RowMedia>

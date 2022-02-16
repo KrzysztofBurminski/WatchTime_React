@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { FaChevronDown } from 'react-icons/fa';
 import { BsCheckCircleFill, BsEyeFill } from 'react-icons/bs';
@@ -177,7 +177,7 @@ export const ContainerEpisodes = styled.div`
   animation: ${fadeIn} 700ms ease-in;
 `;
 
-export const Episode = styled.div`
+export const Episode = styled(motion.div)`
   width: 25%;
   display: flex;
   flex-direction: column;

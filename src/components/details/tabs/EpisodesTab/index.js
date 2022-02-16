@@ -7,8 +7,19 @@ import {
   removeEpisodeFromDB,
 } from '../../../../store/shows-actions';
 import { useSelector } from 'react-redux';
-import * as S from './EpisodesTabStyled';
 import { useDispatch } from 'react-redux';
+import * as S from './EpisodesTabStyled';
+
+const episodesVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.95,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+};
 
 const EpisodesTab = ({ seasons, show, followed }) => {
   const dispatch = useDispatch();
@@ -117,8 +128,14 @@ const EpisodesTab = ({ seasons, show, followed }) => {
       {/* EPISODES */}
       {/*  */}
       <S.ContainerEpisodes>
-        {seasons[pickedSeason - 1].map((episode) => (
-          <S.Episode key={episode.id}>
+        {seasons[pickedSeason - 1].map((episode, index) => (
+          <S.Episode
+            key={episode.id}
+            variants={episodesVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ duration: 0.5, delay: index / 5 + 0.5 }}
+          >
             {userId !== null ? (
               <S.EpisodeImg
                 onClick={() => pickEpisodeHandler(userId, show, episode)}

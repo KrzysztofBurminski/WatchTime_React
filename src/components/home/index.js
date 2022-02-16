@@ -83,7 +83,6 @@ const Home = ({ heroImg, heroDesc, shows }) => {
         <S.ContainerRecommendedItems>
           <S.RecommendedImg
             side="left"
-            first
             src="https://static.tvmaze.com/uploads/images/original_untouched/72/180098.jpg"
             to={`/shows/13`}
           >
@@ -92,7 +91,6 @@ const Home = ({ heroImg, heroDesc, shows }) => {
             </S.RecommendedTextContainer>
           </S.RecommendedImg>
           <S.RecommendedImg
-            second
             side="right"
             src="https://static.tvmaze.com/uploads/images/original_untouched/219/547788.jpg"
             to={`/shows/335`}
