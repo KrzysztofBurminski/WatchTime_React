@@ -8,7 +8,7 @@ import {
   getCast,
 } from '../lib/external-api';
 
-import Details from '../components/details';
+import Details from '../components/Details';
 import Spinner from '../components/UI/Spinner';
 
 const ShowDetailsPage = () => {
